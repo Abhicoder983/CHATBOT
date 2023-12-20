@@ -1,0 +1,89 @@
+*{
+    padding: 0;
+    margin: 0;
+}
+.background{
+    background-image: url("chatbotbackground.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    object-fit: cover;
+    height: 100%;
+    width: 100%;
+    
+}
+.navigation{
+    padding-top: 4vh;
+  display: flex;
+  color: white;
+  justify-content: space-between;
+  font-style: italic;
+  height: 15vh;
+  width: 98vw;
+  font-size: 32px;
+  flex-wrap: wrap;
+  flex-direction: row;
+}
+ul{
+    display: flex;
+    list-style: none;
+
+}
+li{
+    height:fit-content;
+    width: 13vw;
+    margin-left: 2vw;
+    align-content:center;
+    text-align: center;
+    
+}
+li:hover{
+    background-color: white;
+    border: 2px solid;
+    border-radius: 7px;
+    color: black;
+}
+.Sign{
+    height: fit-content;
+    width: 11vw;
+    text-align: center;
+}
+.Sign:hover{
+    background-color: white;
+    border: 2px solid;
+    border-radius: 7px;
+    color: black;
+}
+.content_chatbot{
+    display: flex;
+    color: white;
+    justify-content: space-evenly;
+    margin-top: 17vh;
+}
+.text-content{
+    height: 103vh;
+  width: 38vw;
+}
+h3{
+    margin: 8px 0 0 2vw;
+  font-size: 24px;
+  color: #b8087b;
+}
+.para{
+    padding: 2vh 0 0 3vw;
+    font-size: 19px;
+}
+button{
+    margin-top: 3vh;
+    height: 6vh;
+  width: 11vw;
+}
+.image{
+    border: 6px solid white;
+    border-radius: 9px;
+    height: 58vh;
+    width: 32vw;
+  }
+button:hover{
+    background-color: black;
+    color: white;
+  }

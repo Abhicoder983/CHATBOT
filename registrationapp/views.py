@@ -8,6 +8,13 @@ import os
 import random
 import streamlit
 t=0
+def home2(request):
+     if request.method=="POST":
+
+     
+          return render(request, "registration.html")
+     else:
+         return render(request, "chatbot.html") 
 
 
 def registration(request):
@@ -45,7 +52,7 @@ def registration(request):
                     'roll': roll_no,
                     'email': email1,
                     's1':1}
-                return render(request, 'miniproject.html', msg)
+                return render(request,'registration.html', msg)
           else:
                
                
@@ -53,22 +60,21 @@ def registration(request):
            
     
                randomNum = random.randint(111111,999999)
-               file_path= r'C:\Users\abhishek\Desktop\registration page1\registration\image\phone.png'
+               
                email2=EmailMessage(
                     'testing mail',
                     'the otp is {}'.format(randomNum),
                     'kumarabhishekasdf1234@gmail.com',
                     recipient_list,
                )
-               with open(file_path, 'rb') as file:
-                    email2.attach(os.path.basename(file_path), file.read(),'image/png')
+               
                email2.send()
                request.session['randomNum']= randomNum
                
                return redirect('/confrim/')
      
      else:
-          return render(request, 'miniproject.html')
+          return render(request, 'registration.html')
 
               
 
@@ -106,7 +112,7 @@ def confrim(request):
      
      
      if request.method=='POST':
-          otp=int(request.POST.get('otp'))
+          otp= int(request.POST.get('otp'))
           name=request.session.get('name', None)
           roll_no=request.session.get('roll_no', None)
           email1=request.session.get('email1', None)
@@ -119,11 +125,11 @@ def confrim(request):
                return redirect('/loggedIn/')
           else:
           
-               return render(request,'otp.html',{'wrongOtp':1})
+               return render(request,'otp2.html',{'wrongOtp':1})
                
      else:
           
-          return render(request,'otp.html')
+          return render(request,'otp2.html')
      
      
 def home(request):
@@ -184,9 +190,9 @@ def resetPassword(request):
      else:
           return render(request, 'resetPassword.html')
 def loggedIn(request):
-     subprocess.run([r'c:\users\abhishek\appdata\roaming\python\python311\scripts\streamlit.exe','run',r'C:\Users\abhishek\Desktop\registration page1\registration\templates\chatWeb.py'])
-     return 'Bingo'
+     
+     return render(subprocess.run(['streamlit', 'run', 'templates/chatWeb.py']))
 
-   
+    
      
 # Create your views here.

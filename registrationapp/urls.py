@@ -5,8 +5,8 @@ import registrationapp
 
 
 urlpatterns = [
-    
-    path('',views.registration , name="registration"),
+    path("",views.home2, name="home2"), 
+    path('registration/',views.registration , name="registration"),
     path('login/', views.login, name='login'),
      path('home/', views.home, name='home'),
     path('confrim/', views.confrim, name='confrim'),

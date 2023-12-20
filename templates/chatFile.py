@@ -1,4 +1,4 @@
-from langchain import OpenAI
+from langchain.llms import OpenAI
 import os
 def openaiKey(key):
     os.environ["OPENAI_API_KEY"] = key

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/static/registration.css">
+</head>
+<body>
+    <section class="container">
+        <header>Enter Email OTP  
+        </header>
+
+        <form action="{% url 'confrim' %}" class="form" method="post" >
+          {% csrf_token %}
+          <div class="input-box">
+            <label>OTP:-</label>
+            <input type="text" placeholder="Enter OTP" name="otp" required />
+            <button type="submit">SUBMIT</button>
+          </div>
+        </form>
+        {% if wrongOtp == 1 %}
+        <p style="color: red;"> please enter the otp which was sent your registered emial</p>
+          
+        {% endif %}
+    </section>
+</body>
+</html>

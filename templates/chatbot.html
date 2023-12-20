@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title> CHATBOT</title>
+        <link rel="stylesheet" href="/static/chatbot.css">
+
+    </head>
+
+    <body>
+        <div class="background">
+
+            <div class="navigation">
+                <div>
+                    CHATBOT
+                </div>
+                <div>
+                    <ul>
+                        <li>
+                            Solution
+                        </li>
+                        <li>
+                            Pricing
+                        </li>
+                        <li>
+                            About
+                        </li>
+
+                    </ul>
+                </div>
+                <div class="Sign">
+                    Sign Up
+                </div>
+
+
+            </div>
+
+            <div class="content_chatbot">
+                <div class="text-content">
+                    <h1>
+                        Chatbot (for solution purpose and taking inspiration )
+                    </h1>
+                    <h3>
+                        Flexible Solution for Your Business
+                    </h3>
+                    <div class="para">
+
+                        <p>
+                            This is Ai chatbot for providing the solution complex problem
+                            The "intelligent Virtual Assistant" project aims to create an innovative and verasatile
+                            chatbot that can revolutionize user interaction across multiple domains. By combining
+                            advanced
+                            NLP and machine learning techniques, thsi chatbot will provide a dynamic and personalized
+                            user experience,
+                            contributing to increased user engagement and satisfaction
+                        </p>
+                    </div>
+                    <form action="{% url "registration" %}">
+                        {% csrf_token %}
+                        <button type="submit">Submit </button>
+                    </form>
+                </div>
+                <div>
+                    <img src="/static/chatbotfront.jpg" class="image" alt="">
+                </div>
+
+            </div>
+
+        </div>
+    </body>
+
+</html>
