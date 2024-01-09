@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-(r4*e4=*1^a^0^h^nou7i)@m!*87u*&)r8=s)6*-dy_-nnxff(
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['.vercel.app', '.now.sh']
 
 
 # Application definition
@@ -118,10 +118,10 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'
 
 STATICFILES_DIRS=[
-    BASE_DIR, 'static'
+   BASE_DIR / "static",
 ]
 
 
@@ -136,6 +136,8 @@ EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER ='kumarabhishekasdf1234@gmail.com'
-EMAIL_HOST_PASSWORD = 'wehsqfqmqhvpmzcc'
+EMAIL_HOST_PASSWORD = "sftongmzqggrbxmu"
+#"sftongmzqggrbxmu"
+#
 
 EMAIL_USE_SSL = False

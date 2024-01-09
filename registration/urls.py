@@ -18,6 +18,8 @@ from django.contrib import admin
 from django.urls import path, include
 from registrationapp import urls, views
 import registrationapp
+from django.conf import settings
+from django.conf.urls.static import static
 
 
 urlpatterns = [

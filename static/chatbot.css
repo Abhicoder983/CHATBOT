@@ -46,12 +46,29 @@ li:hover{
     height: fit-content;
     width: 11vw;
     text-align: center;
+    text-decoration: none;
+    
 }
+.anchor{
+
+    text-decoration: none;
+    color: white;
+    
+}
+
+
 .Sign:hover{
     background-color: white;
     border: 2px solid;
     border-radius: 7px;
     color: black;
+}
+.anchor:hover{
+    background-color: white;
+    border: 2px solid;
+    border-radius: 7px;
+    color: black;
+    border-color: white;
 }
 .content_chatbot{
     display: flex;

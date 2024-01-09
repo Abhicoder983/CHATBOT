@@ -88,14 +88,14 @@ def login(request):
      s=0
      try:
           data=registrationModel.objects.all().values()
-          roll_no1= request.POST.get('roll_no')
+          roll_no1= request.POST.get('email')
           password1= request.POST.get('password')
           
      
 
           for i in data:
                
-               if( i['roll_no']==roll_no1 and i['password']==password1):
+               if( i['email']==roll_no1 and i['password']==password1):
                     s=1
                     
           if(s==1):
@@ -190,9 +190,14 @@ def resetPassword(request):
      else:
           return render(request, 'resetPassword.html')
 def loggedIn(request):
+     subprocess.run(['streamlit', 'run', 'templates/chatWeb.py'])
+     return redirect('/http://20.204.164.54:8508/')
+     return 0
      
-     return render(subprocess.run(['streamlit', 'run', 'templates/chatWeb.py']))
+     
+     # n', 'templates/chatWeb.py'])), redirect('redirect/')
 
-    
+def redirect(request):
+     return redirect('http://127.0.0.1:8501/')
      
 # Create your views here.

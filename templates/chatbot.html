@@ -1,11 +1,13 @@
+{% load static %}
 <!DOCTYPE html>
+
 <html lang="en">
 
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title> CHATBOT</title>
-        <link rel="stylesheet" href="/static/chatbot.css">
+        <link rel="stylesheet" href="{% static 'chatbot.css' %}">
 
     </head>
 
@@ -31,7 +33,9 @@
                     </ul>
                 </div>
                 <div class="Sign">
-                    Sign Up
+                   <a href="{% url "login" %}" class="anchor">
+                    LOGIN 
+                </a> 
                 </div>
 
 
@@ -59,7 +63,7 @@
                     </div>
                     <form action="{% url "registration" %}">
                         {% csrf_token %}
-                        <button type="submit">Submit </button>
+                        <button type="submit">SIGN UP </button>
                     </form>
                 </div>
                 <div>

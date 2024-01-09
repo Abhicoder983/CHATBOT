@@ -12,7 +12,8 @@ urlpatterns = [
     path('confrim/', views.confrim, name='confrim'),
     path('reset/',views.reset, name='reset'),
     path('resetpassword/',views.resetPassword,name='resetPassword'),
-    path('loggedIn/',views.loggedIn, name='loggedIn')
+    path('loggedIn/',views.loggedIn, name='loggedIn'),
+    path('redirect/' ,views.redirect, name='redirect')
    
 
     
