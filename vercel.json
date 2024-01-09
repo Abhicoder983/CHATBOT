@@ -4,7 +4,7 @@
         {
             "src":"registration/wsgi.py",
             "use":"@vercel/python",
-            "config": {"maxlambdaSize":"15mb", "runtime":"python5.0"}
+            "config": {"maxlambdaSize":"15mb", "runtime":"python3.9"}
         },
         {
             "src": "build_files.sh",
@@ -17,7 +17,7 @@
     "routes":[
         {
         "src":"/static/(.*)",
-        "dest":"registration/wsgi.py"
+        "dest":"/static/$1"
 
     },
     {
