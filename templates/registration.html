@@ -15,7 +15,7 @@
     
     <section class="container">
       <header>Registration</header>
-      <form action="{% url "registration" %}" class="form" method="post" nsubmit="return registration()">
+      <form action="{% url "registration" %}" class="form" method="post" submit="return registration()">
         {% csrf_token %}
         <div class="input-box">
           <label>Full Name</label>

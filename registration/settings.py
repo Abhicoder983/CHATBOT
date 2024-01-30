@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-(r4*e4=*1^a^0^h^nou7i)@m!*87u*&)r8=s)6*-dy_-nnxff(
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['.vercel.app', '.now.sh','*']
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -41,14 +41,14 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'django.contrib.messages.middleware.MessageMiddleware',
-    'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    
+    'django.contrib.messages.middleware.MessageMiddleware'
+ 
 ]
 
 ROOT_URLCONF = 'registration.urls'
@@ -75,12 +75,12 @@ WSGI_APPLICATION = 'registration.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db.sqlite3',
-#     }
-# }
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+    }
+}
 
 
 # Password validation
@@ -139,8 +139,10 @@ EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER ='kumarabhishekasdf1234@gmail.com'
-EMAIL_HOST_PASSWORD = "sftongmzqggrbxmu"
+EMAIL_HOST_PASSWORD = "njywqnuahrizevbc"
 #"sftongmzqggrbxmu"
-#
+
 
 EMAIL_USE_SSL = False
+
+

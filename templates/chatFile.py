@@ -22,12 +22,11 @@ agent = OpenAI(temperature = 1)
 conv = RetrievalQAWithSourcesChain(llm=agent,retriever = vectoreStore.as_retriever(), memory=ConversationSummaryMemory())
 '''
 def web(urls):
-    global vectoreStoreURL, conv, agent, url
+    global vectoreStoreURL, conv, agent
     try:
-        url = []
-        url.append(urls)
+        #url.append(urls)
         print("url - 1")
-        loaders = UnstructuredURLLoader(urls=url)
+        loaders = UnstructuredURLLoader(urls=urls)
         print("url - 2")
         data = loaders.load()
         print("url - 3")
