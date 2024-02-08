@@ -11,7 +11,7 @@ urlpatterns = [
      path('home/', views.home, name='home'),
     path('confirm/', views.confirm, name='confirm'),
     path('reset/',views.reset, name='reset'),
-    path('resetpassword/',views.resetPassword,name='resetPassword'),
+    path('resetpassword/',views.resetPassword,name='resetpassword'),
     path('loggedIn/',views.loggedIn, name='loggedIn'),
     path('redirect/' ,views.redirect, name='redirect')
    
