@@ -87,29 +87,62 @@ def registration(request):
 def login(request):
      s=0
      try:
-          data=registrationModel.objects.all().values()
-          roll_no1= request.POST.get('email')
+          
+          email1= request.POST.get('email')
           password1= request.POST.get('password')
+          if email1==None:
+               email1=''
+          data=registrationModel.objects.filter(email=email1)
+          
+          
+     
+           
+          # for i in data:
+               
+          #      if i.password == password1:
+          #           return HttpResponseRedirect('/loggedIn/')
+          #      else:
+          #           return render(request,'login.html',{'msg':'please enter the valid email and password', 'condition':1}) 
+          if (data[0].email==''):
+               
+               if email1 =='':
+                    return render(request, 'login.html')
+               
+              
+          else:
+               if (data[0].password==password1):
+                    return HttpResponseRedirect('/loggedIn/')
+               else:
+                    return render(request,'login.html',{'msg':'please enter the correct password', 'condition':1}) 
+
+               
+          # print(data)
           
      
 
-          for i in data:
+          # for i in data:
                
                
-               if( i['email']==roll_no1 and i['password']==password1):
+          #      if( i['email']==roll_no1 and i['password']==password1):
                     
-                    s=1
-                    
-          if(s==1):
+          #           s=1
+          #           break
+          #      else:
+          #           s=2
+          # if(s==1):
 
                
-               return HttpResponseRedirect('/loggedIn/')   
+          #      return HttpResponseRedirect('/loggedIn/')   
+          # elif(s==2):
+          #      return render(request,'login.html',{'msg':'please enter the enter the valid email and password', 'condition':1}) 
+               
+     except Exception as e:
+          print(e)
+          print('error')
+          if email1=='':
+               return render(request,'login.html',{'msg':'please enter the valid email', 'condition':1})
           else:
-               return render(request,'login.html') 
-               
-     except:
-          return render(request, 'login.html') 
-
+               return render(request, 'login.html', {'msg':'please enter the email and password','condition':1})
 
 def confirm(request):
      
