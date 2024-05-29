@@ -199,11 +199,10 @@ def reset(request):
 
 
                
-          elif resetChecking:
+          elif not resetChecking:
                return render(request, 'resetPasswordOTP.html', {'wrongEmail': 'Please enter the correct registered email','condition': 0})
           else:
                try:
-               
                
                     randomNumber = random.randint(111111, 999999)
                     
@@ -214,7 +213,7 @@ def reset(request):
                     'The OTP is {}'.format(randomNumber),
                     'kumarabhishekasdf1234@gmail.com',
                     recipient_list,
-               )
+                    )
 
                     email2.send()
                     request.session['randomnumbers'] = randomNumber
