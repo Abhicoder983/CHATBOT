@@ -1,92 +1,85 @@
-aiohttp==3.8.6
-aiosignal==1.3.1
-altair==5.1.2
-annotated-types==0.6.0
-anyio==3.7.1
-async-timeout==4.0.3
-attrs==23.1.0
-backoff==2.2.1
-beautifulsoup4==4.12.2
-blinker==1.7.0
-cachetools==5.3.2
-certifi==2023.7.22
-chardet==5.2.0
-charset-normalizer==3.3.2
-click==8.1.7
-dataclasses-json==0.6.1
-emoji==2.8.0
-exceptiongroup==1.1.3
-faiss-gpu==1.7.2
-filetype==1.2.0
-Flask==3.0.0
-frozenlist==1.4.0
-gitdb==4.0.11
-GitPython==3.1.40
-greenlet==3.0.1
-idna==3.4
-importlib-metadata==6.8.0
-itsdangerous==2.1.2
-Jinja2==3.1.2
-joblib==1.3.2
-jsonpatch==1.33
-jsonpointer==2.4
-jsonschema==4.19.2
-jsonschema-specifications==2023.7.1
-langchain==0.0.329
-langdetect==1.0.9
-langsmith==0.0.56
-lxml==4.9.3
-markdown-it-py==3.0.0
-MarkupSafe==2.1.3
-marshmallow==3.20.1
-mdurl==0.1.2
-multidict==6.0.4
-mypy-extensions==1.0.0
-nltk==3.8.1
-numpy==1.26.1
-openai==0.28.1
-packaging==23.2
-pandas==2.1.2
-Pillow==10.1.0
-protobuf==4.25.0
-pyarrow==14.0.0
-pydantic==2.4.2
-pydantic_core==2.10.1
-pydeck==0.8.1b0
-Pygments==2.16.1
-PyPDF2==3.0.1
-python-dateutil==2.8.2
-python-iso639==2023.6.15
-python-magic==0.4.27
-pytz==2023.3.post1
-PyYAML==6.0.1
-rapidfuzz==3.5.2
-referencing==0.30.2
-regex==2023.10.3
-requests==2.31.0
-rich==13.6.0
-rpds-py==0.10.6
-six==1.16.0
-smmap==5.0.1
-sniffio==1.3.0
-soupsieve==2.5
-SQLAlchemy==2.0.23
-streamlit==1.28.1
-tabulate==0.9.0
-tenacity==8.2.3
-tiktoken==0.5.1
-toml==0.10.2
-toolz==0.12.0
-tornado==6.3.3
-tqdm==4.66.1
-typing-inspect==0.9.0
-typing_extensions==4.8.0
-tzdata==2023.3
-tzlocal==5.2
-unstructured==0.10.28
-urllib3==2.0.7
-validators==0.22.0
-watchdog==3.0.0
-Werkzeug==3.0.1
-yarl==1.9.2
-zipp==3.17.0
+aiohttp                   3.9.1
+aiosignal                 1.3.1
+altair                    5.2.0
+annotated-types           0.6.0
+anyio                     4.1.0
+asgiref                   3.7.2
+attrs                     23.1.0
+blinker                   1.7.0
+cachetools                5.3.2
+certifi                   2023.11.17
+charset-normalizer        3.3.2
+click                     8.1.7
+colorama                  0.4.6
+dataclasses-json          0.6.3
+distro                    1.9.0
+dj-database-url           2.2.0
+Django                    5.0.1
+frozenlist                1.4.0
+gitdb                     4.0.11
+GitPython                 3.1.40
+greenlet                  3.0.2
+gunicorn                  22.0.0
+h11                       0.14.0
+httpcore                  1.0.2
+httpx                     0.26.0
+idna                      3.6
+importlib-metadata        6.11.0
+Jinja2                    3.1.2
+jsonpatch                 1.33
+jsonpointer               2.4
+jsonschema                4.20.0
+jsonschema-specifications 2023.11.2
+langchain                 0.0.350
+langchain-community       0.0.2
+langchain-core            0.1.0
+langsmith                 0.0.69
+markdown-it-py            3.0.0
+MarkupSafe                2.1.3
+marshmallow               3.20.1
+mdurl                     0.1.2
+multidict                 6.0.4
+mypy-extensions           1.0.0
+numpy                     1.26.2
+openai                    1.10.0
+packaging                 23.2
+pandas                    2.1.4
+Pillow                    10.1.0
+pip                       23.3.1
+protobuf                  4.25.1
+pyarrow                   14.0.1
+pydantic                  2.5.2
+pydantic_core             2.14.5
+pydeck                    0.8.1b0
+Pygments                  2.17.2
+PyPDF2                    3.0.1
+python-dateutil           2.8.2
+pytz                      2023.3.post1
+PyYAML                    6.0.1
+referencing               0.32.0
+requests                  2.31.0
+rich                      13.7.0
+rpds-py                   0.13.2
+setuptools                65.5.0
+six                       1.16.0
+smmap                     5.0.1
+sniffio                   1.3.0
+SQLAlchemy                2.0.23
+sqlparse                  0.4.4
+streamlit                 1.29.0
+subprocess.run            0.0.8
+tailwind                  3.1.5b0
+tenacity                  8.2.3
+toml                      0.10.2
+toolz                     0.12.0
+tornado                   6.4
+tqdm                      4.66.1
+typing_extensions         4.9.0
+typing-inspect            0.9.0
+tzdata                    2023.3
+tzlocal                   5.2
+urllib3                   2.1.0
+validators                0.22.0
+watchdog                  3.0.0
+yarl                      1.9.4
+zipp                      3.17.0
