@@ -1,7 +1,7 @@
 
 from django.urls import path, include
 from registrationapp import views
-import registrationapp
+
 
 
 urlpatterns = [

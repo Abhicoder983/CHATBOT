@@ -15,7 +15,7 @@
     
     <section class="container">
       <header>Registration</header>
-      <form action="{% url "registration" %}" class="form" method="post" submit="return registration()">
+      <form action="{% url 'registration' %}" class="form" method="post" submit="return registration()">
         {% csrf_token %}
         <div class="input-box">
           <label>Full Name</label>
@@ -69,6 +69,11 @@
           this email{{email}} and {{roll}} is already exist.
         </p>
         {% endif %}
+        <p style="color: red; font-size: 1.2em;">
+
+          {{msg}}
+        </p>
+        
 
       </form>
     </section>

@@ -57,21 +57,23 @@ def registration(request):
                
                
 
-           
+               try:
     
-               randomNum = random.randint(111111,999999)
-               
-               email2=EmailMessage(
-                    'testing mail',
-                    'the otp is {}'.format(randomNum),
-                    'kumarabhishekasdf1234@gmail.com',
-                    recipient_list
-               )
-               
-               email2.send()
-               
-               request.session['randomNum'] = randomNum
-               return HttpResponseRedirect('/confirm/')
+                    randomNum = random.randint(111111,999999)
+                    
+                    email2=EmailMessage(
+                         'testing mail',
+                         'the otp is {}'.format(randomNum),
+                         'kumarabhishekasdf1234@gmail.com',
+                         recipient_list
+                    )
+                    
+                    email2.send()
+                    
+                    request.session['randomNum'] = randomNum
+                    return HttpResponseRedirect('/confirm/')
+               except:
+                    return render(request , 'registration.html',{'msg':'something went wrong please try again'})
      
      else:
           return render(request, 'registration.html')
@@ -200,30 +202,34 @@ def reset(request):
           elif not resetChecking:
                return render(request, 'resetPasswordOTP.html', {'wrongEmail': 'Please enter the correct registered email','condition': 0})
           else:
+               try:
                
-               randomNumber = random.randint(111111, 999999)
-               request.session['randomnumbers'] = randomNumber
-               request.session['resetEmail2'] = resetEmail
                
+                    randomNumber = random.randint(111111, 999999)
+                    
+                    
 
-               email2 = EmailMessage(
-               'To change the password',
-               'The OTP is {}'.format(randomNumber),
-               'kumarabhishekasdf1234@gmail.com',
-               recipient_list,
-          )
+                    email2 = EmailMessage(
+                    'To change the password',
+                    'The OTP is {}'.format(randomNumber),
+                    'kumarabhishekasdf1234@gmail.com',
+                    recipient_list,
+               )
 
-               email2.send()
-               
-               
+                    email2.send()
+                    request.session['randomnumbers'] = randomNumber
+                    request.session['resetEmail2'] = resetEmail
+                    
+                    
 
                
 
                     
                     
-               return render(request, 'resetPasswordOTP.html', {'condition': 1})     
-          
-     
+                    return render(request, 'resetPasswordOTP.html', {'condition': 1})     
+               except:
+                    return render(request , 'resetPasswordOTP.html', {'errors':'something went wrong', 'condition': 0})
+       
           
           
      else:
