@@ -199,7 +199,7 @@ def reset(request):
 
 
                
-          elif not resetChecking:
+          elif resetChecking:
                return render(request, 'resetPasswordOTP.html', {'wrongEmail': 'Please enter the correct registered email','condition': 0})
           else:
                try:
