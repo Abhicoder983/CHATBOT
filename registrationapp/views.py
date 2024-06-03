@@ -245,8 +245,6 @@ def resetPassword(request):
                udateField = registrationModel.objects.get(email=reemail)
                udateField.password=resetPassword
                udateField.save()
-               
-
                return HttpResponseRedirect('/')
           else:
                return render(request, "resetPassword.html")
