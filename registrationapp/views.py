@@ -251,8 +251,8 @@ def resetPassword(request):
      except:
           return render(request, 'resetPassword.html')
 def loggedIn(request):
-     subprocess.run(['streamlit', 'run', 'templates/chatWeb.py'])
-     return HttpResponseRedirect('/http://20.204.164.54:8508/')
+    
+     return HttpResponseRedirect('https://newchatbot-jmdbzrrxkun3csqpcqqnmt.streamlit.app/')
      
      
      # n', 'templates/chatWeb.py'])), redirect('redirect/')
