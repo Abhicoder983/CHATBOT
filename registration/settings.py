@@ -86,7 +86,7 @@ WSGI_APPLICATION = 'registration.wsgi.application'
 
 DATABASES = {
     'default': dj_database_url.config(
-        default='postgres://chatbot_db_lspz_user:qhM3XfkmyOOF0xj1uXSUSlFj0IImgUu0@dpg-cpbg6b6n7f5s73fbbvq0-a.oregon-postgres.render.com/chatbot_db_lspz',
+        default='postgresql://chatbot_npq0_user:4Yow0fcuXcPULsw8QMncwYbe9075pc1y@dpg-cr7crbbqf0us73bd4tmg-a.oregon-postgres.render.com/chatbot_npq0',
         conn_max_age=600,
         conn_health_checks=True,
     )
