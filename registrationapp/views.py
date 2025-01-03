@@ -39,10 +39,11 @@ def registration(request):
           
           email=""
           checking=registrationModel.objects.filter(roll_no=roll_no)
-          print(checking)
+          
           for i in checking:
-               print(i.roll_no)
-               if i.roll_no==roll_no:
+               print(i.email)
+               print(email1)
+               if (i.roll_no==roll_no or i.email==email1):
                     email="no_data"
                     
                else:
@@ -255,10 +256,3 @@ def loggedIn(request):
      return HttpResponseRedirect('https://newchatbot-jmdbzrrxkun3csqpcqqnmt.streamlit.app/')
      
      
-     # n', 'templates/chatWeb.py'])), redirect('redirect/')
-
-def redirect(request):
-     # return redirect('http://127.0.0.1:8501/')
-     return 0
-     
-# Create your views here.
