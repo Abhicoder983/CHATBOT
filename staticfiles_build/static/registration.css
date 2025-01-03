@@ -6,24 +6,10 @@
   box-sizing: border-box;
   font-family: "Poppins", sans-serif;
 }
-body {
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 20px;
-  background-image:url('/static/backgroundReg.jpg') ;
-  background-repeat: no-repeat;
-  background-repeat: no-repeat;
-  background-size:cover;
-  object-fit: cover;
-}
-*{
-  margin: 0;
-  padding: 0;
-} 
+
+ 
 .container {
-  position: relative;
+  position: block;
   max-width: 700px;
   width: 100%;
   background: #fff;

@@ -13,7 +13,7 @@ urlpatterns = [
     path('reset/',views.reset, name='reset'),
     path('resetpassword/',views.resetPassword,name='resetpassword'),
     path('loggedIn/',views.loggedIn, name='loggedIn'),
-    path('redirect/' ,views.redirect, name='redirect')
+    
    
 
     

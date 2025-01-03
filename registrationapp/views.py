@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect,HttpResponseRedirect
+from django.shortcuts import render,HttpResponseRedirect
 from registrationapp.models import registrationModel
 from django.core.mail import send_mail
 from django.core.mail import EmailMessage
@@ -25,11 +25,11 @@ def registration(request):
      
           name= request.POST.get('name')
           password= request.POST.get('password')
-          roll_no= request.POST.get('roll_no')
+      
           email1= request.POST.get('email')
           recipient_list=[email1]
           request.session['name']=name
-          request.session['roll_no']=roll_no
+         
           request.session['email1']=email1
           request.session['password']=password
               
@@ -37,20 +37,12 @@ def registration(request):
           
 
           
-          email=""
-          checking=registrationModel.objects.filter(roll_no=roll_no)
           
-          for i in checking:
-               print(i.email)
-               print(email1)
-               if (i.roll_no==roll_no or i.email==email1):
-                    email="no_data"
-                    
-               else:
-                    email=""
-          if email=="no_data":
+          checking=registrationModel.objects.filter(email=email1)
+          print(type(checking))
+         
+          if checking:
                 msg={
-                    'roll': roll_no,
                     'email': email1,
                     's1':1}
                 return render(request,'registration.html', msg)
@@ -154,13 +146,13 @@ def confirm(request):
      if request.method=='POST':
           otp= int(request.POST.get('otp'))
           name=request.session.get('name', None)
-          roll_no=request.session.get('roll_no', None)
+         
           email1=request.session.get('email1', None)
           password=request.session.get('password', None)
           randomNum=request.session.get('randomNum', None)
           
           if(randomNum==otp):
-               en=registrationModel(name=name,password=password,roll_no=roll_no,email=email1)
+               en=registrationModel(name=name,password=password,email=email1)
                en.save()
                return HttpResponseRedirect('/loggedIn/')
           else:
@@ -252,7 +244,7 @@ def resetPassword(request):
      except:
           return render(request, 'resetPassword.html')
 def loggedIn(request):
-    
-     return HttpResponseRedirect('https://newchatbot-jmdbzrrxkun3csqpcqqnmt.streamlit.app/')
+     return subprocess.run(['streamlit', 'run','templates\chatWeb.py'])
      
+
      
