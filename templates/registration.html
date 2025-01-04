@@ -13,11 +13,11 @@
     <link rel="stylesheet" href="{% static 'output.css'%}">
   </head>
 
-  <body class="flex justify-center items-center">
-    <div class="h-screen w-full absolute top-0 left-0">
-      <svg class="w-full h-screen absolute top-0 left-0" xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink"
-        xmlns:svgjs="http://svgjs.dev/svgjs" width="1440" height="560" preserveAspectRatio="none"
-        viewBox="0 0 1440 560">
+  <body >
+    <div class="h-screen w-full absolute top-0 left-0 z-[-1]">
+      <svg class="w-full h-screen absolute top-0 left-0" xmlns="http://www.w3.org/2000/svg" version="1.1"
+        xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:svgjs="http://svgjs.dev/svgjs" width="1440" height="560"
+        preserveAspectRatio="none" viewBox="0 0 1440 560">
         <g mask="url(&quot;#SvgjsMask4143&quot;)" fill="none">
           <rect width="1440" height="560" x="0" y="0" fill="url(&quot;#SvgjsLinearGradient4144&quot;)"></rect>
           <path d="M1401 45L1400 -157" stroke-width="8" stroke="url(&quot;#SvgjsLinearGradient4145&quot;)"
@@ -116,8 +116,39 @@
 
     </div>
 
-    <section class="container w-1/2 h-1/2 mt-32 text-white">
-      <header>Registration</header>
+    {% if s1 == 1 %}
+    <div class="h-6 w-full bg-red-400 text-center text-white absolute top-0 left-0">
+      <p class="text-wrap text-center">
+
+        This email {{email}} is already exist.
+      </p>
+    </div>
+    {% endif %}
+    {% if msg != None %}
+    <div class="h-6 w-full bg-red-400 text-center text-white absolute top-0 left-0">
+      <p class="text-wrap text-center">
+
+          {{msg}}
+        </p>
+    </div>
+    {% endif %}
+
+    <div class=" mx-auto p-1 text-center max-w-screen-lg h-fit mt-16 text-3xl ">
+      <div class="w-fit h-full mx-auto ">
+      <h1 class="text-purple-500">WEBSITE CHATBOT</h1>
+      <div class="mt-1 h-[0.2rem]  bg-white rounded-lg"></div>
+    </div>
+    </div>
+    
+    <section class="container max-w-screen-lg h-1/2 mt-10 text-white">
+
+      <header class="mx-auto text-center w-fit ">Sign-Up
+        <div class=" h-full w-full mt-1">
+         
+          <div class=" h-[0.2rem]  bg-white rounded-lg"></div>
+      </header>
+
+
       <form action="{% url 'registration' %}" class="form" method="post" submit="return registration()">
         {% csrf_token %}
         <div class="input-box">
@@ -132,24 +163,11 @@
           <label> CreatePassword</label>
           <input type="password" placeholder="Enter new Password" name="password" required />
         </div>
-        
-        
-        
+
+
+
 
         <button>Submit</button>
-        {% if s1 == 1 %}
-
-        <p style="color: red; font-size: 1.2em;">
-
-          this email{{email}} is already exist.
-        </p>
-        {% endif %}
-        <p style="color: red; font-size: 1.2em;">
-
-          {{msg}}
-        </p>
-
-
       </form>
     </section>
   </body>

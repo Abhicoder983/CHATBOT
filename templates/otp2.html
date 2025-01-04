@@ -6,9 +6,9 @@
     <title>Document</title>
     <link rel="stylesheet" href="/static/registration.css">
 </head>
-<body>
-    <section class="container">
-        <header>Enter Email OTP  
+<body >
+    <section class="container m-auto p-3" >
+        <header>Enter sent OTP on email 
         </header>
 
         <form action="{% url 'confirm' %}" class="form" method="post" >
@@ -18,11 +18,14 @@
             <input type="text" placeholder="Enter OTP" name="otp" required />
             <button type="submit">SUBMIT</button>
           </div>
+          {% if wrongOtp == 1 %}
+          <div class="bg-red-400 h-fit absolute top-0 left-0">
+          <p class="text-white text-wrap text-center my-1"> 
+            Wrong OTP!</p>
+            
+          {% endif %}
         </form>
-        {% if wrongOtp == 1 %}
-        <p style="color: red;"> please enter the otp which was sent your registered email</p>
-          
-        {% endif %}
+       
     </section>
 </body>
 </html>

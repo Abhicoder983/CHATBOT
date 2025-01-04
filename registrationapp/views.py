@@ -66,7 +66,7 @@ def registration(request):
                     request.session['randomNum'] = randomNum
                     return HttpResponseRedirect('/confirm/')
                except:
-                    return render(request , 'registration.html',{'msg':'something went wrong please try again'})
+                    return render(request , 'registration.html',{'msg':'Something went wrong please try again later'})
      
      else:
           return render(request, 'registration.html')
