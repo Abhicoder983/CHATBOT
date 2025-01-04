@@ -117,7 +117,7 @@
     </div>
 
     {% if s1 == 1 %}
-    <div class="h-6 w-full bg-red-400 text-center text-white absolute top-0 left-0">
+    <div class="h-fit w-full bg-red-400 text-center text-white absolute top-0 left-0">
       <p class="text-wrap text-center">
 
         This email {{email}} is already exist.
@@ -125,7 +125,7 @@
     </div>
     {% endif %}
     {% if msg != None %}
-    <div class="h-6 w-full bg-red-400 text-center text-white absolute top-0 left-0">
+    <div class="h-fit w-full bg-red-400 text-center text-white absolute top-0 left-0">
       <p class="text-wrap text-center">
 
           {{msg}}
@@ -140,7 +140,7 @@
     </div>
     </div>
     
-    <section class="container max-w-screen-lg h-1/2 mt-10 text-white">
+    <section class="container max-w-screen-lg h-1/2 mt-10 text-white mx-1">
 
       <header class="mx-auto text-center w-fit ">Sign-Up
         <div class=" h-full w-full mt-1">
