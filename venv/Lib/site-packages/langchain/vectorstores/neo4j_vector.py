@@ -1,21 +1,28 @@
-from langchain_community.vectorstores.neo4j_vector import (
-    DEFAULT_DISTANCE_STRATEGY,
-    DEFAULT_SEARCH_TYPE,
-    DISTANCE_MAPPING,
-    Neo4jVector,
-    SearchType,
-    _get_search_index_query,
-    check_if_not_null,
-    sort_by_index_name,
-)
+from typing import TYPE_CHECKING, Any
+
+from langchain._api import create_importer
+
+if TYPE_CHECKING:
+    from langchain_community.vectorstores import Neo4jVector
+    from langchain_community.vectorstores.neo4j_vector import SearchType
+
+# Create a way to dynamically look up deprecated imports.
+# Used to consolidate logic for raising deprecation warnings and
+# handling optional imports.
+DEPRECATED_LOOKUP = {
+    "SearchType": "langchain_community.vectorstores.neo4j_vector",
+    "Neo4jVector": "langchain_community.vectorstores",
+}
+
+_import_attribute = create_importer(__package__, deprecated_lookups=DEPRECATED_LOOKUP)
+
+
+def __getattr__(name: str) -> Any:
+    """Look up attributes dynamically."""
+    return _import_attribute(name)
+
 
 __all__ = [
-    "DEFAULT_DISTANCE_STRATEGY",
-    "DISTANCE_MAPPING",
     "SearchType",
-    "DEFAULT_SEARCH_TYPE",
-    "_get_search_index_query",
-    "check_if_not_null",
-    "sort_by_index_name",
     "Neo4jVector",
 ]

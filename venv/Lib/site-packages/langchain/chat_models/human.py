@@ -1,7 +1,23 @@
-from langchain_community.chat_models.human import (
-    HumanInputChatModel,
-    _collect_yaml_input,
-    _display_messages,
-)
+from typing import TYPE_CHECKING, Any
 
-__all__ = ["_display_messages", "_collect_yaml_input", "HumanInputChatModel"]
+from langchain._api import create_importer
+
+if TYPE_CHECKING:
+    from langchain_community.chat_models.human import HumanInputChatModel
+
+# Create a way to dynamically look up deprecated imports.
+# Used to consolidate logic for raising deprecation warnings and
+# handling optional imports.
+DEPRECATED_LOOKUP = {"HumanInputChatModel": "langchain_community.chat_models.human"}
+
+_import_attribute = create_importer(__package__, deprecated_lookups=DEPRECATED_LOOKUP)
+
+
+def __getattr__(name: str) -> Any:
+    """Look up attributes dynamically."""
+    return _import_attribute(name)
+
+
+__all__ = [
+    "HumanInputChatModel",
+]

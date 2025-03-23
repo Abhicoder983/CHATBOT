@@ -1,19 +1,30 @@
-from langchain_community.chat_models.google_palm import (
-    ChatGooglePalm,
-    ChatGooglePalmError,
-    _create_retry_decorator,
-    _messages_to_prompt_dict,
-    _response_to_result,
-    _truncate_at_stop_tokens,
-    chat_with_retry,
-)
+from typing import TYPE_CHECKING, Any
+
+from langchain._api import create_importer
+
+if TYPE_CHECKING:
+    from langchain_community.chat_models.google_palm import (
+        ChatGooglePalm,
+        ChatGooglePalmError,
+    )
+
+# Create a way to dynamically look up deprecated imports.
+# Used to consolidate logic for raising deprecation warnings and
+# handling optional imports.
+DEPRECATED_LOOKUP = {
+    "ChatGooglePalm": "langchain_community.chat_models.google_palm",
+    "ChatGooglePalmError": "langchain_community.chat_models.google_palm",
+}
+
+_import_attribute = create_importer(__package__, deprecated_lookups=DEPRECATED_LOOKUP)
+
+
+def __getattr__(name: str) -> Any:
+    """Look up attributes dynamically."""
+    return _import_attribute(name)
+
 
 __all__ = [
-    "ChatGooglePalmError",
-    "_truncate_at_stop_tokens",
-    "_response_to_result",
-    "_messages_to_prompt_dict",
-    "_create_retry_decorator",
-    "chat_with_retry",
     "ChatGooglePalm",
+    "ChatGooglePalmError",
 ]

@@ -1,13 +1,25 @@
-from langchain_community.callbacks.openai_info import (
-    MODEL_COST_PER_1K_TOKENS,
-    OpenAICallbackHandler,
-    get_openai_token_cost_for_model,
-    standardize_model_name,
-)
+from typing import TYPE_CHECKING, Any
+
+from langchain._api import create_importer
+
+if TYPE_CHECKING:
+    from langchain_community.callbacks.openai_info import OpenAICallbackHandler
+
+# Create a way to dynamically look up deprecated imports.
+# Used to consolidate logic for raising deprecation warnings and
+# handling optional imports.
+DEPRECATED_LOOKUP = {
+    "OpenAICallbackHandler": "langchain_community.callbacks.openai_info"
+}
+
+_import_attribute = create_importer(__file__, deprecated_lookups=DEPRECATED_LOOKUP)
+
+
+def __getattr__(name: str) -> Any:
+    """Look up attributes dynamically."""
+    return _import_attribute(name)
+
 
 __all__ = [
-    "MODEL_COST_PER_1K_TOKENS",
-    "standardize_model_name",
-    "get_openai_token_cost_for_model",
     "OpenAICallbackHandler",
 ]

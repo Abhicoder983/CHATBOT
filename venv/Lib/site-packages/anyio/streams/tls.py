@@ -3,10 +3,11 @@ from __future__ import annotations
 import logging
 import re
 import ssl
+import sys
 from collections.abc import Callable, Mapping
 from dataclasses import dataclass
 from functools import wraps
-from typing import Any, Tuple, TypeVar
+from typing import Any, TypeVar
 
 from .. import (
     BrokenResourceError,
@@ -17,9 +18,15 @@ from .. import (
 from .._core._typedattr import TypedAttributeSet, typed_attribute
 from ..abc import AnyByteStream, ByteStream, Listener, TaskGroup
 
+if sys.version_info >= (3, 11):
+    from typing import TypeVarTuple, Unpack
+else:
+    from typing_extensions import TypeVarTuple, Unpack
+
 T_Retval = TypeVar("T_Retval")
-_PCTRTT = Tuple[Tuple[str, str], ...]
-_PCTRTTT = Tuple[_PCTRTT, ...]
+PosArgsT = TypeVarTuple("PosArgsT")
+_PCTRTT = tuple[tuple[str, str], ...]
+_PCTRTTT = tuple[_PCTRTT, ...]
 
 
 class TLSAttribute(TypedAttributeSet):
@@ -126,7 +133,7 @@ class TLSStream(ByteStream):
         return wrapper
 
     async def _call_sslobject_method(
-        self, func: Callable[..., T_Retval], *args: object
+        self, func: Callable[[Unpack[PosArgsT]], T_Retval], *args: Unpack[PosArgsT]
     ) -> T_Retval:
         while True:
             try:
@@ -155,9 +162,8 @@ class TLSStream(ByteStream):
             except ssl.SSLError as exc:
                 self._read_bio.write_eof()
                 self._write_bio.write_eof()
-                if (
-                    isinstance(exc, ssl.SSLEOFError)
-                    or "UNEXPECTED_EOF_WHILE_READING" in exc.strerror
+                if isinstance(exc, ssl.SSLEOFError) or (
+                    exc.strerror and "UNEXPECTED_EOF_WHILE_READING" in exc.strerror
                 ):
                     if self.standard_compatible:
                         raise BrokenResourceError from exc

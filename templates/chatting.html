@@ -1,0 +1,106 @@
+{% load custom_filter %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'output.css' %}">
+    <title>ChatBot</title>
+</head>
+
+<body class="bg-gray-800 flex flex-col justify-center items-center ">
+    <nav class="fixed top-0 border-purple-700 border-b-2  rounded-xl w-full mx-5 z-10">
+        <div class="text-2xl  text-sky-400 text-center w-full py-1  ">
+            <p >WEBSITE CHATBOT</p>
+        </div>
+        <div class="h-0.5 w-11/12 bg-white mx-auto"></div>
+        <div class="flex pb-1 w-full">
+            <div class="flex flex-col py-2 w-fit  md:flex-row absolute left-3">
+                <img src="" class="rounded-full mx-2 inline">
+                <span class="mr-6  text-white text-xl "> {{name|capfirst}}</span>
+            </div>
+            <div class="mx-auto my-2 text-white text-lg ">
+                <div class="text-xl text-center bg-white rounded-xl p-1 hidden " id="searching">
+                    <img src="{% static "./gif/searching2.gif" %}" class="w-9 h-8 inline alt="">
+                    <p class="inline text-slate-600 my-auto text-center w-full"> SEARCHING</p>
+                </div> 
+
+                <div class="text-xl text-center bg-white rounded-xl p-1 hidden" id="completed">
+                    <img src="{% static "./image/correct.png" %}" class="w-9 h-8 inline" alt="">
+                    <p class="inline text-slate-600 my-auto text-center w-full">COMPLETED</p>
+                </div>
+                
+                <div class="inline text-white text-2xl py-14 break-words tracking-wider" id='welcome'>HELLO</div>
+             
+            </div> 
+            <div class=" my-auto mx-2 w-fit absolute right-3 top-14 hidden" id="loading">
+                    <img src="{% static "./gif/loading.gif" %}" class="w-9 h-8 inline " alt="">
+            </div>
+
+        </div>
+
+    </nav>
+    <section class=" h-[calc(100vh-120px)] grid grid-cols-1 grid-rows-[2fr,1fr]  w-3/4 mt-28 gap-1 ">    
+        <div class="w-full min-h-20 border-2 border-sky-500 overflow-y-scroll overflow-hidden p-2" id="content">
+    {% if ai_message != None %}
+      
+   
+    {% for ai_msg, user_msg in ai_message|zip_lists:user_message %}
+    <div class="grid w-full mt-4 mb-4  ">
+        
+    <!-- Right Aligned Div -->
+    <div class="Content  text-xl bg-[rgb(110,110,117)]/45 break-words text-justify text-white tracking-wider p-0 w-fit max-w-[75%] justify-self-end mb-4 rounded-xl">
+        <p class="text-right text-blue-600 text-bold overflow-hidden bg-white p-1 truncate min-w-64">{{user_msg.url}}</p>
+        <p class="p-2 ">{{ user_msg.msg }} </p>
+        <p class="text-right text-slate-400 text-bold ">{{user_msg.time}}</p>
+    </div>
+        <!-- Left Aligned Div -->
+        <div class="Content text-xl bg-[rgb(110,110,117)]/45 break-words text-justify  text-white tracking-wider p-0 w-fit max-w-[75%] rounded-xl">
+            <p class=" text-blue-600 text-bold overflow-hidden bg-white p-1 truncate min-w-64">{{ai_msg.url}}</p>
+            <p class="p-2">{{ai_msg.msg}} </p>
+            <p class="text-right text-slate-400 text-bold mt-2">{{ai_msg.time}}</p>
+              </div>
+        </div>
+{% endfor %}
+{% endif %}
+
+        </div>
+    
+    
+    <div name="chatbar" class="h-fit bg-slate-600 border-white rounded-lg mb-2 flex flex-col border-2 w-full z-0 " >
+        <div class=" my-2 mx-auto w-3/4  bg-gray-600 flex border-2 border-white rounded-lg  z-10 transition-all duration-500 ease-in-out opacity-100 max-h-40 overflow-hidden " id="link" >
+            <div class="w-full my-2 ml-2">
+            <label for="link" >
+    
+                <input type="text" name="link"  class="w-full h-8 pl-3 text-lg   text-blue-600  rounded-lg" placeholder="Enter the link of website" id="user_link">
+                
+    
+            </label>
+        </div>
+            <img src="../static/gif/lock_link.gif" class=" w-7 h-8 cursor-pointer mx-2 my-2 " onclick="openLink(event)" id="closelink"alt="">
+        </div>
+        <div name="input-message" class="my-2 flex w-full rounded-lg ">
+            <label for="input" class="w-11/12 pl-2">
+                <input type="text" name="input"  class=" w-full h-8 text-lg text-while pl-2 focus:border-white rounded-sm border-slate-400" placeholder="Ask question..." id="user_msg">
+
+            </label>
+
+            <img src="../static/image/sent_msg.png"  class="w-8 h-8 mx-2 inline cursor-pointer" onclick="getAiInfo(event)" alt="">
+            <img src="../static/image/link.png" onclick="openLink(event)"  class="w-8 h-8 mx-2 cursor-pointer opacity-0" id="openlink" alt="">
+            
+        </div>
+        
+        
+    </div>
+</section>
+    <footer class="w-full bottom-0 fixed bg-slate-500 ">
+        <p class=" my-1 text-white text-center  text-sm"> Powered by Gemini</p>
+    </footer>
+    
+</body>
+
+<script src="{% static 'chatting.js' %}">
+
+</script>
+</html>

@@ -1,7 +1,23 @@
-from langchain_community.chat_models.konko import (
-    DEFAULT_API_BASE,
-    DEFAULT_MODEL,
-    ChatKonko,
-)
+from typing import TYPE_CHECKING, Any
 
-__all__ = ["DEFAULT_API_BASE", "DEFAULT_MODEL", "ChatKonko"]
+from langchain._api import create_importer
+
+if TYPE_CHECKING:
+    from langchain_community.chat_models.konko import ChatKonko
+
+# Create a way to dynamically look up deprecated imports.
+# Used to consolidate logic for raising deprecation warnings and
+# handling optional imports.
+DEPRECATED_LOOKUP = {"ChatKonko": "langchain_community.chat_models.konko"}
+
+_import_attribute = create_importer(__package__, deprecated_lookups=DEPRECATED_LOOKUP)
+
+
+def __getattr__(name: str) -> Any:
+    """Look up attributes dynamically."""
+    return _import_attribute(name)
+
+
+__all__ = [
+    "ChatKonko",
+]

@@ -20,8 +20,8 @@ from langchain_core.callbacks import (
     AsyncCallbackManagerForToolRun,
     CallbackManagerForToolRun,
 )
-from langchain_core.pydantic_v1 import BaseModel, Field
 from langchain_core.tools import BaseTool
+from pydantic import BaseModel, Field
 
 logger = logging.getLogger(__name__)
 
@@ -54,7 +54,7 @@ class NUASchema(BaseModel):
     )
 
 
-class NucliaUnderstandingAPI(BaseTool):
+class NucliaUnderstandingAPI(BaseTool):  # type: ignore[override, override]
     """Tool to process files with the Nuclia Understanding API."""
 
     name: str = "nuclia_understanding_api"
@@ -75,7 +75,7 @@ class NucliaUnderstandingAPI(BaseTool):
         else:
             self._config["NUA_KEY"] = key
         self._config["enable_ml"] = enable_ml
-        super().__init__()
+        super().__init__()  # type: ignore[call-arg]
 
     def _run(
         self,
@@ -161,7 +161,7 @@ class NucliaUnderstandingAPI(BaseTool):
         )
         if response.status_code != 200:
             logger.info(
-                f"Error pushing field {id}:" f"{response.status_code} {response.text}"
+                f"Error pushing field {id}:{response.status_code} {response.text}"
             )
             raise ValueError("Error pushing field")
         else:
@@ -177,7 +177,7 @@ class NucliaUnderstandingAPI(BaseTool):
             logger.info(f"{id} not in queue")
             return ""
         elif result["status"] == "pending":
-            logger.info(f'Waiting for {result["uuid"]} to be processed')
+            logger.info(f"Waiting for {result['uuid']} to be processed")
             return ""
         else:
             return result["data"]
@@ -220,7 +220,7 @@ class NucliaUnderstandingAPI(BaseTool):
                 data = MessageToJson(
                     pb,
                     preserving_proto_field_name=True,
-                    including_default_value_fields=True,
+                    including_default_value_fields=True,  # type: ignore
                 )
                 self._results[matching_id]["data"] = data
 

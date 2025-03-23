@@ -1,25 +1,23 @@
-from langchain_community.vectorstores.astradb import (
-    ADBVST,
-    DEFAULT_BATCH_SIZE,
-    DEFAULT_BULK_DELETE_CONCURRENCY,
-    DEFAULT_BULK_INSERT_BATCH_CONCURRENCY,
-    DEFAULT_BULK_INSERT_OVERWRITE_CONCURRENCY,
-    AstraDB,
-    DocDict,
-    T,
-    U,
-    _unique_list,
-)
+from typing import TYPE_CHECKING, Any
+
+from langchain._api import create_importer
+
+if TYPE_CHECKING:
+    from langchain_community.vectorstores import AstraDB
+
+# Create a way to dynamically look up deprecated imports.
+# Used to consolidate logic for raising deprecation warnings and
+# handling optional imports.
+DEPRECATED_LOOKUP = {"AstraDB": "langchain_community.vectorstores"}
+
+_import_attribute = create_importer(__package__, deprecated_lookups=DEPRECATED_LOOKUP)
+
+
+def __getattr__(name: str) -> Any:
+    """Look up attributes dynamically."""
+    return _import_attribute(name)
+
 
 __all__ = [
-    "ADBVST",
-    "T",
-    "U",
-    "DocDict",
-    "DEFAULT_BATCH_SIZE",
-    "DEFAULT_BULK_INSERT_BATCH_CONCURRENCY",
-    "DEFAULT_BULK_INSERT_OVERWRITE_CONCURRENCY",
-    "DEFAULT_BULK_DELETE_CONCURRENCY",
-    "_unique_list",
     "AstraDB",
 ]

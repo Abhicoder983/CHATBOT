@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
 from pathlib import Path
+from decouple import config
 
 import os
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -38,7 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'registrationapp'
+    'registrationapp',  # Only use the AppConfig path
 ]
 
 MIDDLEWARE = [
@@ -154,5 +155,7 @@ EMAIL_HOST_PASSWORD = "njywqnuahrizevbc"
 
 
 EMAIL_USE_SSL = False
+
+API_URL= config('APP_URL')  
 
 

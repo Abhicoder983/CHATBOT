@@ -1,19 +1,33 @@
-from langchain_community.document_loaders.youtube import (
-    ALLOWED_NETLOCK,
-    ALLOWED_SCHEMAS,
-    SCOPES,
-    GoogleApiClient,
-    GoogleApiYoutubeLoader,
-    YoutubeLoader,
-    _parse_video_id,
-)
+from typing import TYPE_CHECKING, Any
+
+from langchain._api import create_importer
+
+if TYPE_CHECKING:
+    from langchain_community.document_loaders import (
+        GoogleApiClient,
+        GoogleApiYoutubeLoader,
+        YoutubeLoader,
+    )
+
+# Create a way to dynamically look up deprecated imports.
+# Used to consolidate logic for raising deprecation warnings and
+# handling optional imports.
+DEPRECATED_LOOKUP = {
+    "YoutubeLoader": "langchain_community.document_loaders",
+    "GoogleApiYoutubeLoader": "langchain_community.document_loaders",
+    "GoogleApiClient": "langchain_community.document_loaders",
+}
+
+_import_attribute = create_importer(__package__, deprecated_lookups=DEPRECATED_LOOKUP)
+
+
+def __getattr__(name: str) -> Any:
+    """Look up attributes dynamically."""
+    return _import_attribute(name)
+
 
 __all__ = [
-    "SCOPES",
-    "GoogleApiClient",
-    "ALLOWED_SCHEMAS",
-    "ALLOWED_NETLOCK",
-    "_parse_video_id",
     "YoutubeLoader",
     "GoogleApiYoutubeLoader",
+    "GoogleApiClient",
 ]

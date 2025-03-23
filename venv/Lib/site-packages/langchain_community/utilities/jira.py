@@ -1,29 +1,33 @@
 """Util that calls Jira."""
+
 from typing import Any, Dict, List, Optional
 
-from langchain_core.pydantic_v1 import BaseModel, Extra, root_validator
 from langchain_core.utils import get_from_dict_or_env
+from pydantic import BaseModel, ConfigDict, model_validator
 
 
 # TODO: think about error handling, more specific api specs, and jql/project limits
 class JiraAPIWrapper(BaseModel):
     """Wrapper for Jira API."""
 
-    jira: Any  #: :meta private:
-    confluence: Any
+    jira: Any = None  #: :meta private:
+    confluence: Any = None
     jira_username: Optional[str] = None
     jira_api_token: Optional[str] = None
     jira_instance_url: Optional[str] = None
+    jira_cloud: Optional[bool] = None
 
-    class Config:
-        """Configuration for this pydantic object."""
+    model_config = ConfigDict(
+        extra="forbid",
+    )
 
-        extra = Extra.forbid
-
-    @root_validator()
-    def validate_environment(cls, values: Dict) -> Dict:
+    @model_validator(mode="before")
+    @classmethod
+    def validate_environment(cls, values: Dict) -> Any:
         """Validate that api key and python package exists in environment."""
-        jira_username = get_from_dict_or_env(values, "jira_username", "JIRA_USERNAME")
+        jira_username = get_from_dict_or_env(
+            values, "jira_username", "JIRA_USERNAME", default=""
+        )
         values["jira_username"] = jira_username
 
         jira_api_token = get_from_dict_or_env(
@@ -36,6 +40,10 @@ class JiraAPIWrapper(BaseModel):
         )
         values["jira_instance_url"] = jira_instance_url
 
+        jira_cloud_str = get_from_dict_or_env(values, "jira_cloud", "JIRA_CLOUD")
+        jira_cloud = jira_cloud_str.lower() == "true"
+        values["jira_cloud"] = jira_cloud
+
         try:
             from atlassian import Confluence, Jira
         except ImportError:
@@ -44,18 +52,25 @@ class JiraAPIWrapper(BaseModel):
                 "Please install it with `pip install atlassian-python-api`"
             )
 
-        jira = Jira(
-            url=jira_instance_url,
-            username=jira_username,
-            password=jira_api_token,
-            cloud=True,
-        )
+        if jira_username == "":
+            jira = Jira(
+                url=jira_instance_url,
+                token=jira_api_token,
+                cloud=jira_cloud,
+            )
+        else:
+            jira = Jira(
+                url=jira_instance_url,
+                username=jira_username,
+                password=jira_api_token,
+                cloud=jira_cloud,
+            )
 
         confluence = Confluence(
             url=jira_instance_url,
             username=jira_username,
             password=jira_api_token,
-            cloud=True,
+            cloud=jira_cloud,
         )
 
         values["jira"] = jira
@@ -69,7 +84,10 @@ class JiraAPIWrapper(BaseModel):
             key = issue["key"]
             summary = issue["fields"]["summary"]
             created = issue["fields"]["created"][0:10]
-            priority = issue["fields"]["priority"]["name"]
+            if "priority" in issue["fields"]:
+                priority = issue["fields"]["priority"]["name"]
+            else:
+                priority = None
             status = issue["fields"]["status"]["name"]
             try:
                 assignee = issue["fields"]["assignee"]["displayName"]
@@ -106,7 +124,7 @@ class JiraAPIWrapper(BaseModel):
             key = project["key"]
             name = project["name"]
             type = project["projectTypeKey"]
-            style = project["style"]
+            style = project.get("style", None)
             parsed.append(
                 {"id": id, "key": key, "name": name, "type": type, "style": style}
             )

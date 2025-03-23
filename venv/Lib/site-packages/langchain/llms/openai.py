@@ -1,23 +1,30 @@
-from langchain_community.llms.openai import (
-    AzureOpenAI,
-    BaseOpenAI,
-    OpenAI,
-    OpenAIChat,
-    _create_retry_decorator,
-    _stream_response_to_generation_chunk,
-    _streaming_response_template,
-    _update_response,
-    completion_with_retry,
-    update_token_usage,
-)
+from typing import TYPE_CHECKING, Any
+
+from langchain._api import create_importer
+
+if TYPE_CHECKING:
+    from langchain_community.llms import AzureOpenAI, OpenAI, OpenAIChat
+    from langchain_community.llms.openai import BaseOpenAI
+
+# Create a way to dynamically look up deprecated imports.
+# Used to consolidate logic for raising deprecation warnings and
+# handling optional imports.
+DEPRECATED_LOOKUP = {
+    "BaseOpenAI": "langchain_community.llms.openai",
+    "OpenAI": "langchain_community.llms",
+    "AzureOpenAI": "langchain_community.llms",
+    "OpenAIChat": "langchain_community.llms",
+}
+
+_import_attribute = create_importer(__package__, deprecated_lookups=DEPRECATED_LOOKUP)
+
+
+def __getattr__(name: str) -> Any:
+    """Look up attributes dynamically."""
+    return _import_attribute(name)
+
 
 __all__ = [
-    "update_token_usage",
-    "_stream_response_to_generation_chunk",
-    "_update_response",
-    "_streaming_response_template",
-    "_create_retry_decorator",
-    "completion_with_retry",
     "BaseOpenAI",
     "OpenAI",
     "AzureOpenAI",

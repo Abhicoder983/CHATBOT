@@ -1,17 +1,25 @@
-from langchain_community.callbacks.comet_ml_callback import (
-    LANGCHAIN_MODEL_NAME,
-    CometCallbackHandler,
-    _fetch_text_complexity_metrics,
-    _get_experiment,
-    _summarize_metrics_for_generated_outputs,
-    import_comet_ml,
-)
+from typing import TYPE_CHECKING, Any
+
+from langchain._api import create_importer
+
+if TYPE_CHECKING:
+    from langchain_community.callbacks.comet_ml_callback import CometCallbackHandler
+
+# Create a way to dynamically look up deprecated imports.
+# Used to consolidate logic for raising deprecation warnings and
+# handling optional imports.
+DEPRECATED_LOOKUP = {
+    "CometCallbackHandler": "langchain_community.callbacks.comet_ml_callback"
+}
+
+_import_attribute = create_importer(__file__, deprecated_lookups=DEPRECATED_LOOKUP)
+
+
+def __getattr__(name: str) -> Any:
+    """Look up attributes dynamically."""
+    return _import_attribute(name)
+
 
 __all__ = [
-    "LANGCHAIN_MODEL_NAME",
-    "import_comet_ml",
-    "_get_experiment",
-    "_fetch_text_complexity_metrics",
-    "_summarize_metrics_for_generated_outputs",
     "CometCallbackHandler",
 ]

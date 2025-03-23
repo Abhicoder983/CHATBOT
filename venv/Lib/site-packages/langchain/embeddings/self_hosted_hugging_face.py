@@ -1,21 +1,30 @@
-from langchain_community.embeddings.self_hosted_hugging_face import (
-    DEFAULT_EMBED_INSTRUCTION,
-    DEFAULT_INSTRUCT_MODEL,
-    DEFAULT_MODEL_NAME,
-    DEFAULT_QUERY_INSTRUCTION,
-    SelfHostedHuggingFaceEmbeddings,
-    SelfHostedHuggingFaceInstructEmbeddings,
-    _embed_documents,
-    load_embedding_model,
-)
+from typing import TYPE_CHECKING, Any
+
+from langchain._api import create_importer
+
+if TYPE_CHECKING:
+    from langchain_community.embeddings import (
+        SelfHostedHuggingFaceEmbeddings,
+        SelfHostedHuggingFaceInstructEmbeddings,
+    )
+
+# Create a way to dynamically look up deprecated imports.
+# Used to consolidate logic for raising deprecation warnings and
+# handling optional imports.
+DEPRECATED_LOOKUP = {
+    "SelfHostedHuggingFaceEmbeddings": "langchain_community.embeddings",
+    "SelfHostedHuggingFaceInstructEmbeddings": "langchain_community.embeddings",
+}
+
+_import_attribute = create_importer(__package__, deprecated_lookups=DEPRECATED_LOOKUP)
+
+
+def __getattr__(name: str) -> Any:
+    """Look up attributes dynamically."""
+    return _import_attribute(name)
+
 
 __all__ = [
-    "DEFAULT_MODEL_NAME",
-    "DEFAULT_INSTRUCT_MODEL",
-    "DEFAULT_EMBED_INSTRUCTION",
-    "DEFAULT_QUERY_INSTRUCTION",
-    "_embed_documents",
-    "load_embedding_model",
     "SelfHostedHuggingFaceEmbeddings",
     "SelfHostedHuggingFaceInstructEmbeddings",
 ]

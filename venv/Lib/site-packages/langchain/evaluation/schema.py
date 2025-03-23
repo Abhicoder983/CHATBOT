@@ -1,16 +1,16 @@
 """Interfaces to be implemented by general evaluators."""
+
 from __future__ import annotations
 
-import asyncio
 import logging
 from abc import ABC, abstractmethod
 from enum import Enum
-from functools import partial
 from typing import Any, Optional, Sequence, Tuple, Union
 from warnings import warn
 
 from langchain_core.agents import AgentAction
 from langchain_core.language_models import BaseLanguageModel
+from langchain_core.runnables.config import run_in_executor
 
 from langchain.chains.base import Chain
 
@@ -158,7 +158,7 @@ class StringEvaluator(_EvalArgsMixin, ABC):
             prediction (str): The LLM or chain prediction to evaluate.
             reference (Optional[str], optional): The reference label to evaluate against.
             input (Optional[str], optional): The input to consider during evaluation.
-            **kwargs: Additional keyword arguments, including callbacks, tags, etc.
+            kwargs: Additional keyword arguments, including callbacks, tags, etc.
         Returns:
             dict: The evaluation results containing the score or value.
                 It is recommended that the dictionary contain the following keys:
@@ -181,7 +181,7 @@ class StringEvaluator(_EvalArgsMixin, ABC):
             prediction (str): The LLM or chain prediction to evaluate.
             reference (Optional[str], optional): The reference label to evaluate against.
             input (Optional[str], optional): The input to consider during evaluation.
-            **kwargs: Additional keyword arguments, including callbacks, tags, etc.
+            kwargs: Additional keyword arguments, including callbacks, tags, etc.
         Returns:
             dict: The evaluation results containing the score or value.
                 It is recommended that the dictionary contain the following keys:
@@ -189,15 +189,13 @@ class StringEvaluator(_EvalArgsMixin, ABC):
                      - value: the string value of the evaluation, if applicable.
                      - reasoning: the reasoning for the evaluation, if applicable.
         """  # noqa: E501
-        return await asyncio.get_running_loop().run_in_executor(
+        return await run_in_executor(
             None,
-            partial(
-                self._evaluate_strings,
-                prediction=prediction,
-                reference=reference,
-                input=input,
-                **kwargs,
-            ),
+            self._evaluate_strings,
+            prediction=prediction,
+            reference=reference,
+            input=input,
+            **kwargs,
         )
 
     def evaluate_strings(
@@ -214,7 +212,7 @@ class StringEvaluator(_EvalArgsMixin, ABC):
             prediction (str): The LLM or chain prediction to evaluate.
             reference (Optional[str], optional): The reference label to evaluate against.
             input (Optional[str], optional): The input to consider during evaluation.
-            **kwargs: Additional keyword arguments, including callbacks, tags, etc.
+            kwargs: Additional keyword arguments, including callbacks, tags, etc.
         Returns:
             dict: The evaluation results containing the score or value.
         """  # noqa: E501
@@ -237,7 +235,7 @@ class StringEvaluator(_EvalArgsMixin, ABC):
             prediction (str): The LLM or chain prediction to evaluate.
             reference (Optional[str], optional): The reference label to evaluate against.
             input (Optional[str], optional): The input to consider during evaluation.
-            **kwargs: Additional keyword arguments, including callbacks, tags, etc.
+            kwargs: Additional keyword arguments, including callbacks, tags, etc.
         Returns:
             dict: The evaluation results containing the score or value.
         """  # noqa: E501
@@ -267,7 +265,7 @@ class PairwiseStringEvaluator(_EvalArgsMixin, ABC):
             prediction_b (str): The output string from the second model.
             reference (Optional[str], optional): The expected output / reference string.
             input (Optional[str], optional): The input string.
-            **kwargs: Additional keyword arguments, such as callbacks and optional reference strings.
+            kwargs: Additional keyword arguments, such as callbacks and optional reference strings.
         Returns:
             dict: A dictionary containing the preference, scores, and/or other information.
         """  # noqa: E501
@@ -288,20 +286,18 @@ class PairwiseStringEvaluator(_EvalArgsMixin, ABC):
             prediction_b (str): The output string from the second model.
             reference (Optional[str], optional): The expected output / reference string.
             input (Optional[str], optional): The input string.
-            **kwargs: Additional keyword arguments, such as callbacks and optional reference strings.
+            kwargs: Additional keyword arguments, such as callbacks and optional reference strings.
         Returns:
             dict: A dictionary containing the preference, scores, and/or other information.
         """  # noqa: E501
-        return await asyncio.get_running_loop().run_in_executor(
+        return await run_in_executor(
             None,
-            partial(
-                self._evaluate_string_pairs,
-                prediction=prediction,
-                prediction_b=prediction_b,
-                reference=reference,
-                input=input,
-                **kwargs,
-            ),
+            self._evaluate_string_pairs,
+            prediction=prediction,
+            prediction_b=prediction_b,
+            reference=reference,
+            input=input,
+            **kwargs,
         )
 
     def evaluate_string_pairs(
@@ -320,7 +316,7 @@ class PairwiseStringEvaluator(_EvalArgsMixin, ABC):
             prediction_b (str): The output string from the second model.
             reference (Optional[str], optional): The expected output / reference string.
             input (Optional[str], optional): The input string.
-            **kwargs: Additional keyword arguments, such as callbacks and optional reference strings.
+            kwargs: Additional keyword arguments, such as callbacks and optional reference strings.
         Returns:
             dict: A dictionary containing the preference, scores, and/or other information.
         """  # noqa: E501
@@ -349,7 +345,7 @@ class PairwiseStringEvaluator(_EvalArgsMixin, ABC):
             prediction_b (str): The output string from the second model.
             reference (Optional[str], optional): The expected output / reference string.
             input (Optional[str], optional): The input string.
-            **kwargs: Additional keyword arguments, such as callbacks and optional reference strings.
+            kwargs: Additional keyword arguments, such as callbacks and optional reference strings.
         Returns:
             dict: A dictionary containing the preference, scores, and/or other information.
         """  # noqa: E501
@@ -415,16 +411,14 @@ class AgentTrajectoryEvaluator(_EvalArgsMixin, ABC):
         Returns:
             dict: The evaluation result.
         """
-        return await asyncio.get_running_loop().run_in_executor(
+        return await run_in_executor(
             None,
-            partial(
-                self._evaluate_agent_trajectory,
-                prediction=prediction,
-                agent_trajectory=agent_trajectory,
-                reference=reference,
-                input=input,
-                **kwargs,
-            ),
+            self._evaluate_agent_trajectory,
+            prediction=prediction,
+            agent_trajectory=agent_trajectory,
+            reference=reference,
+            input=input,
+            **kwargs,
         )
 
     def evaluate_agent_trajectory(

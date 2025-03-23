@@ -1,19 +1,25 @@
-from langchain_community.callbacks.arthur_callback import (
-    COMPLETION_TOKENS,
-    DURATION,
-    FINISH_REASON,
-    PROMPT_TOKENS,
-    TOKEN_USAGE,
-    ArthurCallbackHandler,
-    _lazy_load_arthur,
-)
+from typing import TYPE_CHECKING, Any
+
+from langchain._api import create_importer
+
+if TYPE_CHECKING:
+    from langchain_community.callbacks.arthur_callback import ArthurCallbackHandler
+
+# Create a way to dynamically look up deprecated imports.
+# Used to consolidate logic for raising deprecation warnings and
+# handling optional imports.
+DEPRECATED_LOOKUP = {
+    "ArthurCallbackHandler": "langchain_community.callbacks.arthur_callback"
+}
+
+_import_attribute = create_importer(__file__, deprecated_lookups=DEPRECATED_LOOKUP)
+
+
+def __getattr__(name: str) -> Any:
+    """Look up attributes dynamically."""
+    return _import_attribute(name)
+
 
 __all__ = [
-    "PROMPT_TOKENS",
-    "COMPLETION_TOKENS",
-    "TOKEN_USAGE",
-    "FINISH_REASON",
-    "DURATION",
-    "_lazy_load_arthur",
     "ArthurCallbackHandler",
 ]

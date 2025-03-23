@@ -1,35 +1,27 @@
-from langchain_community.callbacks.llmonitor_callback import (
-    DEFAULT_API_URL,
-    PARAMS_TO_CAPTURE,
-    LLMonitorCallbackHandler,
-    UserContextManager,
-    _get_user_id,
-    _get_user_props,
-    _parse_input,
-    _parse_lc_message,
-    _parse_lc_messages,
-    _parse_lc_role,
-    _parse_output,
-    _serialize,
-    identify,
-    user_ctx,
-    user_props_ctx,
-)
+from typing import TYPE_CHECKING, Any
+
+from langchain._api import create_importer
+
+if TYPE_CHECKING:
+    from langchain_community.callbacks.llmonitor_callback import (
+        LLMonitorCallbackHandler,
+    )
+
+# Create a way to dynamically look up deprecated imports.
+# Used to consolidate logic for raising deprecation warnings and
+# handling optional imports.
+DEPRECATED_LOOKUP = {
+    "LLMonitorCallbackHandler": "langchain_community.callbacks.llmonitor_callback"
+}
+
+_import_attribute = create_importer(__file__, deprecated_lookups=DEPRECATED_LOOKUP)
+
+
+def __getattr__(name: str) -> Any:
+    """Look up attributes dynamically."""
+    return _import_attribute(name)
+
 
 __all__ = [
-    "DEFAULT_API_URL",
-    "user_ctx",
-    "user_props_ctx",
-    "PARAMS_TO_CAPTURE",
-    "UserContextManager",
-    "identify",
-    "_serialize",
-    "_parse_input",
-    "_parse_output",
-    "_parse_lc_role",
-    "_get_user_id",
-    "_get_user_props",
-    "_parse_lc_message",
-    "_parse_lc_messages",
     "LLMonitorCallbackHandler",
 ]

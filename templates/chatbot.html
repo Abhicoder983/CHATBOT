@@ -13,10 +13,10 @@
 
   <body class="p-0  m-0 h-fit bg-background bg-no-repeat bg-cover bg-center ">
 
-    <div class=" w-full overflow-y-hidden absolute top-0 left-0 h-[70vh] z-[-1]">
-      <svg class=" absolute  top-0 left-0 w-full h-full"xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink"
-        xmlns:svgjs="http://svgjs.dev/svgjs" width="1440" height="560" preserveAspectRatio="none"
-        viewBox="0 0 1440 560">
+    <div class=" w-full overflow-y-hidden absolute top-0 left-0 h-[70vh] z-[-1] ">
+      <svg class=" absolute  top-0 left-0 w-full h-full" xmlns="http://www.w3.org/2000/svg" version="1.1"
+        xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:svgjs="http://svgjs.dev/svgjs" width="1440" height="560"
+        preserveAspectRatio="none" viewBox="0 0 1440 560">
         <g mask="url(&quot;#SvgjsMask1393&quot;)" fill="none">
           <rect width="1440" height="560" x="0" y="0" fill="rgba(0, 24, 49, 1)"></rect>
           <path d="M1578.09 205.39C1463.47 212.23 1385.93 426.82 1174.04 423.79 962.16 420.76 918.62-3.87 770-50.52"
@@ -40,10 +40,10 @@
 
     </div>
 
-    <div class="bg-[#270C4A] text-white text-xl border-b-2 border-[#ecc7f7] w-full">
+    <div class="bg-[#270C4A] text-white text-xl border-b-2 border-[#2c0cf8fa] w-full bg-opacity-65">
       <div class="max-w-screen-2xl mx-auto px-1 flex justify-between items-center md:text-xl text-sm">
         <div class="md:m-1 text-center">
-          CHATBOT
+          WEBSITE CHATBOT
         </div>
         <div class="flex justify-around items-center mx-3 my-1">
           <div class='py-1 md:mr-20'>
@@ -62,18 +62,14 @@
             </ul>
           </div>
           <div class="flex justify-between items-center ">
-            <!-- <div
-              class="hover:border-0 hover:bg-white hover:text-[#270C4A] border-2 border-[#f3f3f4] rounded-lg p-1 flex justify-center items-center">
-              <a href="{% url "login" %}" class="anchor">
-                Login
-              </a>
-            </div> -->
-            <div class="flex justify-center items-center bg-[#852FFF] rounded-lg p-1">
-              <a href="{% url "login" %}" class="anchor">
-                Login
-              </a>
 
-            </div>
+            <a href="{% url "login" %}"
+              class="flex justify-center items-center bg-[#852FFF] hover:bg-transparent rounded-lg px-2 py-1 md:px-7 border-white border-2 hover:border-[#852FFF] hover:text-[#852FFF] cursor-pointer">
+              <p class="anchor">
+                Login
+              </p>
+
+            </a>
           </div>
         </div>
       </div>
@@ -82,8 +78,9 @@
     <section class="mx-auto mt-11 max-w-screen-lg">
       <div class="flex flex-col items-center px-4">
         <div class="text-white  text-2xl font-outfit font-bold md:text-4xl">
-          <h1 class="text-center text-[#852FFF]"> Takes the Refining information the website on the basis of
-            your ask Question and gives you the simplfied answer </h1>
+          <h1 class="text-center text-[#7cfff8]"> Takes the Refining information the website on the basis of
+            your ask <span class="text-[#ffffff]">Question</span> and gives you the <span
+              class="text-[#fdfdfd]">simplfied answer</span> </h1>
         </div>
         <div class="px-12 mt-1">
           <p class=" text-xs text-wrap text-center text-slate-300 md:text-lg">
@@ -106,27 +103,48 @@
 
       </div>
     </section>
-    <section class="mt-11 mx-auto px-auto max-w-screen-2xl ">
+    <section class="mt-11 mx-auto px-auto max-w-screen-2xl mb-4 ">
       <div class="text-slate-200 text-2xl font-outfit pl-2 mt-36">
         <p> what the chatbot Features ? </p>
       </div>
-      <div class="mx-auto py-1 grid md:grid-cols-2 md:grid-rows-2 lg:grid-cols-4 lg:grid-rows-1 md:ratio-1:4 gap-4">
+      <div class="mx-auto py-1 grid md:grid-cols-2 md:grid-rows-2 xl:grid-cols-4 xl:grid-rows-1 md:ratio-1:4 gap-4">
+
         <div
-          class="max-w-sm mx-auto p-6 bg-custom-gradient rounded-lg shadow-lg text-white hover:transform hover:scale-105 duration-100">
+          class="max-w-sm mx-auto p-6 bg-custom-gradient rounded-lg shadow-lg text-white hover:transform hover:scale-105 duration-100  hover:border-white hover:border-2">
+          <div class="w-64">
+            <div class="flex items-center justify-center w-12 h-12 bg-blue-950 rounded-full">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
+                stroke="currentColor" class="w-6 h-6 text-white">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 14.5l4-4-4-4M8 10.5H16" />
+              </svg>
+            </div>
+            <h3 class="mt-4 text-lg font-semibold">General Advisor</h3>
+            <p class="mt-2 text-sm text-purple-200 text-justify ">
+              Get comprehensive advice on various aspects of real estate, from
+              legalities to client management, tailored to your needs.
+            </p>
+          </div>
+        </div>
+        <div
+          class="max-w-sm mx-auto p-6 bg-custom-gradient rounded-lg shadow-lg text-white hover:transform hover:scale-105 duration-100 hover:border-white hover:border-2">
+          <div class="w-64">
           <div class="flex items-center justify-center w-12 h-12 bg-blue-950 rounded-full">
+            
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
               stroke="currentColor" class="w-6 h-6 text-white">
               <path stroke-linecap="round" stroke-linejoin="round" d="M12 14.5l4-4-4-4M8 10.5H16" />
             </svg>
           </div>
           <h3 class="mt-4 text-lg font-semibold">General Advisor</h3>
-          <p class="mt-2 text-sm text-purple-200">
+          <p class="mt-2 text-sm text-purple-200 text-justify">
             Get comprehensive advice on various aspects of real estate, from
             legalities to client management, tailored to your needs.
           </p>
         </div>
+        </div>
         <div
-          class="max-w-sm mx-auto p-6 bg-custom-gradient rounded-lg shadow-lg text-white hover:transform hover:scale-105 duration-100">
+          class="max-w-sm mx-auto p-6 bg-custom-gradient rounded-lg shadow-lg text-white hover:transform hover:scale-105 duration-100 hover:border-white hover:border-2">
+          <div class="w-64">
           <div class="flex items-center justify-center w-12 h-12 bg-blue-950 rounded-full">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
               stroke="currentColor" class="w-6 h-6 text-white">
@@ -134,13 +152,15 @@
             </svg>
           </div>
           <h3 class="mt-4 text-lg font-semibold">General Advisor</h3>
-          <p class="mt-2 text-sm text-purple-200">
+          <p class="mt-2 text-sm text-purple-200 text-justify">
             Get comprehensive advice on various aspects of real estate, from
             legalities to client management, tailored to your needs.
           </p>
         </div>
+        </div>
         <div
-          class="max-w-sm mx-auto p-6 bg-custom-gradient rounded-lg shadow-lg text-white hover:transform hover:scale-105 duration-100">
+          class="max-w-sm mx-auto p-6 bg-custom-gradient rounded-lg shadow-lg text-white hover:transform hover:scale-105 duration-100 hover:border-white hover:border-2">
+          <div class="w-64">
           <div class="flex items-center justify-center w-12 h-12 bg-blue-950 rounded-full">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
               stroke="currentColor" class="w-6 h-6 text-white">
@@ -148,24 +168,11 @@
             </svg>
           </div>
           <h3 class="mt-4 text-lg font-semibold">General Advisor</h3>
-          <p class="mt-2 text-sm text-purple-200">
+          <p class="mt-2 text-sm text-purple-200 text-justify">
             Get comprehensive advice on various aspects of real estate, from
             legalities to client management, tailored to your needs.
           </p>
         </div>
-        <div
-          class="max-w-sm mx-auto p-6 bg-custom-gradient rounded-lg shadow-lg text-white hover:transform hover:scale-105 duration-100">
-          <div class="flex items-center justify-center w-12 h-12 bg-blue-950 rounded-full">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
-              stroke="currentColor" class="w-6 h-6 text-white">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M12 14.5l4-4-4-4M8 10.5H16" />
-            </svg>
-          </div>
-          <h3 class="mt-4 text-lg font-semibold">General Advisor</h3>
-          <p class="mt-2 text-sm text-purple-200">
-            Get comprehensive advice on various aspects of real estate, from
-            legalities to client management, tailored to your needs.
-          </p>
         </div>
 
       </div>

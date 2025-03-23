@@ -1,7 +1,7 @@
 import json
 import logging
 import time
-from typing import List
+from typing import Iterator, List
 
 import requests
 from langchain_core.documents import Document
@@ -92,14 +92,16 @@ class CubeSemanticLoader(BaseLoader):
                     ]
                     return dimension_values
             else:
-                logger.error("Request failed with status code:", response.status_code)
+                logger.error(
+                    "Request failed with status code: %s", response.status_code
+                )
                 break
 
         if retries == self.dimension_values_max_retries:
             logger.info("Maximum retries reached.")
         return []
 
-    def load(self) -> List[Document]:
+    def lazy_load(self) -> Iterator[Document]:
         """Makes a call to Cube's REST API metadata endpoint.
 
         Returns:
@@ -130,8 +132,6 @@ class CubeSemanticLoader(BaseLoader):
 
         if not cube_data_objects:
             raise ValueError("No cubes found in metadata.")
-
-        docs = []
 
         for cube_data_obj in cube_data_objects:
             cube_data_obj_name = cube_data_obj.get("name")
@@ -173,6 +173,4 @@ class CubeSemanticLoader(BaseLoader):
                 page_content = f"{str(item.get('title'))}, "
                 page_content += f"{str(item.get('description'))}"
 
-                docs.append(Document(page_content=page_content, metadata=metadata))
-
-        return docs
+                yield Document(page_content=page_content, metadata=metadata)

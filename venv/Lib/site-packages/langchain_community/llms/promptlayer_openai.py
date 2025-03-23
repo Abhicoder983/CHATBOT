@@ -31,7 +31,7 @@ class PromptLayerOpenAI(OpenAI):
         .. code-block:: python
 
             from langchain_community.llms import PromptLayerOpenAI
-            openai = PromptLayerOpenAI(model_name="text-davinci-003")
+            openai = PromptLayerOpenAI(model_name="gpt-3.5-turbo-instruct")
     """
 
     pl_tags: Optional[List[str]]
@@ -124,7 +124,7 @@ class PromptLayerOpenAI(OpenAI):
 
 
 class PromptLayerOpenAIChat(OpenAIChat):
-    """Wrapper around OpenAI large language models.
+    """PromptLayer OpenAI large language models.
 
     To use, you should have the ``openai`` and ``promptlayer`` python
     package installed, and the environment variable ``OPENAI_API_KEY``
