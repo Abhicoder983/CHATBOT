@@ -10,6 +10,10 @@
       {
         "src": "/(.*)",
         "dest": "wsgi.py"
+      },
+      {
+        "src": "/(.*)",
+        "dest": "registration/wsgi.py"
       }
     ]
   }
