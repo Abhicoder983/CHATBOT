@@ -95,17 +95,17 @@ function getAiInfo(e){
     let user_ai_box=document.createElement('div');
     let userTimeDiv=document.createElement('p')
     let uMsg=document.createElement('p')
-    uMsg.className="p-2"
+    uMsg.className="p-2 break-words"
 
     let link=document.createElement('p')
-    link.className="text-right text-blue-600 text-bold overflow-hidden bg-white p-1 truncate min-w-64"
+    link.className="text-right text-blue-600 font-bold bg-white p-1 rounded-md break-words"
    
 
 
-    user_ai_box.classList.add("grid", "w-full" ,"mt-4", "mb-4")
-    user_msg_div.classList.add("text-xl","bg-[rgb(110,110,117)]/45" ,"break-words" ,"text-justify", "text-white", "tracking-wider", "p-0",  "w-fit", "max-w-[75%]", "justify-self-end", "mb-4" ,"rounded-xl")
+    user_ai_box.classList.add("flex", "flex-col", "w-full", "mt-2" ,"mb-2" ,"gap-2")
+    user_msg_div.classList.add("Content", "text-base" ,"bg-gray-700", "text-white", "p-3", "w-fit", "max-w-[90%]", "md:max-w-[80%]" ,"ml-auto", "rounded-xl", "shadow-md" ,"break-words", "whitespace-normal")
     
-    userTimeDiv.classList.add("text-right",'text-slate-400','text-bold', 'mt-1')
+    userTimeDiv.classList.add("text-right", "text-slate-400" ,"text-sm")
                             
     console.log(now.toTimeString().split(' ')[0])
     console.log(typeof(now.toTimeString().split(' ')[0]))
@@ -137,11 +137,10 @@ function getAiInfo(e){
         let aiTimeDiv=document.createElement('p')
         let ailink=document.createElement('p')
         let aiMsg=document.createElement('p')
-        aiMsg.className="p-2"
-        ailink.className=" text-blue-600 text-bold overflow-hidden bg-white p-1 truncate min-w-64"
-        ai_msg_div.classList.add("text-xl","bg-[rgb(110,110,117)]/45" ,"break-words" ,"text-justify", "text-white", "tracking-wider", "p-0",  "w-fit", "max-w-[75%]", "mb-4" ,"rounded-xl")
-        aiTimeDiv.classList.add("text-right",'text-slate-400','text-bold','mt-1')
-
+        aiMsg.className="p-2 break-words"
+        ailink.className=" text-blue-600 font-bold bg-white p-1 rounded-md break-words"
+        ai_msg_div.classList.add("Content", "text-base", "bg-gray-800", "text-white", "p-3", "w-fit", "max-w-[90%]", "md:max-w-[80%]", "rounded-xl", "shadow-md","break-words" ,"whitespace-normal")
+        aiTimeDiv.className="text-right text-slate-400 text-sm"
         user_ai_box.appendChild(ai_msg_div)
         console.log(data.url)
         ailink.innerText=data.url
