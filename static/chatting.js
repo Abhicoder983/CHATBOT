@@ -124,7 +124,7 @@ function getAiInfo(e){
     let ai_info
     
     
-    fetch('http://127.0.0.1:8000/ai/info/ai_983/ai_info/' ,{
+    fetch('https://chatbot-alpha-mauve-80.vercel.app/ai/info/ai_983/ai_info/' ,{
         method:'POST',
         headers:{'Content-Type':'application/json',
             "X-CSRFToken": csrftoken
