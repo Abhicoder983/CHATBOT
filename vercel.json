@@ -6,7 +6,7 @@
             "config": { "distDir": "staticfiles_build" }
         },
         {
-            "src": "registration/wsgi.py",
+            "src": "chatbotProject/wsgi.py",
             "use": "@vercel/python",
             "config": { "maxLambdaSize": "15mb", "runtime": "python3.9" }
         }
@@ -18,7 +18,7 @@
         },
         {
             "src": "/(.*)",
-            "dest": "registration/wsgi.py"
+            "dest": "chatbotProject/wsgi.py"
         }
     ]
 }
