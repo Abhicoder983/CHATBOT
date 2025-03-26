@@ -79,7 +79,7 @@ WSGI_APPLICATION = 'chatbotProject.wsgi.application'
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
 DATABASES = {
-    "default": django_mongodb_backend.parse_uri("mongodb+srv://ruhelabhishek:Dsr1utWPHXinntsU@cluster0.0kyz4.mongodb.net/abhiDatabase?retryWrites=true&w=majority&appName=Cluster0")
+    "default": django_mongodb_backend.parse_uri(config("MONGODB_URI"))
 }
 
 # Password validation
@@ -148,8 +148,8 @@ EMAIL_PORT = 587 # Use 587 for TLS or 465 for SSL
 EMAIL_USE_TLS = True # Enable TLS (STARTTLS)
 EMAIL_USE_SSL=False
   # Ensure SSL is False
-EMAIL_HOST_USER = 'kumarabhishekasdf1234@gmail.com'
-EMAIL_HOST_PASSWORD = 'wipavanaunksnkqq'  # Use an App Password, NOT your real password
+EMAIL_HOST_USER = config('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')  # Use an App Password, NOT your real password
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 
 
