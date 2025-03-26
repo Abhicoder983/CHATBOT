@@ -272,12 +272,12 @@ def get_ai_info(request):
              if(user.user_message=={}):
                   user.user_message={'content':[user_content]}
                   user.save()
-                  return JsonResponse({'info':ai_info,'time':datetime.now().strftime("%I:%M %p"),'url':user_url}, status=200)
+                  return JsonResponse({'info':ai_info,'time':datetime.now(datetime.now().astimezone().tzinfo).strftime("%I:%M %p"),'url':user_url}, status=200)
      
         user.ai_message['content'].append(ai_content)
         user.user_message['content'].append(user_content)
         user.save()
-        return JsonResponse({'info':ai_info,'time':datetime.now().strftime("%I:%M %p"), 'url':user_url}, status=200)
+        return JsonResponse({'info':ai_info,'time':datetime.now(datetime.now().astimezone().tzinfo).strftime("%I:%M %p"), 'url':user_url}, status=200)
 
 
 
