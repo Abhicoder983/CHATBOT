@@ -243,7 +243,7 @@ def loggedIn(request):
 @csrf_exempt  
 def get_ai_info(request):
     auth_login=request.session.get('user_email_id',None)
-    allowed_referrer = "https://chatbot-32sjsmhi7-abhishek-kumars-projects-cb1a4d2e.vercel.app/loggedIn/"  
+    allowed_referrer = "https://chatbot-alpha-mauve-80.vercel.app/loggedIn/"  
     request_referrer = request.META.get("HTTP_REFERER", "")
 
     if not request_referrer.startswith(allowed_referrer):
