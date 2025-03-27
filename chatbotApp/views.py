@@ -9,7 +9,7 @@ from .form import loginForm
 import json
 import random
 from .utils import get_answer_from_website
-from datetime import datetime
+from datetime import datetime, timezone
 
 import pytz
 t=0
@@ -250,7 +250,9 @@ def get_ai_info(request):
           return redirect('login')
     if(request.method=='POST'):
         data= json.loads(request.body)
+        
         user_timezone=data.get('user_timezone',"UTC")
+        utc_now = datetime.now(timezone.utc)
         user_url=data['user_link']
         user_message=data['user_msg']
         user_message_time=data['user_time']
