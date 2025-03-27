@@ -154,7 +154,7 @@ document.addEventListener("keydown",function(event){
                 openlink.style.display="none"; // Hide the link
                 openlink.style.opacity=0; // Hide the link
               
-            }, 300);
+            }, 2);
         }
     }
     
@@ -180,12 +180,13 @@ function openLink(e){
     else {
         linkDiv.style.display = "flex";
         setTimeout(() => {
+            
             linkDiv.classList.remove("opacity-0", "max-h-0");
             linkDiv.classList.add("opacity-100", "max-h-40");
             openlink.style.display="none"; // Hide the link
             openlink.style.opacity=0; // Hide the link
           
-        }, 300);
+        }, 2);
     }
 }
 function getCookie(name) {
