@@ -10,10 +10,8 @@ import json
 import random
 from .utils import get_answer_from_website
 from datetime import datetime
-import smtplib
 
-
-
+import pytz
 t=0
 def home2(request):
 
@@ -252,6 +250,7 @@ def get_ai_info(request):
           return redirect('login')
     if(request.method=='POST'):
         data= json.loads(request.body)
+        user_timezone=data.get('user_timezone',"UTC")
         user_url=data['user_link']
         user_message=data['user_msg']
         user_message_time=data['user_time']
@@ -259,10 +258,16 @@ def get_ai_info(request):
                       'time':user_message_time,
                       'url':user_url}
         ai_info = get_answer_from_website(user_url,user_message).data.get('answer')
+        try:
+             user_tz=pytz.timezone(user_timezone)
+             local_time=utc_now.astimezone(user_tz)
+        except pytz.exceptions.UnknownTimeZoneError:
+             local_time=utc_now  
+             
         
-       
+        time=local_time.strftime("%I:%M %p")
         ai_content={'msg':ai_info,
-                    'time':datetime.now().strftime("%I:%M %p"),
+                    'time':time,
                     'url':user_url}
         user= messageModel.objects.get(user=auth_login)
 
@@ -272,12 +277,12 @@ def get_ai_info(request):
              if(user.user_message=={}):
                   user.user_message={'content':[user_content]}
                   user.save()
-                  return JsonResponse({'info':ai_info,'time':datetime.now(datetime.now().astimezone().tzinfo).strftime("%I:%M %p"),'url':user_url}, status=200)
+                  return JsonResponse({'info':ai_info,'time':time,'url':user_url}, status=200)
      
         user.ai_message['content'].append(ai_content)
         user.user_message['content'].append(user_content)
         user.save()
-        return JsonResponse({'info':ai_info,'time':datetime.now(datetime.now().astimezone().tzinfo).strftime("%I:%M %p"), 'url':user_url}, status=200)
+        return JsonResponse({'info':ai_info,'time':time, 'url':user_url}, status=200)
 
 
 

@@ -122,6 +122,7 @@ function getAiInfo(e){
     userTimeDiv.innerText = now.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: true });
     document.getElementById("content").appendChild(user_ai_box)
     let ai_info
+    const userTimeZone=Intl.DateTimeFormat().resolvedOptions().timeZone
     
     
     fetch('https://chatbot-alpha-mauve-80.vercel.app/ai/info/ai_983/ai_info/' ,{
@@ -129,7 +130,7 @@ function getAiInfo(e){
         headers:{'Content-Type':'application/json',
             "X-CSRFToken": csrftoken
         },
-        body:JSON.stringify({'user_msg':user_msg.value, 'user_link':user_link.value,'user_time':now.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: true })})
+        body:JSON.stringify({'user_msg':user_msg.value, 'user_link':user_link.value,'user_time':now.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: true }) , 'time_zone':userTimeZone})
     }).then(response=> response.json())
     .then(data=>{
         console.log(data)
