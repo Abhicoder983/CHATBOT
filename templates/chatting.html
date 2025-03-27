@@ -9,8 +9,8 @@
     <title>ChatBot</title>
 </head>
 
-<body class="bg-gray-800 flex flex-col justify-center items-center min-h-screen">
-    <nav class="fixed top-0 border-purple-700 border-b-2  rounded-xl w-full mx-5 z-10">
+<body class="bg-gray-800 flex flex-col justify-center items-center h-screen">
+    <nav class="fixed top-0 bg-gray-800 border-purple-700 border-b-2  rounded-xl w-full mx-5 z-10">
         <div class="text-2xl  text-sky-400 text-center w-full py-1  ">
             <p >WEBSITE CHATBOT</p>
         </div>
@@ -80,7 +80,7 @@
                 <button onclick="getAiInfo(event)" class="ml-2 p-2  text-white rounded-full ">
                     <img src="../static/image/sent_msg.png" class="w-8 h-8" alt="Send">
                 </button>
-                <button onclick="openLink(event)" id="openlink" class="ml-2 p-2  text-white rounded-full  opacity-0">
+                <button onclick="openLink(event)" id="openlink" class="ml-2 p-2  text-white rounded-full  opacity-0 hidden">
                     <img src="../static/image/link.png" class="w-8 h-8" alt="Link">
                 </button>
             </div>
@@ -93,7 +93,7 @@
     
 </body>
 
-<script src="{% static 'chatting.js' %}">
+<script src="{% static 'chatting.js' %}" defer>
 
 </script>
 </html>
