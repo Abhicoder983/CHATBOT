@@ -107,19 +107,14 @@ function getAiInfo(e){
     
     userTimeDiv.classList.add("text-right", "text-slate-400" ,"text-sm")
                             
-    console.log(now.toTimeString().split(' ')[0])
-    console.log(typeof(now.toTimeString().split(' ')[0]))
    
-    
-    console.log('abhishek usertme')
-    console.log(userTimeDiv.innerText)
     user_ai_box.appendChild(user_msg_div)
     user_msg_div.appendChild(link)
     link.innerText=user_link.value
     user_msg_div.appendChild(uMsg)
     uMsg.innerText=user_msg.value;
     user_msg_div.appendChild(userTimeDiv)
-    userTimeDiv.innerText = now.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: true });
+    userTimeDiv.innerText = now.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true });
     document.getElementById("content").appendChild(user_ai_box)
     let ai_info
     const userTimeZone=Intl.DateTimeFormat().resolvedOptions().timeZone
@@ -130,7 +125,7 @@ function getAiInfo(e){
         headers:{'Content-Type':'application/json',
             "X-CSRFToken": csrftoken
         },
-        body:JSON.stringify({'user_msg':user_msg.value, 'user_link':user_link.value,'user_time':now.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: true }) , 'time_zone':userTimeZone})
+        body:JSON.stringify({'user_msg':user_msg.value, 'user_link':user_link.value,'user_time':now.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true }) , 'time_zone':userTimeZone})
     }).then(response=> response.json())
     .then(data=>{
         console.log(data)

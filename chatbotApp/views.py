@@ -241,6 +241,7 @@ def loggedIn(request):
 @csrf_exempt  
 def get_ai_info(request):
     auth_login=request.session.get('user_email_id',None)
+#     
     allowed_referrer = "https://chatbot-alpha-mauve-80.vercel.app/loggedIn/"  
     request_referrer = request.META.get("HTTP_REFERER", "")
 
@@ -250,8 +251,8 @@ def get_ai_info(request):
           return redirect('login')
     if(request.method=='POST'):
         data= json.loads(request.body)
-        
-        user_timezone=data.get('user_timezone',"UTC")
+    
+        user_timezone=data.get('time_zone',"UTC")
         utc_now = datetime.now(timezone.utc)
         user_url=data['user_link']
         user_message=data['user_msg']
@@ -260,18 +261,22 @@ def get_ai_info(request):
                       'time':user_message_time,
                       'url':user_url}
         ai_info = get_answer_from_website(user_url,user_message).data.get('answer')
+        print(user_timezone)
         try:
              user_tz=pytz.timezone(user_timezone)
              local_time=utc_now.astimezone(user_tz)
+             print(local_time)
         except pytz.exceptions.UnknownTimeZoneError:
              local_time=utc_now  
+             print('abhishek')
              
         
-        time=local_time.strftime("%I:%M %p")
+        user= messageModel.objects.get(user=auth_login)
+        time=local_time.strftime("%I:%M:%S %p")
+        print(time)
         ai_content={'msg':ai_info,
                     'time':time,
                     'url':user_url}
-        user= messageModel.objects.get(user=auth_login)
 
 
         if(user.ai_message=={}):
