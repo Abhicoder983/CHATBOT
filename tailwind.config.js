@@ -8,6 +8,8 @@ module.exports = {
     extend: {
       fontFamily: {
         outfit: ["Outfit", "sans-serif"],
+        playwrite:["Winky Rough", "sans-serif"]
+        
       },
      
       backgroundImage: {

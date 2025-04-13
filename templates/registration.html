@@ -14,7 +14,7 @@
   </head>
 ';
 '
-  <body class="px-2 overflow-x-hidden bg-gray-800">
+  <body class="px-2 overflow-x-hidden bg-gray-800 bg-cover bg-no-repeat" style="background-image: url('{% static "image/chatbotSignIn/signBG.png" %}');">
     
 
    
@@ -39,7 +39,7 @@
 
     <div class=" mx-auto p-1 text-center max-w-screen-lg h-fit mt-16 text-3xl ">
       <div class="w-fit h-full mx-auto ">
-      <h1 class="text-purple-500">WEBSITE CHATBOT</h1>
+      <h1 class="text-white">WEBSITE CHATBOT</h1>
       <div class="mt-1 h-[0.2rem]  bg-white rounded-lg"></div>
     </div>
     </div>
@@ -56,22 +56,23 @@
       <form action="{% url 'registration' %}" class="form" method="post" submit="return registration()">
         {% csrf_token %}
         <div class="input-box">
-          <label>Full Name</label>
-          <input type="text" placeholder="Enter full name" name="name" required />
+          <label for="name">Full Name</label>
+          <input placeholder="Enter full name" type="text" name="name" required class="focus:outline-none focus:ring-2 focus:ring-[#46fff6] transition duration-200 rounded w-full "
+/>
         </div>
         <div class="input-box">
           <label>Email Address</label>
-          <input type="text" placeholder="Enter email address" name="email" required />
+          <input type="text" placeholder="Enter email address" name="email" required class="focus:outline-none focus:ring-2 focus:ring-[#46fff6] transition duration-200 rounded w-full" />
         </div>
         <div class="input-box">
           <label> CreatePassword</label>
-          <input type="password" placeholder="Enter new Password" name="password" required />
+          <input type="password" placeholder="Enter new Password" name="password" required class="focus:outline-none focus:ring-2 focus:ring-[#46fff6] transition duration-200 rounded w-full" />
         </div>
 
 
 
 
-        <button>Submit</button>
+        <button class="text-2xl font-bold ">Submit</button>
       </form>
     </section>
     <script>
