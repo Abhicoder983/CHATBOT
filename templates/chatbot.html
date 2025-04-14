@@ -11,9 +11,19 @@
 
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{% static 'output.css'%}">
+    <style>
+      .hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.hide-scrollbar {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none;    /* Firefox */
+}
+    </style>
   </head>
 
-  <body class="p-0  m-0 h-fit bg-background bg-no-repeat bg-cover bg-center ">
+  <body class="p-0  m-0 h-fit bg-background bg-no-repeat bg-cover bg-center overflow-x-hidden  ">
 
     <div class=" w-full overflow-y-hidden absolute top-0 left-0 h-[70vh] z-[-1] ">
       <svg class=" absolute  top-0 left-0 w-full h-full" xmlns="http://www.w3.org/2000/svg" version="1.1"
@@ -177,10 +187,10 @@
 
       </div>
     </section>
-    <section class="mt-10 bg-[#2eb7ef4d] mx-auto min-h-fit p-10">
+    <section class="mt-10 min-h-fit p-10 border-t-2 border-white">
       <div class=" leading-none text-[4rem] sm:text-[8rem] lg:text-[12rem] text-white font-playwrite font-bold mt-4">
         ABOUT </div>
-      <div class="grid sm:grid-cols-3 grid-cols-1 grid-rows-1 items-center gap-2 ">
+      <div class="grid lg:grid-cols-3 grid-cols-1 grid-rows-1 items-center gap-2 ">
         <div class="col-span-2 min-h-full">
           <div class="w-full  flex h-full">
             <div class="flex flex-col w-2/4 ">
@@ -198,29 +208,76 @@
             </div>
           </div>
         </div>
-        <div class="h-full flex flex-col justify-between">
-          <div class="overflow-hidden rounded-3xl w-full h-[50%]">
-            <img src="{% static './image/chatbot_home/aboutUsImg1.jpg' %}" alt="Chatbot Illustration" class="w-full h-full">
+        <div class="h-full flex flex-col justify-between w-full">
+          <div id="auto-scroll" class="overflow-x-auto hide-scrollbar snap-x snap-mandatory flex scroll-smooth rounded-3xl w-full h-[50%]">
+
+            <div class="snap-start min-w-full h-full">
+              <img src="{% static './image/chatbot_home/aboutUsImg1.jpg' %}" alt="Chatbot Illustration" class="w-full h-full object-cover rounded-3xl" />
+            </div>
+        
+            <div class="snap-start min-w-full h-full">
+              <img src="{% static './image/chatbot_home/aboutUsImg1.jpg' %}" alt="Chatbot Illustration" class="w-full h-full object-cover rounded-3xl" />
+            </div>
+        
+            <div class="snap-start min-w-full h-full">
+              <img src="{% static './image/chatbot_home/aboutUsImg1.jpg' %}" alt="Chatbot Illustration" class="w-full h-full object-cover rounded-3xl" />
+            </div>
+        
           </div>
       
           <!-- Technology Used Box -->
-          <div class="flex flex-col items-center justify-center rounded-xl p-5 bg-[#4755696b]  h-[45%] border-2 border-[#00ff92]">
-            <div class="text-[#00ff92] font-bold lg:text-3xl sm:text-base text-3xl mb-4 lg:my-2 ">
+          <div class="flex flex-col items-center justify-center rounded-xl p-5 bg-[#4755696b] h-[45%] border-2 border-[#00ff92]">
+            <div class="text-[#00ff92] font-bold lg:text-3xl sm:text-base text-3xl mb-6">
               Technology Used
             </div>
-            <ul class="text-white sm:text-lg list-disc list-inside text-xl text-center">
-              <li>Python</li>
-              <li>Django</li>
-              <li>REST APIs</li>
-              <li>Gemini AI</li>
-            </ul>
+          
+            <!-- Scrollable Wrapper -->
+            <div id="tech-scroll" class="flex hide-scrollbar space-x-4 overflow-x-auto snap-x snap-mandatory scroll-smooth w-full no-scrollbar px-2">
+              
+              <!-- Card 1 -->
+              <div class="snap-start min-w-full h-full flex-shrink-0 flex  items-center text-center bg-[#1e293b] overflow-hidden rounded-xl border border-[#00ff92] shadow-md w-[200px]">
+                <img src="{% static './image/chatbot_home/techImg/python.png' %}" alt="Python" class="w-2/5 h-full " />
+                <div class="sm:m-2">
+                <h3 class="text-white font-semibold sm:text-lg text-sm">Python</h3>
+                <p class="text-gray-300 text-sm mt-1">Core backend logic using Python scripting.</p>
+                </div>
+              </div>
+          
+              <!-- Card 2 -->
+              <div class="snap-start min-w-full h-full flex-shrink-0 flex  items-center text-center bg-[#1e293b] overflow-hidden rounded-xl border border-[#00ff92] shadow-md w-[200px]">
+                <img src="{% static './image/chatbot_home/techImg/django.png' %}" alt="Python" class="w-2/5 h-full " />
+                <div class="m-2">
+                <h3 class="text-white font-semibold sm:text-lg text-sm">DJANGO</h3>
+                <p class="text-gray-300 text-sm mt-1">Powerful backend web framework for APIs.</p>
+                </div>
+              </div>
+          
+              <!-- Card 3 -->
+              <div class="snap-start min-w-full h-full flex-shrink-0 flex  items-center text-center bg-[#1e293b] overflow-hidden rounded-xl border border-[#00ff92] shadow-md w-[200px]">
+                <img src="{% static './image/chatbot_home/techImg/restAPI.jpg' %}" alt="Python" class="w-2/5 h-full " />
+                <div class="m-2">
+                <h3 class="text-white font-semibold sm:text-lg text-sm">RESTAPI</h3>
+                <p class="text-gray-300 text-sm mt-1">RESTful APIs for communication and integration.</p>
+                </div>
+              </div>
+          
+              <!-- Card 4 -->
+              <div class="snap-start min-w-full h-full flex-shrink-0 flex  items-center text-center bg-[#1e293b] overflow-hidden rounded-xl border border-[#00ff92] shadow-md w-[200px]">
+                <img src="{% static './image/chatbot_home/techImg/geminIAPI.jpg' %}" alt="Python" class="w-2/5 h-full " />
+                <div class="m-2">
+                <h3 class="text-white font-semibold sm:text-lg text-sm">Gemini AI</h3>
+                <p class="text-gray-300 text-sm mt-1">AI model for smart and relevant chatbot responses.</p>
+                </div>
+              </div>
+            </div>
           </div>
+          
         </div>
       </div>
     </section>
     <!-- Feature Section -->
-<section class="bg-[#6dadb66e] py-16 px-6" id="features">
-  <div class="max-w-7xl mx-auto text-center">
+<section class="border-t-2   border-white py-16 px-6" id="features">
+  <div class=" mx-auto text-center">
     <h2 class="text-3xl font-bold text-[#00fffb] sm:text-7xl mb-4">Chatbot Features</h2>
     <p class="text-xl text-white mb-12">
       Discover what makes our AI chatbot intelligent, fast, and user-friendly.
@@ -293,6 +350,55 @@
     </div>
   </div>
 </section>
+<footer class=" relative w-full bottom-0  bg-[#0404058c] border-t-2 border-white py-4 min-h-48">
+  <div class="sm:max-w-screen-2xl w-full grid grid-cols-4 grid-rows-1 sm:p-14  sm:mx-auto sm:my-0 ">
+    <div class="col-span-1 flex flex-col sm:justify-start items-center justify-center border-y-2 border-gray-400 ">
+      <div class="my-auto h-fit">
+      <p class="text-white sm:text-lg text-sm "> Ghaziabad, Uttar Pradesh</p>
+      <p class="mt-4 text-white sm:text-lg text-sm"> street Road 1 , Main Road 1 , INDIA</p>
+      <p class="mt-4 text-white sm:text-lg text-sm"> +91 1234567890</p>
+      <p class="mt-1 text-white sm:text-lg text-xs"> info@chatbot.com</p>
+    </div>
+
+    </div>
+    <div class="col-span-2 flex flex-col justify-center items-center border-2 border-gray-400">
+      <h1 class=" text-2xl my-3 text-emerald-300"> Website Chatbot</h1>
+      <p class="sm:text-lg text-sm text-white text-center" > 
+        The chatbot project is an intelligent web-based assistant developed using Django and Gemini API. It allows users to input a website link and ask questions related to the content of 
+        that site. The chatbot processes and understands the site data to provide 
+        accurate, relevant answers. 
+      </p>
+
+
+    </div>
+    <div class="border-y-2 border-gray-400 flex justify-evenly items-center lg:pt-5 lg:items-start  flex-col lg:flex-row ">
+      <div class="w-2/6  h-fit">
+        <p class="text-white font-bold text-base">
+          Pages</p>
+       <a href="{% url 'home' %}" class="text-white no-underline block text-base"> HOME</a>
+       <a href="{% url 'registration' %}"class="text-white no-underline block text-base"> SIGN UP</a>
+       <a href="{% url 'login' %}"class="text-white no-underline block text-base"> LOGIN</a>
+    
+        
+      </div>
+      <div class="w-2/6 h-fit p-1">
+        <h4 class="text-white font-bold text-base"> utility Pages</h4>
+        <p class="text-white text-base ">style Guide</p>
+        <p class="text-white text-base ">Protect</p>
+        <p class="text-white text-base ">License</p>
+        <p class="text-white text-base ">Changelog</p>
+        <p class="text-white text-base ">Not Found</p>
+
+
+      </div>
+
+    </div>
+
+  </div>
+  <div class="absolute bottom-2 w-full text-white text-center text-sm">
+    &copy; 2023 Website Chatbot. All rights reserved.
+  </div>
+</footer>
 
 
   <script>
@@ -311,6 +417,33 @@
       card.classList.add('opacity-0', 'translate-y-6');
       observer.observe(card);
     });
+
+  const container = document.getElementById('auto-scroll');
+  let scrollAmount = 0;
+  const scrollStep = container.offsetWidth; // approx width of one card
+  const maxScroll = container.scrollWidth - container.clientWidth;
+
+  setInterval(() => {
+    scrollAmount += scrollStep;
+    if (scrollAmount > maxScroll) scrollAmount = 0;
+    container.scrollTo({
+      left: scrollAmount,
+      behavior: 'smooth',
+    });
+  }, 2000); // every 3 seconds
+  const tech_container = document.getElementById('tech-scroll');
+  let tech_scrollAmount = 0;
+  const tech_scrollStep = tech_container.offsetWidth; // approx width of one card
+  const tech_maxScroll = tech_container.scrollWidth - tech_container.clientWidth;
+
+  setInterval(() => {
+    tech_scrollAmount += tech_scrollStep;
+    if (tech_scrollAmount > tech_maxScroll) tech_scrollAmount = 0;
+    tech_container.scrollTo({
+      left: tech_scrollAmount,
+      behavior: 'smooth',
+    });
+  }, 2000);
   </script>
   </body>
 
