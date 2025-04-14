@@ -54,7 +54,7 @@
 
     <div class="bg-[#270C4A] fixed top-0 w-full text-white text-xl border-b-2 border-[#2c0cf8fa]  mx-auto bg-opacity-65 z-20">
       <div class=" mx-auto px-1 flex justify-between items-center md:text-xl text-sm">
-        <div class="md:m-1 text-center text-purple-400 font-outfit font-bold ">
+        <div class="md:m-1 text-center text-sky-400 font-outfit font-bold ">
           WEBSITE CHATBOT
         </div>
         <div class="flex justify-around items-center mx-3 my-1">
@@ -207,22 +207,18 @@
             </div>
           </div>
         </div>
-        <div class="h-full flex flex-col justify-between w-full">
-          <div id="auto-scroll" class="overflow-x-auto hide-scrollbar snap-x snap-mandatory flex scroll-smooth rounded-3xl w-full h-[45%]">
-
-            <div class="snap-start min-w-full h-full">
-              <img src="{% static './image/chatbot_home/aboutUsImg1.jpg' %}" alt="Chatbot Illustration" class="w-full h-full object-cover rounded-3xl" />
-            </div>
-        
-            <div class="snap-start min-w-full h-full">
-              <img src="{% static './image/chatbot_home/aboutUsImg1.jpg' %}" alt="Chatbot Illustration" class="w-full h-full object-cover rounded-3xl" />
-            </div>
-        
-            <div class="snap-start min-w-full h-full">
-              <img src="{% static './image/chatbot_home/aboutUsImg1.jpg' %}" alt="Chatbot Illustration" class="w-full h-full object-cover rounded-3xl" />
-            </div>
-        
-          </div>
+<div class="h-full w-full flex flex-col justify-between gap-4">
+  <!-- Video Section -->
+  <div class="w-full h-[45%] overflow-hidden rounded-3xl shadow-lg border-2 border-[#00ff92]">
+    <video 
+      src="{% static './video/tut.mp4' %}" 
+      class="w-full h-full object-cover rounded-3xl"
+      autoplay 
+      muted 
+      loop 
+      playsinline
+    ></video>
+  </div>
       
           <!-- Technology Used Box -->
           <div class="flex flex-col items-center justify-center rounded-xl p-5 bg-[#4755696b] h-[50%] border-2 border-[#00ff92]">
