@@ -9,12 +9,12 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <!--<title>Registration Form in HTML CSS</title>-->
     <!---Custom CSS File--->
-    <link rel="stylesheet" href="/static/registration.css" />
     <link rel="stylesheet" href="{% static 'output.css'%}">
   </head>
 ';
 '
-  <body class="px-2 overflow-x-hidden bg-gray-800 bg-cover bg-no-repeat" style="background-image: url('{% static "image/chatbotSignIn/signBG.png" %}');">
+  <body class="px-2  bg-cover bg-no-repeat min-h-screen bg-center"
+   style="background-image: url('{% static "image/chatbotSignIn/signIN.webp" %}');">
     
 
    
@@ -37,42 +37,53 @@
     </div>
     {% endif %}
 
-    <div class=" mx-auto p-1 text-center max-w-screen-lg h-fit mt-16 text-3xl ">
+    <div class=" mx-auto p-1 text-center max-w-screen-2xl w-full text-3xl text-blue-600 font-bold ">
       <div class="w-fit h-full mx-auto ">
-      <h1 class="text-white">WEBSITE CHATBOT</h1>
-      <div class="mt-1 h-[0.2rem]  bg-white rounded-lg"></div>
+      <h1 class="text-4xl font-bold bg-gradient-to-b from-slate-600 via-white  to-white bg-clip-text text-transparent">WEBSITE CHATBOT</h1>
+      <div class="mt-1 h-[0.2rem]  bg-gradient-to-b from-slate-600 via-white  to-white rounded-lg"></div>
     </div>
     </div>
     
-    <section class="container max-w-screen-lg h-1/2 mt-10 text-white md:mx-auto">
+    <section class="bg-[#000000a8] max-w-screen-sm mx-3 sm:max-w-screen-md h-1/2 mt-10 text-white md:mx-auto rounded-2xl shadow-2xl border-y-4 border-x-2 border-x-slate-400">
 
-      <header class="mx-auto text-center w-fit ">Sign-Up
-        <div class=" h-full w-full mt-1">
-         
-          <div class=" h-[0.2rem]  bg-white rounded-lg"></div>
+      <header class=" relative mx-auto text-center w-full text-2xl my-5 text-sky-400">
+        <a href="{% url 'home' %}">
+         <div class="rounded-full bg-[#94949487] hover:bg-[#3d3d3d] absolute left-5 w-fit h-fit p-3 top-0">
+          <img src="{% static "./image/chatbotSignIn/arrow.png" %}" class="w-4 h-4  " alt="">
+         </div>
+        </a>
+        <a href="{% url 'login' %}">
+          <div class="text-purple-500 hover:underline absolute right-5 w-fit h-fit p-2 top-0 text-lg">
+           LOGIN 
+          </div>
+         </a>
+         <div class="w-fit text-3xl mx-auto">
+          Sign-Up
+           <div class=" h-[0.2rem]  bg-sky-400 rounded-lg mt-1"></div>
+
+         </div>
       </header>
 
 
-      <form action="{% url 'registration' %}" class="form" method="post" submit="return registration()">
+      <form action="{% url 'registration' %}" class="form " method="post" submit="return registration()">
         {% csrf_token %}
-        <div class="input-box">
-          <label for="name">Full Name</label>
-          <input placeholder="Enter full name" type="text" name="name" required class="focus:outline-none focus:ring-2 focus:ring-[#46fff6] transition duration-200 rounded w-full "
-/>
+        <div class="input-box mx-auto w-4/5 my-2 flex flex-col-reverse ">
+          <input placeholder="Enter full name" type="text" name="name" required class=" focus:outline-none focus:ring-2 focus:ring-[#46fff6] peer/name transition duration-200 rounded w-full p-2 text-cyan-400 text-base "/>
+          <label for="name" class="  text-slate-300 block text-lg peer-focus/name:text-[#46fff6]">Full Name</label>
         </div>
-        <div class="input-box">
-          <label>Email Address</label>
-          <input type="text" placeholder="Enter email address" name="email" required class="focus:outline-none focus:ring-2 focus:ring-[#46fff6] transition duration-200 rounded w-full" />
+        <div class="input-box mx-auto w-4/5  my-5 flex flex-col-reverse">
+          <input type="text" placeholder="Enter email address" name="email" required class="peer/email focus:outline-none focus:ring-2 focus:ring-[#46fff6] transition duration-200 rounded w-full p-2 text-cyan-400 text-base" />
+          <label for="email" class="text-slate-300 block text-lg peer-focus/email:text-[#46fff6]">Email Address</label>
         </div>
-        <div class="input-box">
-          <label> CreatePassword</label>
-          <input type="password" placeholder="Enter new Password" name="password" required class="focus:outline-none focus:ring-2 focus:ring-[#46fff6] transition duration-200 rounded w-full" />
+        <div class="input-box mx-auto w-4/5 my-2 flex flex-col-reverse">
+          <input type="password" placeholder="Enter new Password" name="password" required class="peer/password focus:outline-none focus:ring-2 focus:ring-[#46fff6] transition duration-200 rounded w-full p-2 text-cyan-400 text-base" />
+          <label for="password" class="text-slate-300 block text-lg peer-focus/password:text-[#46fff6]"> CreatePassword</label>
         </div>
 
 
 
 
-        <button class="text-2xl font-bold ">Submit</button>
+        <button class="text-2xl font-bold my-9 w-4/5 mx-auto block text-center text-white bg-[#8c4df1] p-2 rounded-lg hover:bg-purple-800">SUBMIT</button>
       </form>
     </section>
     <script>
