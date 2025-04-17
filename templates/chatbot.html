@@ -227,7 +227,7 @@
             </div>
           
             <!-- Scrollable Wrapper -->
-            <div id="tech-scroll" class="flex hide-scrollbar space-x-4 w-full overflow-x-auto snap-x snap-mandatory scroll-smooth border-2 border-[#00ff92] rounded-xl  no-scrollbar ">
+            <div id="auto-scroll" class="flex hide-scrollbar space-x-4 w-full overflow-x-auto snap-x snap-mandatory scroll-smooth border-2 border-[#00ff92] rounded-xl  no-scrollbar ">
               
               <!-- Card 1 -->
               <div class="snap-start min-w-full h-full flex-shrink-0 flex  items-center text-center bg-[#1e293b] overflow-hidden  shadow-md w-[200px]">
@@ -405,12 +405,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
           // Remove active class from all links
           links.forEach(l => l.classList.remove("text-[#852FFF]", "font-bold"));
-
+          console.log(e.target)
           // Add active class to clicked link
           this.classList.add("text-[#852FFF]", "font-bold");
 
           // Scroll to the section
-          const targetId = this.getAttribute("href").slice(1);
+          const targetId =this.getAttribute("href").slice(1);
           
           const target = document.getElementById(targetId);
           if (target) {
@@ -449,20 +449,8 @@ document.addEventListener("DOMContentLoaded", () => {
       left: scrollAmount,
       behavior: 'smooth',
     });
-  }, 2000); // every 3 seconds
-  const tech_container = document.getElementById('tech-scroll');
-  let tech_scrollAmount = 0;
-  const tech_scrollStep = tech_container.offsetWidth; // approx width of one card
-  const tech_maxScroll = tech_container.scrollWidth - tech_container.clientWidth;
-
-  setInterval(() => {
-    tech_scrollAmount += tech_scrollStep;
-    if (tech_scrollAmount > tech_maxScroll) tech_scrollAmount = 0;
-    tech_container.scrollTo({
-      left: tech_scrollAmount,
-      behavior: 'smooth',
-    });
   }, 2000);
+  
   </script>
   </body>
 
