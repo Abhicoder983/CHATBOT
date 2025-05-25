@@ -8,7 +8,7 @@ from django.conf import settings
 from .form import loginForm
 import json
 import random
-from .utils import get_answer_from_website
+from .utils import scraping_web
 from datetime import datetime, timezone
 
 import pytz
@@ -241,7 +241,7 @@ def loggedIn(request):
 @csrf_exempt  
 def get_ai_info(request):
     auth_login=request.session.get('user_email_id',None)
-#     
+    
     allowed_referrer = "https://chatbot-alpha-mauve-80.vercel.app/loggedIn/"  
     request_referrer = request.META.get("HTTP_REFERER", "")
 
@@ -260,7 +260,7 @@ def get_ai_info(request):
         user_content={'msg':user_message,
                       'time':user_message_time,
                       'url':user_url}
-        ai_info = get_answer_from_website(user_url,user_message).data.get('answer')
+        ai_info = scraping_web(user_url,user_message).data.get('answer')
         print(user_timezone)
         try:
              user_tz=pytz.timezone(user_timezone)
