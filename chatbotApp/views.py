@@ -241,6 +241,7 @@ def loggedIn(request):
 @csrf_exempt  
 def get_ai_info(request):
     auth_login=request.session.get('user_email_id',None)
+    print('abhishek',auth_login)
     
     allowed_referrer = "https://chatbot-alpha-mauve-80.vercel.app/loggedIn/"  
     request_referrer = request.META.get("HTTP_REFERER", "")
@@ -260,6 +261,7 @@ def get_ai_info(request):
         user_content={'msg':user_message,
                       'time':user_message_time,
                       'url':user_url}
+        print('abhishek345')
         ai_info = scraping_web(user_url,user_message).data.get('answer')
         print(user_timezone)
         try:

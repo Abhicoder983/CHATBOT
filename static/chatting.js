@@ -79,7 +79,7 @@ document.addEventListener("keydown" , function(event){
         let ai_info
         const userTimeZone=Intl.DateTimeFormat().resolvedOptions().timeZone
         
-        
+    
         fetch('https://chatbot-alpha-mauve-80.vercel.app/ai/info/ai_983/ai_info/' ,{
             method:'POST',
             headers:{'Content-Type':'application/json',
@@ -286,8 +286,7 @@ function getAiInfo(e){
     document.getElementById("content").appendChild(user_ai_box)
     let ai_info
     const userTimeZone=Intl.DateTimeFormat().resolvedOptions().timeZone
-    
-    
+      
     fetch('https://chatbot-alpha-mauve-80.vercel.app/ai/info/ai_983/ai_info/' ,{
         method:'POST',
         headers:{'Content-Type':'application/json',
