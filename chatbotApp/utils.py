@@ -12,9 +12,12 @@ from selenium.webdriver.common.by import By
 from urllib.parse import urlparse
 import re
 import time
+from selenium.webdriver.chrome.service import Service
+import os
 
 
 class UniversalWebScraper:
+    CHROMEDRIVER_PATH = os.path.join(os.path.dirname(__file__), 'Drivers/ChromeDriver')
     def __init__(self):
         self.headers = {
             'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
@@ -45,14 +48,16 @@ class UniversalWebScraper:
             raise Exception(f"Failed to fetch URL with requests: {str(e)}")
     
     def _scrape_with_selenium(self, url):
-        """Fetch HTML using Selenium (for dynamic websites)"""
+        """Fetch HTML using Selenium (for dynamic websites)""" 
         try:
+            service = Service(self.CHROMEDRIVER_PATH)
             if not self.selenium_driver:
                 chrome_options = Options()
                 chrome_options.add_argument("--headless")
                 chrome_options.add_argument("--disable-gpu")
                 chrome_options.add_argument("--window-size=1920x1080")
-                self.selenium_driver = webdriver.Chrome(options=chrome_options)
+
+                self.selenium_driver = webdriver.Chrome(service=service, options=chrome_options)
             
             self.selenium_driver.get(url)
             
