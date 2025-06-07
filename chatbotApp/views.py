@@ -29,10 +29,9 @@ def registration(request):
           request.session['email1']=email1
           request.session['password']=password
 
-          print('abhishek',name,password,email1)
+     
           checking=registrationModel.objects.filter(email=email1)
           
-          print('abhishek',checking) 
           if checking:
                 msg={
                     'email': email1,
@@ -57,7 +56,7 @@ def registration(request):
                     email2.send()
 
      # Print a success message and store data in the session
-                    print("Email sent successfully!")
+                    
                     request.session['randomNum'] = randomNum
                     request.session['access'] = True
                except:
@@ -210,12 +209,12 @@ def loggedIn(request):
           user_obj = registrationModel.objects.get(email=email)
           user_id = user_obj.id  # MongoDB me ObjectId store hota hai
     except registrationModel.DoesNotExist:
-          print("User not found")
+         
           user_id = None
     request.session['user_email_id'] = str(user_id)
     # Fetch user messages
     data = messageModel.objects.filter(user=user_id).values('ai_message', 'user_message')
-    print(data)
+    
     # Fetch user name correctly
     user = user_obj
     name = user.name if user else 'Guest'
@@ -233,7 +232,7 @@ def loggedIn(request):
         'user_message': data[0]['user_message']['content'] if data else None,
         'name': name   
     }
-    print(send_data)
+  
 
     return render(request, 'chatting.html', send_data)
 
@@ -241,7 +240,7 @@ def loggedIn(request):
 @csrf_exempt  
 def get_ai_info(request):
     auth_login=request.session.get('user_email_id',None)
-    print('abhishek',auth_login)
+  
     
     allowed_referrer = "https://chatbot-alpha-mauve-80.vercel.app/loggedIn/"  
     request_referrer = request.META.get("HTTP_REFERER", "")
@@ -261,21 +260,20 @@ def get_ai_info(request):
         user_content={'msg':user_message,
                       'time':user_message_time,
                       'url':user_url}
-        print('abhishek345')
         ai_info = scraping_web(user_url,user_message).data.get('answer')
-        print(user_timezone)
+    
         try:
              user_tz=pytz.timezone(user_timezone)
              local_time=utc_now.astimezone(user_tz)
-             print(local_time)
+            
         except pytz.exceptions.UnknownTimeZoneError:
              local_time=utc_now  
-             print('abhishek')
+             
              
         
         user= messageModel.objects.get(user=auth_login)
         time=local_time.strftime("%I:%M:%S %p")
-        print(time)
+       
         ai_content={'msg':ai_info,
                     'time':time,
                     'url':user_url}
