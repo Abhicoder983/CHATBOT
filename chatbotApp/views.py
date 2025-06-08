@@ -241,8 +241,8 @@ def loggedIn(request):
 def get_ai_info(request):
     auth_login=request.session.get('user_email_id',None)
   
-    
-    allowed_referrer = "https://chatbot-alpha-mauve-80.vercel.app/loggedIn/"  
+#     https://chatbot-alpha-mauve-80.vercel.app/loggedIn/
+    allowed_referrer = "https://website-chatbot-7el7.onrender.com/loggedIn/"  
     request_referrer = request.META.get("HTTP_REFERER", "")
 
     if not request_referrer.startswith(allowed_referrer):

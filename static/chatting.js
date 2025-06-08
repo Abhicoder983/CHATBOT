@@ -9,7 +9,7 @@ document.addEventListener("keydown" , function(event){
         
         let closelink=document.getElementById("link");
         let openlink=document.getElementById("openlink");
-        console.log('abhishek2')
+        
         
         if(closelink.classList.contains("flex")){
             closelink.classList.remove("opacity-100", "max-h-40");
@@ -79,8 +79,8 @@ document.addEventListener("keydown" , function(event){
         let ai_info
         const userTimeZone=Intl.DateTimeFormat().resolvedOptions().timeZone
         
-    
-        fetch('https://chatbot-alpha-mauve-80.vercel.app/ai/info/ai_983/ai_info/' ,{
+        // https://chatbot-alpha-mauve-80.vercel.app/ai/info/ai_983/ai_info/
+        fetch('https://website-chatbot-7el7.onrender.com/ai/info/ai_983/ai_info/' ,{
             method:'POST',
             headers:{'Content-Type':'application/json',
                 "X-CSRFToken": csrftoken
@@ -114,7 +114,6 @@ document.addEventListener("keydown" , function(event){
             completed.style.display="block";
             loading.style.display="none";
         });
-        console.log(ai_info)
         
        
     
@@ -286,8 +285,8 @@ function getAiInfo(e){
     document.getElementById("content").appendChild(user_ai_box)
     let ai_info
     const userTimeZone=Intl.DateTimeFormat().resolvedOptions().timeZone
-      
-    fetch('https://chatbot-alpha-mauve-80.vercel.app/ai/info/ai_983/ai_info/' ,{
+    // https://chatbot-alpha-mauve-80.vercel.app/ai/info/ai_983/ai_info/
+    fetch('https://website-chatbot-7el7.onrender.com/ai/info/ai_983/ai_info/' ,{
         method:'POST',
         headers:{'Content-Type':'application/json',
             "X-CSRFToken": csrftoken
@@ -321,7 +320,7 @@ function getAiInfo(e){
         completed.style.display="block";
         loading.style.display="none";
     });
-    console.log(ai_info)
+   
     
    
 
