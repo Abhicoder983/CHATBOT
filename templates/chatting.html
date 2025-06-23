@@ -9,89 +9,93 @@
     <title>ChatBot</title>
 </head>
 
-<body class="bg-gray-800 flex flex-col justify-center items-center h-screen">
-    <nav class="fixed top-0 bg-gray-800 border-purple-700 border-b-2  rounded-xl w-full mx-5 z-10">
-        <div class="text-2xl  text-sky-400 text-center w-full py-1  ">
-            <p >WEBSITE CHATBOT</p>
+<body class="bg-gray-900 text-white min-h-screen flex flex-col items-center">
+    <!-- Navigation Bar -->
+    <nav class="max-h-[15vh] min-h-fit bg-gray-800 border-purple-700 border-b-2 rounded-xl w-[98%] mx-auto z-10">
+        <div class="text-xl text-sky-400 text-center w-full hidden md:block">
+            <p class="hidden md:block">WEBSITE CHATBOT</p>
         </div>
-        <div class="h-0.5 w-11/12 bg-white mx-auto"></div>
-        <div class="flex md:pb-1 w-full items-center justify-center flex-col md:flex-row">
-            <div class="  w-fit md:absolute md:left-5 top-12">
-               
-                <span class=" block  text-white text-xl  "> {{name|capfirst}}</span>
-            </div>
-            <div class="h-0.5 w-4/5 bg-green-500 mx-auto md:hidden "></div>
-            <div class="text-white text-lg flex justify-center items-center my-2" >
-                <div class="text-xl text-center bg-white rounded-xl p-1 hidden w-fit mr-2" id="searching">
-                    <img src="{% static "./gif/searching2.gif" %}" class="w-9 h-8 inline" alt="">
-                    <p class="inline text-slate-600 my-auto text-center w-full"> SEARCHING</p>
-                </div> 
-
-                <div class="text-xl text-center bg-white rounded-xl p-1 hidden w-fit mr-2" id="completed">
-                    <img src="{% static "./image/correct.png" %}" class="w-9 h-8 inline" alt="">
-                    <p class="inline text-slate-600 my-auto text-center w-full">COMPLETED</p>
+        <div class="h-0.5 w-11/12 bg-white mx-auto hidden md:block"></div>
+        <div class="flex w-[98%] mx-auto md:pb-1 items-center md:justify-between justify-center flex-col md:flex-row">
+            <div class="w-full md:w-fit flex justify-between items-center">
+                <div class="text-xl text-sky-400 text-center w-fit md:hidden">
+                    <p>WEBSITE CHATBOT</p>
                 </div>
-                
-                <div class="inline text-white text-2xl py-1 break-words tracking-wider w-fit mr-2" id='welcome'>HELLO</div>
-             
-               
-                <div class=" my-auto mx-2 w-fit  hidden md:absolute md:right-5 top-12  " id="loading">
-                    <img src="{% static "./gif/Loading.gif" %}" class="w-9 h-8 inline " alt="">
+                <div class="w-fit">
+                    <span class="block text-white text-lg">{{ name|capfirst }}</span>
+                </div>
             </div>
-            </div> 
-
+            <div class="h-0.5 w-full bg-green-500 mx-auto md:hidden"></div>
+            <div class="text-white text-lg flex w-full md:w-fit justify-between items-center my-1">
+                <div class="text-base text-center bg-white rounded-xl px-1 hidden w-fit" id="searching">
+                    <img src="{% static "./gif/searching2.gif" %}" class="w-9 h-2 inline" alt="">
+                    <p class="inline text-slate-600 text-center w-full"> SEARCHING</p>
+                </div>
+                <div class="text-base text-center bg-white rounded-xl p-1 hidden w-fit" id="completed">
+                    <img src="{% static "./image/correct.png" %}" class="w-9 h-2 inline" alt="">
+                    <p class="inline text-slate-600 text-center w-full">COMPLETED</p>
+                </div>
+                <div class="inline text-white text-lg break-words tracking-wider w-fit" id='welcome'>HELLO</div>
+                <div class="my-auto mx-2 w-fit invisible top-12 md:hidden" id="loading">
+                    <img src="{% static "./gif/Loading.gif" %}" class="w-4 h-4 inline" alt="">
+                </div>
+            </div>
+            <div class="my-auto mx-2 w-fit top-12 hidden md:block invisible" id="loading">
+                <img src="{% static "./gif/Loading.gif" %}" class="w-4 h-4 inline" alt="">
+            </div>
         </div>
-
     </nav>
-    <section class="h-[calc(90vh-100px)] md:mt-[1.75rem] grid grid-cols-1 grid-rows-[3fr,1fr] md:w-[calc(100vw-120px)] w-[calc(100vw-40px)] gap-1 mt-[5.75rem]">    
-        <div class="w-full max-h-[70vh] border-2 border-sky-500 overflow-y-auto p-2" id="content">
+
+    <!-- Main Content Section -->
+    <section class="flex-grow w-full max-w-screen-xl p-4 flex flex-col">
+        <!-- Scrollable Chat Area -->
+        <div id="content" class="overflow-y-auto border border-gray-600 rounded-xl p-4 mb-4 bg-gray-800 space-y-4 md:h-[65vh] h-[73vh]">
             {% if ai_message %}
                 {% for ai_msg, user_msg in ai_message|zip_lists:user_message %}
-                <div class="flex flex-col w-full mt-2 mb-2 gap-2">
-                    <!-- User Message -->
-                    <div class="Content text-base bg-gray-700 text-white p-3 w-fit max-w-[90%] md:max-w-[80%] ml-auto rounded-xl shadow-md break-words whitespace-normal">
-                        <p class="text-right text-blue-600 font-bold bg-white p-1 rounded-md break-words">{{ user_msg.url }}</p>
-                        <p class="p-2 break-words">{{ user_msg.msg }}</p>
-                        <p class="text-right text-slate-400 text-sm">{{ user_msg.time }}</p>
+                    <div class="space-y-2">
+                        <div class="bg-gray-700 p-3 rounded-xl ml-auto max-w-[90%] md:max-w-[70%] shadow-md">
+                            <p class="text-blue-600 font-bold bg-white text-right p-1 rounded break-words">{{ user_msg.url }}</p>
+                            <p class="p-2 break-words">{{ user_msg.msg }}</p>
+                            <p class="text-sm text-right text-gray-400">{{ user_msg.time }}</p>
+                        </div>
+                        <div class="bg-gray-800 p-3 rounded-xl max-w-[90%] md:max-w-[70%] shadow-md">
+                            <p class="text-blue-600 font-bold bg-white p-1 rounded break-words">{{ ai_msg.url }}</p>
+                            <p class="p-2 break-words">{{ ai_msg.msg }}</p>
+                            <p class="text-sm text-right text-gray-400">{{ ai_msg.time }}</p>
+                        </div>
                     </div>
-                
-                    <!-- AI Message -->
-                    <div class="Content text-base bg-gray-800 text-white p-3 w-fit max-w-[90%] md:max-w-[80%] rounded-xl shadow-md break-words whitespace-normal">
-                        <p class="text-blue-600 font-bold bg-white p-1 rounded-md break-words">{{ ai_msg.url }}</p>
-                        <p class="p-2 break-words">{{ ai_msg.msg }}</p>
-                        <p class="text-right text-slate-400 text-sm">{{ ai_msg.time }}</p>
-                    </div>
-                </div>
-                
-                
                 {% endfor %}
             {% endif %}
         </div>
-    
+
         <!-- Chat Input Section -->
-        <div name="chatbar" class="h-fit bg-slate-600 border-white rounded-lg flex flex-col border-2 w-full my-auto p-2">
-            <div class="flex items-center bg-gray-600 border-2 border-white rounded-lg p-2 transition-all duration-500 ease-in-out max-h-40 overflow-hidden w-full" id="link">
-                <input type="text" name="link" class="w-full h-10 pl-3 text-lg text-blue-600 rounded-lg outline-none" placeholder="Enter website link" id="user_link">
-                <img src="../static/gif/lock_link.gif" class="w-7 h-8 cursor-pointer mx-2" onclick="openLink(event)" id="closelink" alt="">
+        <div class="bg-slate-700 border border-white rounded-xl p-3 space-y-2">
+            <!-- Link Input -->
+            <div class="flex items-center bg-gray-600 border border-white rounded-lg px-2 py-1"  id="link">
+                <input id="user_link" type="text" name="link" placeholder="Enter website link" class="flex-grow bg-transparent text-blue-400 placeholder-blue-300 focus:outline-none" />
+                <img src="../static/gif/lock_link.gif" class="w-5 h-5 cursor-pointer ml-2" onclick="openLink(event)"  id="closelink"  alt="Lock">
             </div>
-    
-            <div name="input-message" class="mt-2 flex w-full items-center">
-                <input type="text" name="input" class="w-full h-10 text-lg text-white bg-slate-700 border border-slate-400 rounded-lg pl-3 outline-none" placeholder="Ask a question..." id="user_msg">
-                <button onclick="getAiInfo(event)" class="ml-2 p-2  text-white rounded-full ">
+            <!-- Message Input -->
+            <div class="flex items-center">
+                <input id="user_msg" type="text" name="input" placeholder="Ask a question..." class="flex-grow bg-slate-800 text-white placeholder-gray-400 border border-slate-500 rounded-lg px-3 py-1 focus:outline-none" />
+                <button onclick="getAiInfo(event)" class="ml-2">
                     <img src="../static/image/sent_msg.png" class="w-8 h-8" alt="Send">
                 </button>
-                <button onclick="openLink(event)" id="openlink" class="ml-2 p-2  text-white rounded-full  opacity-0 hidden">
+                <button onclick="openLink(event)" id="openlink" class="ml-2 hidden opacity-0">
                     <img src="../static/image/link.png" class="w-8 h-8" alt="Link">
                 </button>
             </div>
         </div>
     </section>
-    
-    <footer class="w-full bottom-0 fixed bg-slate-500 ">
-        <p class=" my-1 text-white text-center  text-sm"> Powered by Gemini</p>
+
+    <!-- Footer -->
+    <footer class="w-full bg-slate-600 py-2 text-center text-sm text-white">
+        <p>Powered by Gemini</p>
     </footer>
-    
 </body>
+
+
+
 
 <script src="{% static 'chatting.js' %}" defer>
 

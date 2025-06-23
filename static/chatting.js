@@ -1,3 +1,6 @@
+const container = document.getElementById("content");
+
+container.scrollLeft = container.scrollWidth;
 document.addEventListener("keydown" , function(event){
     if(event.key==="Enter"){
         let welcome=document.getElementById("welcome");
@@ -22,7 +25,7 @@ document.addEventListener("keydown" , function(event){
         }
         let user_msg= document.getElementById('user_msg')
         let user_link=document.getElementById('user_link')
-        console.log(typeof(user_msg.value))
+        
         if(user_msg.value=="" || user_link.value==""){
             if(user_msg.value=="" && user_link.value==""){
                 alert("!Please provide the link and question")
@@ -48,7 +51,8 @@ document.addEventListener("keydown" , function(event){
         welcome.style.display="none";
         searching.style.display="block";
         completed.style.display="none";
-        loading.style.display="block";
+        loading.classList.remove("invisible");
+        loading.classList.add("visible");
         let now = new Date();
         let csrftoken = getCookie('csrftoken');
         let  user_msg_div=document.createElement('div');
@@ -75,10 +79,17 @@ document.addEventListener("keydown" , function(event){
         uMsg.innerText=user_msg.value;
         user_msg_div.appendChild(userTimeDiv)
         userTimeDiv.innerText = now.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true });
-        document.getElementById("content").appendChild(user_ai_box)
-        let ai_info
+        const container=document.getElementById("content")
+        container.appendChild(user_ai_box)
+
+        console.log("abhishek",container.scrollHeight)
+        console.log("abhishek3",container.scrollTop)
+        container.scrollTop = container.scrollHeight;
+        console.log(container.scrollHeight)
+        console.log(container.scrollTop)
         const userTimeZone=Intl.DateTimeFormat().resolvedOptions().timeZone
         
+
         // https://chatbot-alpha-mauve-80.vercel.app/ai/info/ai_983/ai_info/
         fetch('https://website-chatbot-7el7.onrender.com/ai/info/ai_983/ai_info/' ,{
             method:'POST',
@@ -88,7 +99,7 @@ document.addEventListener("keydown" , function(event){
             body:JSON.stringify({'user_msg':user_msg.value, 'user_link':user_link.value,'user_time':now.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true }) , 'time_zone':userTimeZone})
         }).then(response=> response.json())
         .then(data=>{
-            console.log(data)
+            
             let ai_msg_div=document.createElement('div');
             let aiTimeDiv=document.createElement('p')
             let ailink=document.createElement('p')
@@ -98,7 +109,7 @@ document.addEventListener("keydown" , function(event){
             ai_msg_div.classList.add("Content", "text-base", "bg-gray-800", "text-white", "p-3", "w-fit", "max-w-[90%]", "md:max-w-[80%]", "rounded-xl", "shadow-md","break-words" ,"whitespace-normal")
             aiTimeDiv.className="text-right text-slate-400 text-sm"
             user_ai_box.appendChild(ai_msg_div)
-            console.log(data.url)
+           
             ailink.innerText=data.url
             ai_msg_div.appendChild(ailink)
     
@@ -108,11 +119,12 @@ document.addEventListener("keydown" , function(event){
     
             ai_msg_div.appendChild(aiTimeDiv)
             aiTimeDiv.innerText=data.time
-    
+            container.scrollTop = container.scrollHeight;
             welcome.style.display="none";
             searching.style.display="none";
             completed.style.display="block";
-            loading.style.display="none";
+            loading.classList.remove("visible");
+            loading.classList.add("invisible");
         });
         
        
@@ -208,6 +220,7 @@ function getCookie(name) {
 // getting ai information from the server
 
 function getAiInfo(e){
+    console.log("getAiInfo called", e);
     let welcome=document.getElementById("welcome");
     let searching=document.getElementById("searching");
     let completed=document.getElementById("completed");
@@ -255,7 +268,10 @@ function getAiInfo(e){
     welcome.style.display="none";
     searching.style.display="block";
     completed.style.display="none";
-    loading.style.display="block";
+    console.log("loadingrem",loading.classList)
+    loading.classList.remove("invisible");
+    loading.classList.add("visible")
+    console.log("laodingadd",loading.classList)
     let now = new Date();
     let csrftoken = getCookie('csrftoken');
     let  user_msg_div=document.createElement('div');
@@ -282,9 +298,12 @@ function getAiInfo(e){
     uMsg.innerText=user_msg.value;
     user_msg_div.appendChild(userTimeDiv)
     userTimeDiv.innerText = now.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true });
-    document.getElementById("content").appendChild(user_ai_box)
-    let ai_info
+    const container=document.getElementById("content")
+    container.appendChild(user_ai_box)
+    
+   
     const userTimeZone=Intl.DateTimeFormat().resolvedOptions().timeZone
+    container.scrollTop = container.scrollHeight;
     // https://chatbot-alpha-mauve-80.vercel.app/ai/info/ai_983/ai_info/
     fetch('https://website-chatbot-7el7.onrender.com/ai/info/ai_983/ai_info/' ,{
         method:'POST',
@@ -294,7 +313,7 @@ function getAiInfo(e){
         body:JSON.stringify({'user_msg':user_msg.value, 'user_link':user_link.value,'user_time':now.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true }) , 'time_zone':userTimeZone})
     }).then(response=> response.json())
     .then(data=>{
-        console.log(data)
+    
         let ai_msg_div=document.createElement('div');
         let aiTimeDiv=document.createElement('p')
         let ailink=document.createElement('p')
@@ -304,7 +323,7 @@ function getAiInfo(e){
         ai_msg_div.classList.add("Content", "text-base", "bg-gray-800", "text-white", "p-3", "w-fit", "max-w-[90%]", "md:max-w-[80%]", "rounded-xl", "shadow-md","break-words" ,"whitespace-normal")
         aiTimeDiv.className="text-right text-slate-400 text-sm"
         user_ai_box.appendChild(ai_msg_div)
-        console.log(data.url)
+        
         ailink.innerText=data.url
         ai_msg_div.appendChild(ailink)
 
@@ -314,11 +333,12 @@ function getAiInfo(e){
 
         ai_msg_div.appendChild(aiTimeDiv)
         aiTimeDiv.innerText=data.time
-
+        container.scrollTop = container.scrollHeight;
         welcome.style.display="none";
         searching.style.display="none";
         completed.style.display="block";
-        loading.style.display="none";
+        loading.classList.remove("visible");
+        loading.classList.add("invisible");
     });
    
     
