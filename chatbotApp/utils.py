@@ -229,7 +229,7 @@ Based on the structured content, check whether it contains any information relev
 
 
 
-    print('prompt ready')
+  
     response = model.generate_content(prompt)
     return response.text
    

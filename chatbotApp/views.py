@@ -1,11 +1,9 @@
 from django.shortcuts import render,HttpResponseRedirect,redirect
 from django.http import JsonResponse
 from chatbotApp.models import registrationModel , messageModel
-from django.core.mail import send_mail
 from django.core.mail import EmailMessage
 from django.views.decorators.csrf import csrf_exempt
 from django.conf import settings
-from .form import loginForm
 import json
 import random
 from .utils import scraping_web
@@ -297,11 +295,7 @@ def get_ai_info(request):
    
 
 
-def login2(request):
 
-     form= loginForm()
-
-     return render(request, 'login2.html', {'form':form})
      
 
 
