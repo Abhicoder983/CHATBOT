@@ -9,6 +9,8 @@ import random
 from .utils import scraping_web
 from datetime import datetime, timezone
 
+from utils.JWT import generate_token, decode_token
+
 import pytz
 t=0
 def home2(request):
@@ -75,6 +77,17 @@ def registration(request):
          
 
 def login(request):
+     token=request.COOKIES.get('jwt')
+     payload=decode_token(token)
+     if(payload):
+          try:
+               print('abhishek',payload)
+               user= registrationModel.objects.get(email=payload['user'])
+          except registrationModel.DoesNotExist:
+               user=None
+          if(user):
+               request.session['auth_email']=user.email
+               return redirect('/loggedIn/')
      if request.method=='POST':
           email1= request.POST.get('email',None)
           password1= request.POST.get('password',None)
@@ -93,7 +106,11 @@ def login(request):
           else:
                if (data[0].password==password1):
                     request.session['auth_email']=email1
-                    return HttpResponseRedirect('/loggedIn/')
+                    token = generate_token(email1)
+                    response = redirect('/loggedIn/')
+                    response.set_cookie('jwt', token) 
+
+                    return response
                else:
                     return render(request,'login.html',{'msg':'Please enter the correct password', 'condition':1})            
      else:
@@ -197,9 +214,17 @@ def resetPassword(request):
           return render(request, 'resetPassword.html')
 def loggedIn(request):
     email = request.session.get('auth_email')
+    token = request.COOKIES.get('jwt')
     
     if not email:
-        return redirect('login')  
+        return redirect('login') 
+    
+    payload=decode_token(token)
+    if payload==None:
+         print('abhishek')
+         return redirect('login')
+
+     
     
 
     request.session['auth_email2'] = email
@@ -238,6 +263,10 @@ def loggedIn(request):
 @csrf_exempt  
 def get_ai_info(request):
     auth_login=request.session.get('user_email_id',None)
+    token= request.COOKIES.get('jwt')
+    payload=decode_token(token)
+    if(payload==None):
+         return redirect('login')
   
 #     https://chatbot-alpha-mauve-80.vercel.app/loggedIn/
     allowed_referrer = "https://website-chatbot-7el7.onrender.com/loggedIn/"  
