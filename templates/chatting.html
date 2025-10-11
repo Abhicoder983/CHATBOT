@@ -36,13 +36,17 @@
                     <p class="inline text-slate-600 text-center w-full">COMPLETED</p>
                 </div>
                 <div class="inline text-white text-lg break-words tracking-wider w-fit" id='welcome'>HELLO</div>
-                <div class="my-auto mx-2 w-fit invisible top-12 md:hidden" id="loading">
-                    <img src="{% static "./gif/Loading.gif" %}" class="w-4 h-4 inline" alt="">
-                </div>
+                <a href="{% url 'logout' %}" class="h-fit px-2 py-0.5 mt-1 w-fit  border-2 border-white rounded-lg hover:border-red-600 hover:text-red-600 block md:hidden">
+                LOGOUT
+            </a>
+                
             </div>
-            <div class="my-auto mx-2 w-fit top-12 hidden md:block invisible" id="loading">
+            <!-- <div class="my-auto mx-2 w-fit top-12 hidden md:block invisible" id="loading">
                 <img src="{% static "./gif/Loading.gif" %}" class="w-4 h-4 inline" alt="">
-            </div>
+            </div> -->
+            <a href="{% url 'logout' %}" class="h-fit px-2 py-1 mt-1 w-fit  border-2 border-white rounded-lg hover:border-red-600 hover:text-red-600 md:block hidden">
+                LOGOUT
+            </a>
         </div>
     </nav>
 

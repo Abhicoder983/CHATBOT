@@ -12,6 +12,7 @@ urlpatterns = [
     path('reset/',views.reset, name='reset'),
     path('resetpassword/',views.resetPassword,name='resetpassword'),
     path('loggedIn/',views.loggedIn, name='loggedIn'),
+    path('logout/', views.logout, name='logout'),
     path('ai/info/ai_983/ai_info/' ,views.get_ai_info), 
 
     

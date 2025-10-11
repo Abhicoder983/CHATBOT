@@ -6,7 +6,7 @@ document.addEventListener("keydown" , function(event){
         let welcome=document.getElementById("welcome");
         let searching=document.getElementById("searching");
         let completed=document.getElementById("completed");
-        let loading=document.getElementById("loading");
+       
         
         
         
@@ -51,8 +51,6 @@ document.addEventListener("keydown" , function(event){
         welcome.style.display="none";
         searching.style.display="block";
         completed.style.display="none";
-        loading.classList.remove("invisible");
-        loading.classList.add("visible");
         let now = new Date();
         let csrftoken = getCookie('csrftoken');
         let  user_msg_div=document.createElement('div');
@@ -123,8 +121,6 @@ document.addEventListener("keydown" , function(event){
             welcome.style.display="none";
             searching.style.display="none";
             completed.style.display="block";
-            loading.classList.remove("visible");
-            loading.classList.add("invisible");
         });
         
        
@@ -224,7 +220,7 @@ function getAiInfo(e){
     let welcome=document.getElementById("welcome");
     let searching=document.getElementById("searching");
     let completed=document.getElementById("completed");
-    let loading=document.getElementById("loading");
+   
     
     
     
@@ -268,10 +264,6 @@ function getAiInfo(e){
     welcome.style.display="none";
     searching.style.display="block";
     completed.style.display="none";
-    console.log("loadingrem",loading.classList)
-    loading.classList.remove("invisible");
-    loading.classList.add("visible")
-    console.log("laodingadd",loading.classList)
     let now = new Date();
     let csrftoken = getCookie('csrftoken');
     let  user_msg_div=document.createElement('div');
@@ -337,8 +329,6 @@ function getAiInfo(e){
         welcome.style.display="none";
         searching.style.display="none";
         completed.style.display="block";
-        loading.classList.remove("visible");
-        loading.classList.add("invisible");
     });
    
     

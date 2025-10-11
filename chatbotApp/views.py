@@ -259,6 +259,13 @@ def loggedIn(request):
 
     return render(request, 'chatting.html', send_data)
 
+def logout(request):
+     print('abhishek')
+     response=redirect('/')
+     
+     response.delete_cookie('jwt')
+     return response
+
 
 @csrf_exempt  
 def get_ai_info(request):
