@@ -157,7 +157,8 @@ def reset(request):
      if request.method == 'POST':
           resetEmail = request.POST.get('resetEmail')
           recipient_list = [resetEmail]
-          resetChecking = registrationModel.objects.filter(email=resetEmail)
+          resetChecking = registrationModel.objects.filter(email=resetEmail).first()
+          print(resetChecking)
           if resetEmail==None:
                randomNumber= request.session.get('randomnumbers')
                resetOTP = int(request.POST.get('otp'))
@@ -166,7 +167,7 @@ def reset(request):
                     return HttpResponseRedirect('/resetpassword')
                else:
                     return render(request, 'resetPasswordOTP.html', {'wrongOTP': 'Please enter the correct OTP'})   
-          elif not resetChecking:
+          elif resetChecking==None:
                return render(request, 'resetPasswordOTP.html', {'wrongEmail': 'Please enter the correct registered email','condition': 0})
           else:
                try:
