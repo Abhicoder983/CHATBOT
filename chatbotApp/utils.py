@@ -167,7 +167,7 @@ def scraping_web(url,question):
 
 # Configure Gemini
 genai.configure(api_key=config("API_KEY"))
-model = genai.GenerativeModel("gemini-2.0-flash")
+model = genai.GenerativeModel("gemini-3.5-flash-lite")
 
 
 
