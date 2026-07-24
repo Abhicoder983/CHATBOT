@@ -25,7 +25,7 @@ def registration(request):
           name= request.POST.get('name')
           password= request.POST.get('password')
           email1= request.POST.get('email')
-          recipient_list=[email1]
+          recipient_list=email1
           request.session['name']=name
           request.session['email1']=email1
           request.session['password']=password
@@ -47,23 +47,36 @@ def registration(request):
      # Create the email message
                
                try:
-                    email2=EmailMessage(
-                              'ChatBot registeration OTP',
-                              'To verify your email, your otp is {}'.format(randomNum),
-                              'kumarabhishekasdf1234@gmail.com',
-                              recipient_list
-                         )
-                         
-                    email2.send()
 
-     # Print a success message and store data in the session
+                    url = "https://api.brevo.com/v3/smtp/email"
+                    headers = {
+                            "accept": "application/json",
+                            "api-key": config('BREVO_EMAIL_API'),
+                            "content-type": "application/json"
+                        }
                     
-                    request.session['randomNum'] = randomNum
-                    request.session['access'] = True
+                    
+                    
+                    payload = {
+                            "sender": {"name": "chatbot", "email": "ruhelabhishek@gmail.com"},
+                            "to": [{"email": recipient_list}],
+                            "subject": "Chatbot Registeration Your OTP Code",
+                            "htmlContent": f"<p>Your OTP is: <b>{randomNum}</b> <br> This should be used for verifying account.</p>"
+                        } 
+                    response = requests.post(url, json=payload, headers=headers)
+                    if response.status_code == 201:
+                         request.session['randomNum'] = randomNum
+                         request.session['access'] = True
+                         return HttpResponseRedirect('/confirm/')
+                    else:
+                         return render(request, 'registration.html', {'msg':'Something went wrong please try again later'})
+                         
+
+                    
+
                except:
                     return render(request, 'registration.html', {'msg':'Something went wrong please try again later'})
-     # Redirect to the confirmation page
-               return HttpResponseRedirect('/confirm/')
+
           
              
      else:
