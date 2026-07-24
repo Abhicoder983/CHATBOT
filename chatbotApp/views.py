@@ -1,14 +1,15 @@
+from django.contrib.sites import requests
 from django.shortcuts import render,HttpResponseRedirect,redirect
 from django.http import JsonResponse
 from chatbotApp.models import registrationModel , messageModel
-from django.core.mail import send_mail,EmailMultiAlternatives
 from django.views.decorators.csrf import csrf_exempt
 from django.conf import settings
 import json
 import random
+import requests
 from .utils import scraping_web
 from datetime import datetime, timezone
-
+from decouple import config
 from utils.JWT import generate_token, decode_token
 
 import pytz
@@ -156,7 +157,7 @@ def reset(request):
     
      if request.method == 'POST':
           resetEmail = request.POST.get('resetEmail')
-          recipient_list = [resetEmail]
+          recipient_list = resetEmail
           resetChecking = registrationModel.objects.filter(email=resetEmail).first()
           print(resetChecking)
           if resetEmail==None:
@@ -171,20 +172,44 @@ def reset(request):
                return render(request, 'resetPasswordOTP.html', {'wrongEmail': 'Please enter the correct registered email','condition': 0})
           else:
                try:
-               
+
+                    url = "https://api.brevo.com/v3/smtp/email"
+                    headers = {
+        "accept": "application/json",
+        "api-key": config('BREVO_EMAIL_API'),
+        "content-type": "application/json"
+    }
+
+
                     randomNumber = random.randint(111111, 999999)
-                    subject = "OTP Verification"
-                    text = f"Your OTP is {randomNumber}. Please use this to reset your password."
-                    html = f"<p>Your OTP is <strong>{randomNumber}</strong>. Please use this to reset your password.</p>"
-                    email2 = EmailMultiAlternatives(
-                              subject,
-                              text,
-                              None,
-                              recipient_list
-                              )
+                    payload = {
+        "sender": {"name": "chatbot", "email": "ruhelabhishek@gmail.com"},
+        "to": [{"email": recipient_list}],
+        "subject": "Your OTP Code",
+        "htmlContent": f"<p>Your OTP is: <b>{randomNumber}</b> <br> This should be used for reset password.</p>"
+    } 
+                    response = requests.post(url, json=payload, headers=headers)
+                    if response.status_code == 201:
+                         request.session['randomnumbers'] = randomNumber
+                         request.session['resetEmail2'] = resetEmail   
+                         print('email sended')  
+                         return render(request, 'resetPasswordOTP.html', {'condition': 1})     
+                    else:
+                         return render(request , 'resetPasswordOTP.html', {'errors':'something went wrong', 'condition': 0})
+
+
+                    # subject = "OTP Verification"
+                    # text = f"Your OTP is {randomNumber}. Please use this to reset your password."
+                    # html = f"<p>Your OTP is <strong>{randomNumber}</strong>. Please use this to reset your password.</p>"
+                    # email2 = EmailMultiAlternatives(
+                    #           subject,
+                    #           text,
+                    #           None,
+                    #           recipient_list
+                    #           )
                     
-                    email2.attach_alternative(html, "text/html")
-                    email2.send()                  
+                    # email2.attach_alternative(html, "text/html")
+                    # email2.send()                  
                     
 
                     # email2 = send_mail(

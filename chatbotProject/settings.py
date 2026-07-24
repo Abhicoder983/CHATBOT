@@ -142,15 +142,6 @@ MIGRATION_MODULES = {
     'contenttypes': 'mongo_migrations.contenttypes',
 }
 
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp-relay.brevo.com'
-EMAIL_PORT = 587 # Use 587 for TLS or 465 for SSL
-EMAIL_USE_TLS = True # Enable TLS (STARTTLS)
-  # Ensure SSL is False
-EMAIL_USE_SSL = False
-EMAIL_HOST_USER = config('EMAIL_HOST_USER')
-EMAIL_HOST_PASSWORD = config('BREVO_EMAIL_API_KEY')  # Use an App Password, NOT your real password
-DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 SECRET_KEY=config('SECURITY_KEY')
 JWT_EXPIRY=config('JWT_EXPIRY')
 
