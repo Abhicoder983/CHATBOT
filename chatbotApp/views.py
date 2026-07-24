@@ -1,7 +1,7 @@
 from django.shortcuts import render,HttpResponseRedirect,redirect
 from django.http import JsonResponse
 from chatbotApp.models import registrationModel , messageModel
-from django.core.mail import EmailMessage
+from django.core.mail import send_mail,EmailMultiAlternatives
 from django.views.decorators.csrf import csrf_exempt
 from django.conf import settings
 import json
@@ -173,17 +173,30 @@ def reset(request):
                try:
                
                     randomNumber = random.randint(111111, 999999)
+                    subject = "OTP Verification"
+                    text = f"Your OTP is {randomNumber}. Please use this to reset your password."
+                    html = f"<p>Your OTP is <strong>{randomNumber}</strong>. Please use this to reset your password.</p>"
+                    email2 = EmailMultiAlternatives(
+                              subject,
+                              text,
+                              None,
+                              recipient_list
+                              )
                     
+                    email2.attach_alternative(html, "text/html")
+                    email2.send()                  
                     
 
-                    email2 = EmailMessage(
-                    'To change the password',
-                    'The OTP is {}'.format(randomNumber),
-                    'kumarabhishekasdf1234@gmail.com',
-                    recipient_list,
-                    )
+                    # email2 = send_mail(
+                    # 'To change the password',
+                    # 'The OTP is {}'.format(randomNumber),
+                    # None,
+                    # recipient_list,
+                    # fail_silently=False,
+                    # )
+                    
 
-                    email2.send()
+                   
                     request.session['randomnumbers'] = randomNumber
                     request.session['resetEmail2'] = resetEmail   
                     print('email sended')  
