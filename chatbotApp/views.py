@@ -185,9 +185,11 @@ def reset(request):
 
                     email2.send()
                     request.session['randomnumbers'] = randomNumber
-                    request.session['resetEmail2'] = resetEmail     
+                    request.session['resetEmail2'] = resetEmail   
+                    print('email sended')  
                     return render(request, 'resetPasswordOTP.html', {'condition': 1})     
-               except:
+               except Exception as e:
+                    print('Error occurred:', e)
                     return render(request , 'resetPasswordOTP.html', {'errors':'something went wrong', 'condition': 0})
        
           
