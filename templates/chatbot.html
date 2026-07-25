@@ -7,391 +7,439 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title> CHATBOT</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
-
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{% static 'output.css'%}">
     <style>
-      .hide-scrollbar::-webkit-scrollbar {
-  display: none;
-}
+      .hide-scrollbar::-webkit-scrollbar { display: none; }
+      .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
 
-.hide-scrollbar {
-  -ms-overflow-style: none; /* IE and Edge */
-  scrollbar-width: none;    /* Firefox */
-}
+      :root{
+        --ink: #0A0D0C;
+        --panel: #101513;
+        --panel-2: #141B18;
+        --line: rgba(110,231,183,0.14);
+        --line-strong: rgba(110,231,183,0.35);
+        --text: #E7ECEA;
+        --muted: #8FA39D;
+        --amber: #F5A623;
+        --mint: #6EE7B7;
+      }
+
+      body{
+        font-family: 'Inter', sans-serif;
+        background-color: var(--ink);
+        color: var(--text);
+      }
+
+      .font-mono{ font-family: 'JetBrains Mono', monospace; }
+
+      .bg-background{
+        background-image:
+          radial-gradient(ellipse 70% 50% at 15% 0%, rgba(110,231,183,0.10), transparent 60%),
+          radial-gradient(ellipse 55% 40% at 100% 10%, rgba(245,166,35,0.10), transparent 60%),
+          linear-gradient(180deg, var(--ink) 0%, var(--ink) 100%);
+      }
+
+      .panel{
+        background: linear-gradient(180deg, var(--panel), var(--panel-2));
+        border: 1px solid var(--line);
+      }
+      .panel:hover{ border-color: var(--line-strong); }
+
+      .divider{ border-color: var(--line); }
+
+      .text-amber{ color: var(--amber); }
+      .text-mint{ color: var(--mint); }
+      .text-muted{ color: var(--muted); }
+
+      .btn-primary{
+        background: var(--mint);
+        color: #06110C;
+      }
+      .btn-primary:hover{ background: #8FF0C4; }
+
+      .btn-ghost{
+        background: transparent;
+        border: 1px solid var(--line-strong);
+        color: var(--text);
+      }
+      .btn-ghost:hover{ border-color: var(--mint); color: var(--mint); }
+
+      .tag{
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 0.7rem;
+        letter-spacing: 0.06em;
+        border: 1px solid var(--line-strong);
+        color: var(--mint);
+        background: rgba(110,231,183,0.06);
+      }
+
+      .term{
+        background: #0C1210;
+        border: 1px solid var(--line-strong);
+      }
+      .term-dot{ width: 10px; height:10px; border-radius: 999px; display:inline-block; }
+      .cursor-blink{
+        display:inline-block; width:8px; height:1.1em; background: var(--mint);
+        animation: blink 1s steps(1) infinite; vertical-align: text-bottom; margin-left:2px;
+      }
+      @keyframes blink{ 50%{ opacity:0; } }
+
+      .grid-fade{ opacity:0; transform: translateY(24px); }
+      .grid-fade.in{ opacity:1; transform: translateY(0); transition: all .6s ease; }
+
+      /* keeps anchor sections from hiding behind the fixed navbar on click-scroll */
+      #About, #features{ scroll-margin-top: 88px; }
     </style>
   </head>
 
-  <body class="p-0  m-0 h-fit bg-background bg-no-repeat bg-cover bg-center  ">
+  <body class="p-0 m-0 h-fit bg-background bg-no-repeat bg-cover bg-center">
 
-    <div class=" w-full overflow-y-hidden absolute top-0 left-0 h-[70vh] z-[-1] ">
-      <svg class=" absolute  top-0 left-0 w-full h-full" xmlns="http://www.w3.org/2000/svg" version="1.1"
-        xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:svgjs="http://svgjs.dev/svgjs" width="1440" height="560"
-        preserveAspectRatio="none" viewBox="0 0 1440 560">
-        <g mask="url(&quot;#SvgjsMask1393&quot;)" fill="none">
-          <rect width="1440" height="560" x="0" y="0" fill="rgba(0, 24, 49, 1)"></rect>
-          <path d="M1578.09 205.39C1463.47 212.23 1385.93 426.82 1174.04 423.79 962.16 420.76 918.62-3.87 770-50.52"
-            stroke="rgba(16, 206, 244, 0.58)" stroke-width="2"></path>
-          <path
-            d="M1471.15 252.73C1355.53 252.53 1242.58 182.73 1014.01 182.73 785.44 182.73 793.99 255.04 556.87 252.73 319.75 250.42 238.71-54.11 99.73-69.8"
-            stroke="rgba(16, 206, 244, 0.58)" stroke-width="2"></path>
-          <path d="M1482.9 355.6C1348.52 353.46 1188.95 200.14 972.22 187.6 755.49 175.06 802.8-35.44 716.88-53.43"
-            stroke="rgba(16, 206, 244, 0.58)" stroke-width="2"></path>
-          <path d="M1537.16 285.08C1386.47 285.73 1255.3 412.15 947.12 408.28 638.93 404.41 545-42.73 357.07-71.74"
-            stroke="rgba(16, 206, 244, 0.58)" stroke-width="2"></path>
-          <path d="M1490.21 365.37C1377.3 362.88 1303.56 220.48 1066.57 208.57 829.57 196.66 768.15-51.21 642.92-62.48"
-            stroke="rgba(16, 206, 244, 0.58)" stroke-width="2"></path>
-        </g>
+    <!-- subtle grid backdrop instead of curved SVG lines -->
+    <div class="w-full overflow-hidden fixed top-0 left-0 h-[70vh] z-[-1]">
+      <svg class="absolute top-0 left-0 w-full h-full opacity-40" xmlns="http://www.w3.org/2000/svg" width="1440" height="560" preserveAspectRatio="none" viewBox="0 0 1440 560">
         <defs>
-          <mask id="SvgjsMask1393">
-            <rect width="1440" height="560" fill="#ffffff"></rect>
-          </mask>
+          <pattern id="grid" width="48" height="48" patternUnits="userSpaceOnUse">
+            <path d="M 48 0 L 0 0 0 48" fill="none" stroke="rgba(110,231,183,0.10)" stroke-width="1"/>
+          </pattern>
+          <linearGradient id="fade" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#0A0D0C" stop-opacity="0"/>
+            <stop offset="100%" stop-color="#0A0D0C" stop-opacity="1"/>
+          </linearGradient>
         </defs>
+        <rect width="1440" height="560" fill="url(#grid)"/>
+        <rect width="1440" height="560" fill="url(#fade)"/>
       </svg>
-
     </div>
 
-    <div class="bg-[#270C4A] fixed top-0 w-full text-white text-xl border-b-2 border-[#2c0cf8fa]  mx-auto bg-opacity-65 z-20">
-      <div class=" mx-auto px-1 flex justify-between items-center md:text-xl text-sm">
-        <div class="md:m-1 text-center text-sky-400 font-outfit font-bold ">
-          WEBSITE CHATBOT
+    <div class="bg-[#0A0D0C]/85 backdrop-blur-md fixed top-0 inset-x-0 z-30 border-b divider">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between gap-3">
+        <div class="flex items-center gap-2 text-mint font-mono font-bold text-xs sm:text-sm md:text-base whitespace-nowrap shrink-0 min-w-0 overflow-hidden">
+          <span class="text-muted shrink-0">&gt;</span>
+          <span class="truncate">WEBSITE CHATBOT</span>
+          <span class="cursor-blink hidden sm:inline-block shrink-0"></span>
         </div>
-        <div class="flex justify-around items-center mx-3 my-1">
-          <div class='py-1 md:mr-20'>
 
-            <ul class="flex justify-between items-center ">
-              <li class="hover:text-[#852FFF] hover:scale-x-110  active:text-orange-500 mr-2 md:mx-2 nav-link">
-                <a href="{% url "home" %}"> Home</a>
-              </li>
-              <li class="hover:text-[#852FFF] hover:scale-x-110 active:text-orange-500 mr-2 md:mx-2 nav-link">
-                <a href="#About">About</a>
-              </li>
-              <li class="hover:text-[#852FFF] hover:scale-x-110 active:text-orange-500 mr-2 md:mx-2 nav-link">
-                <a href="#features">Features</a>
-              </li>
+        <div class="flex items-center gap-3 sm:gap-6 shrink-0">
+          <ul class="hidden sm:flex items-center gap-4 md:gap-6 font-mono text-xs md:text-sm tracking-wide">
+            <li class="hover:text-mint active:text-amber transition-colors duration-200 nav-link">
+              <a href="{% url "home" %}">Home</a>
+            </li>
+            <li class="hover:text-mint active:text-amber transition-colors duration-200 nav-link">
+              <a href="#About">About</a>
+            </li>
+            <li class="hover:text-mint active:text-amber transition-colors duration-200 nav-link">
+              <a href="#features">Features</a>
+            </li>
+          </ul>
 
-            </ul>
-          </div>
-          <div class="flex justify-between items-center ">
-
-            <a href="{% url "login" %}"
-              class="flex justify-center items-center bg-[#852FFF] hover:bg-transparent rounded-lg px-2 py-1 md:px-7 border-white border-2 hover:border-[#852FFF] hover:text-[#852FFF] cursor-pointer">
-              <p class="anchor">
-                Login
-              </p>
-
-            </a>
-          </div>
+          <a href="{% url "login" %}"
+            class="flex items-center justify-center btn-ghost rounded-md px-3 py-1.5 sm:px-5 transition-all duration-200 cursor-pointer shrink-0">
+            <p class="anchor font-mono text-xs sm:text-sm">Login</p>
+          </a>
         </div>
       </div>
-
     </div>
-    <section class="mx-auto mt-14 max-w-screen ">
-      <div class="flex flex-col items-center px-4 ">
-        <div class="text-white  text-2xl font-outfit font-bold md:text-7xl">
-          <h1 class="text-center text-[#7cfff8]"> Takes the Refining information the website on the basis of
-            your ask <span class="text-[#ffffff]">Question</span> and gives you the <span
-              class="text-[#fdfdfd]">simplfied answer</span> </h1>
+
+    <section class="mx-auto pt-28 max-w-5xl px-4">
+      <div class="flex flex-col items-center">
+        <div class="tag px-3 py-1 rounded-full mb-6">// paste a link, ask anything</div>
+
+        <div class="text-white text-2xl font-bold md:text-6xl">
+          <h1 class="text-center leading-[1.15]"> Takes the Refining information the website on the basis of
+            your ask <span class="text-mint">Question</span> and gives you the <span
+              class="text-amber">simplfied answer</span> </h1>
         </div>
-        <div class="px-12 mt-1">
-          <p class=" text-xs text-wrap text-center text-slate-300 md:text-2xl">
+        <div class="px-6 mt-6 max-w-2xl">
+          <p class="text-xs text-center text-muted md:text-lg leading-relaxed">
             Ai feature is the most important feature of the website which
             helps the user to get the information in the most simplified way. The user can ask
             the question and the chatbot will give the answer to the user in the most simplified way.
           </p>
         </div>
-
       </div>
 
-      <div class="flex justify-center mt-5 ">
-        <div
-          class="bg-[#2C1250] border-2 border-white text-white  hover:bg-white hover:text-[#2C1250] cursor-pointer rounded-lg">
-          <a href="{% url "registration" %}" class="block anchor text-2xl font-semibold h-fit py-2 px-4 text-center">
+      <div class="flex justify-center mt-8">
+        <div class="btn-primary rounded-lg transition-all duration-200 cursor-pointer font-mono font-semibold hover:-translate-y-0.5">
+          <a href="{% url "registration" %}" class="block anchor text-lg h-fit py-3 px-8 text-center">
             START CHAT
           </a>
         </div>
-
-
       </div>
-    </section>
-    <section class="mt-11 mx-auto px-auto max-w-screen mb-4 ">
-      <div class="text-slate-200 text-2xl font-outfit pl-2 mt-36 mb-1">
-        <p class="text-4xl"> what the chatbot Features ? </p>
-      </div>
-      <div class=" py-1 grid md:grid-cols-2 md:grid-rows-2 xl:grid-cols-4 xl:grid-rows-1 md:ratio-1:4 gap-4">
 
-        <div class="sm:max-w-sm w-10/12 mx-auto p-6 bg-custom-gradient rounded-lg shadow-lg text-white hover:transform hover:scale-105 duration-100  hover:border-white hover:border-2">
-          <div class=" flex flex-col items-center justify-center sm:items-start sm:justify-normal">
-            <div class="flex items-center justify-center w-fit h-fit bg-blue-950 rounded-full">
-              <img src="{% static "./image/chatbot_home/extraction.png" %}" class="m-2 w-10 h-10" alt="extraction icon">
-            </div>
-
-            <h3 class="mt-4 text-2xl font-semibold text-blue-300 text-center">Website-Based Answer Retrieval
-              <p class="mt-2 text-lg text-white text-justify ">
-                The chatbot extracts information from a user-provided website link and provides answers based on the
-                content of that site.
-            </h3>
-            </p>
-          </div>
+      <!-- signature element: terminal mockup showing the actual product flow -->
+      <div class="term rounded-xl mt-14 mb-8 overflow-hidden shadow-2xl">
+        <div class="flex items-center gap-2 px-4 py-3 border-b divider bg-black/20">
+          <span class="term-dot" style="background:#F5A623"></span>
+          <span class="term-dot" style="background:#6EE7B7"></span>
+          <span class="term-dot" style="background:#3D4B46"></span>
+          <span class="font-mono text-xs text-muted ml-3">chatbot — session</span>
         </div>
-        <div
-          class="sm:max-w-sm w-10/12 mx-auto p-6 bg-custom-gradient rounded-lg shadow-lg text-white hover:transform hover:scale-105 duration-100 hover:border-white hover:border-2">
-          <div class=" flex flex-col items-center justify-center sm:items-start sm:justify-normal">
-            <div class="flex items-center justify-center w-12 h-12 bg-blue-950 rounded-full">
-
-              <img src="{% static "./image/chatbot_home/cloud-api.png" %}" class="m-2 w-8 h-8" alt="extraction icon">
-            </div>
-            <h3 class="mt-4 text-2xl font-semibold text-blue-300 text-center">Powered by Gemini API
-              <p class="mt-2 text-lg text-white text-justify">
-                It utilizes the Gemini API to process user queries and generate relevant responses, ensuring high
-                accuracy and contextual understanding.
-            </h3>
-
-            </p>
-          </div>
-        </div>
-        <div
-          class="sm:max-w-sm w-10/12 mx-auto p-6 bg-custom-gradient rounded-lg shadow-lg text-white hover:transform hover:scale-105 duration-100 hover:border-white hover:border-2">
-          <div class=" flex flex-col items-center justify-center sm:items-start sm:justify-normal">
-            <div class="flex items-center justify-center w-fit h-fit bg-blue-950 rounded-full">
-              <img src="{% static "./image/chatbot_home/find.png" %}" class="m-2 w-10 h-10" alt="api icon">
-
-            </div>
-            <h3 class="mt-4 text-2xl font-semibold text-blue-300 text-center">Context-Aware Question Handling
-              <p class="mt-2 text-lg text-white text-justify">
-                The chatbot understands questions related to the given website, making it useful for FAQs,
-                documentation, or research-based queries.
-            </h3>
-
-            </p>
-          </div>
-        </div>
-        <div
-          class="sm:max-w-sm w-10/12 mx-auto p-6 bg-custom-gradient rounded-lg shadow-lg text-white hover:transform hover:scale-105 duration-100 hover:border-white hover:border-2">
-          <div class=" flex flex-col items-center justify-center sm:items-start sm:justify-normal">
-            <div class="flex items-center justify-center w-fit h-fit bg-blue-950 rounded-full">
-              <img src="{% static './image/chatbot_home/profile.png' %}" class="m-2 w-10 h-10" alt="api icon">
-
-            </div>
-            <h3 class="mt-4 text-2xl font-semibold text-blue-300 text-center">User-Friendly Interaction
-              <p class="mt-2 text-lg text-white text-justify">
-                Users can simply provide a website link and ask their questions, receiving clear and precise answers
-                without manually searching through the content.
-            </h3>
-
-            </p>
-          </div>
-        </div>
-
-      </div>
-    </section>
-    <section class="mt-10 min-h-fit max-w-screen p-10 border-t-2 mx-auto border-white" id="About">
-      <div class=" leading-none text-[4rem] sm:text-[8rem] lg:text-[12rem] text-white font-playwrite font-bold mt-4">
-        ABOUT </div>
-      <div class="grid sm:grid-cols-3 grid-cols-1 grid-rows-1 items-center gap-2 ">
-        <div class="col-span-2 min-h-full">
-          <div class="w-full  flex h-full">
-            <div class="flex flex-col w-2/4 ">
-              <div class="leading-none  text-[4rem] sm:text-[8rem] lg:text-[12rem] text-white font-playwrite font-bold mb-6">
-                US</div>
-                <div class=" font-outfit text-justify lg:my-4 text-white lg:text-2xl text-sm mt-1 ">
-                  <p class="mb-4 text-sky-400 ">Innovative Chatbot Solutions</p>
-                  At the core of our innovation lies a smart and intuitive chatbot
-                  solution designed to enhance the way users interact with websites
-                </div>
-              
-            </div>
-            <div class="w-2/4 sm:w-full overflow-hidden rounded-3xl ml-3">
-              <img src="{% static "./image/chatbot_home/aboutUsImg1.jpg" %}" class="w-full h-full " alt="">
-            </div>
-          </div>
-        </div>
-<div class="h-full w-full flex flex-col justify-between gap-4">
-  <!-- Video Section -->
-  <div class="w-full h-[45%] overflow-hidden rounded-3xl shadow-lg border-2 border-[#00ff92]">
-    <video 
-      src="{% static './video/tut.mp4' %}" 
-      class="w-full h-full object-cover rounded-3xl"
-      autoplay 
-      muted 
-      loop 
-      playsinline
-    ></video>
-  </div>
-      
-          <!-- Technology Used Box -->
-          <div class="flex flex-col items-center justify-center rounded-xl p-5 bg-[#4755696b] h-[50%] border-2 border-[#00ff92]">
-            <div class="text-[#00ff92] font-bold lg:text-3xl sm:text-base text-3xl mb-6">
-              Technology Used
-            </div>
-          
-            <!-- Scrollable Wrapper -->
-            <div id="auto-scroll" class="flex hide-scrollbar space-x-4 w-full overflow-x-auto snap-x snap-mandatory scroll-smooth border-2 border-[#00ff92] rounded-xl  no-scrollbar ">
-              
-              <!-- Card 1 -->
-              <div class="snap-start min-w-full h-full flex-shrink-0 flex  items-center text-center bg-[#1e293b] overflow-hidden  shadow-md w-[200px]">
-                <img src="{% static './image/chatbot_home/techImg/python.png' %}" alt="Python" class="w-2/5 h-full " />
-                <div class="sm:m-2">
-                <h3 class="text-white font-semibold sm:text-lg text-sm">Python</h3>
-                <p class="text-gray-300 text-sm mt-1">Core backend logic using Python scripting.</p>
-                </div>
-              </div>
-          
-              <!-- Card 2 -->
-              <div class="snap-start min-w-full h-full flex-shrink-0 flex  items-center text-center bg-[#1e293b] overflow-hidden  shadow-md w-[200px]">
-                <img src="{% static './image/chatbot_home/techImg/django2.png' %}" alt="Python" class="w-2/5 h-full " />
-                <div class="m-2">
-                <h3 class="text-white font-semibold sm:text-lg text-sm">DJANGO</h3>
-                <p class="text-gray-300 text-sm mt-1">Powerful backend web framework for APIs.</p>
-                </div>
-              </div>
-          
-              <!-- Card 3 -->
-              <div class="snap-start min-w-full h-full flex-shrink-0 flex  items-center text-center bg-[#1e293b] overflow-hidden shadow-md w-[200px]">
-                <img src="{% static './image/chatbot_home/techImg/restAPI.jpg' %}" alt="Python" class="w-2/5 h-full " />
-                <div class="m-2">
-                <h3 class="text-white font-semibold sm:text-lg text-sm">RESTAPI</h3>
-                <p class="text-gray-300 text-sm mt-1">RESTful APIs for communication and integration.</p>
-                </div>
-              </div>
-          
-              <!-- Card 4 -->
-              <div class="snap-start min-w-full h-full flex-shrink-0 flex  items-center text-center bg-[#1e293b] overflow-hidden shadow-md w-[200px]">
-                <img src="{% static './image/chatbot_home/techImg/geminiAPI.jpg' %}" alt="Python" class="w-2/5 h-full " />
-                <div class="m-2">
-                <h3 class="text-white font-semibold sm:text-lg text-sm">Gemini AI</h3>
-                <p class="text-gray-300 text-sm mt-1">AI model for smart and relevant chatbot responses.</p>
-                </div>
-              </div>
-            </div>
-          </div>
-          
+        <div class="p-5 font-mono text-sm leading-loose overflow-x-auto">
+          <p><span class="text-mint">$</span> <span class="text-muted">paste_url</span>(<span class="text-amber">"https://yourdocs.com"</span>)</p>
+          <p><span class="text-mint">$</span> <span class="text-muted">ask</span>(<span class="text-amber">"what is the refund policy?"</span>)</p>
+          <p class="text-muted">→ scanning page content…</p>
+          <p><span class="text-mint">200 OK</span> <span class="text-muted">— answer ready</span><span class="cursor-blink"></span></p>
         </div>
       </div>
     </section>
+
+    <section class="mt-20 mx-auto max-w-6xl px-4 mb-4">
+      <div class="mb-10">
+        <p class="tag inline-block px-3 py-1 rounded-full mb-3">// capabilities</p>
+        <p class="text-3xl md:text-4xl font-bold text-white"> what the chatbot Features ? </p>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-5">
+
+        <div class="panel rounded-xl p-6 flex flex-col h-full transition-all duration-300 hover:-translate-y-1">
+          <div class="flex items-center justify-between gap-2 flex-wrap mb-4">
+            <div class="flex items-center justify-center w-11 h-11 bg-black/30 rounded-lg border divider">
+              <img src="{% static "./image/chatbot_home/extraction.png" %}" class="w-6 h-6" alt="extraction icon">
+            </div>
+            <span class="tag px-2 py-0.5 rounded">GET /extract</span>
+          </div>
+          <h3 class="text-lg font-semibold text-white mb-2">Website-Based Answer Retrieval</h3>
+          <p class="text-sm text-muted leading-relaxed">
+            The chatbot extracts information from a user-provided website link and provides answers based on the
+            content of that site.
+          </p>
+        </div>
+
+        <div class="panel rounded-xl p-6 flex flex-col h-full transition-all duration-300 hover:-translate-y-1">
+          <div class="flex items-center justify-between gap-2 flex-wrap mb-4">
+            <div class="flex items-center justify-center w-11 h-11 bg-black/30 rounded-lg border divider">
+              <img src="{% static "./image/chatbot_home/cloud-api.png" %}" class="w-6 h-6" alt="extraction icon">
+            </div>
+            <span class="tag px-2 py-0.5 rounded">POST /gemini</span>
+          </div>
+          <h3 class="text-lg font-semibold text-white mb-2">Powered by Gemini API</h3>
+          <p class="text-sm text-muted leading-relaxed">
+            It utilizes the Gemini API to process user queries and generate relevant responses, ensuring high
+            accuracy and contextual understanding.
+          </p>
+        </div>
+
+        <div class="panel rounded-xl p-6 flex flex-col h-full transition-all duration-300 hover:-translate-y-1">
+          <div class="flex items-center justify-between gap-2 flex-wrap mb-4">
+            <div class="flex items-center justify-center w-11 h-11 bg-black/30 rounded-lg border divider">
+              <img src="{% static "./image/chatbot_home/find.png" %}" class="w-6 h-6" alt="api icon">
+            </div>
+            <span class="tag px-2 py-0.5 rounded">POST /ask</span>
+          </div>
+          <h3 class="text-lg font-semibold text-white mb-2">Context-Aware Question Handling</h3>
+          <p class="text-sm text-muted leading-relaxed">
+            The chatbot understands questions related to the given website, making it useful for FAQs,
+            documentation, or research-based queries.
+          </p>
+        </div>
+
+        <div class="panel rounded-xl p-6 flex flex-col h-full transition-all duration-300 hover:-translate-y-1">
+          <div class="flex items-center justify-between gap-2 flex-wrap mb-4">
+            <div class="flex items-center justify-center w-11 h-11 bg-black/30 rounded-lg border divider">
+              <img src="{% static './image/chatbot_home/profile.png' %}" class="w-6 h-6" alt="api icon">
+            </div>
+            <span class="tag px-2 py-0.5 rounded">UX/UI</span>
+          </div>
+          <h3 class="text-lg font-semibold text-white mb-2">User-Friendly Interaction</h3>
+          <p class="text-sm text-muted leading-relaxed">
+            Users can simply provide a website link and ask their questions, receiving clear and precise answers
+            without manually searching through the content.
+          </p>
+        </div>
+
+      </div>
+    </section>
+
+    <section class="mt-20 max-w-6xl mx-auto p-6 md:p-10 border-t divider" id="About">
+      <p class="tag inline-block px-3 py-1 rounded-full mb-6">// about</p>
+      <div class="text-5xl sm:text-7xl lg:text-8xl text-white font-bold mb-10 leading-none">
+        ABOUT <span class="text-mint">US</span>
+      </div>
+
+      <div class="grid lg:grid-cols-3 grid-cols-1 gap-6 items-stretch">
+        <div class="lg:col-span-2 flex flex-col md:flex-row gap-5">
+          <div class="md:w-1/2 flex flex-col justify-center">
+            <p class="mb-3 text-amber font-mono text-sm tracking-wide">// innovative chatbot solutions</p>
+            <p class="text-white/85 text-base md:text-xl leading-relaxed">
+              At the core of our innovation lies a smart and intuitive chatbot
+              solution designed to enhance the way users interact with websites
+            </p>
+          </div>
+          <div class="md:w-1/2 overflow-hidden rounded-xl border divider min-h-[220px]">
+            <img src="{% static "./image/chatbot_home/aboutUsImg1.jpg" %}" class="w-full h-full object-cover" alt="">
+          </div>
+        </div>
+
+        <div class="flex flex-col gap-5">
+          <div class="w-full overflow-hidden rounded-xl border divider min-h-[200px]">
+            <video
+              src="{% static './video/tut.mp4' %}"
+              class="w-full h-full object-cover"
+              autoplay
+              muted
+              loop
+              playsinline
+            ></video>
+          </div>
+
+          <div class="panel rounded-xl p-5 flex-1">
+            <p class="font-mono text-mint text-sm mb-4 tracking-wide">// technology_used</p>
+
+            <div id="auto-scroll" class="flex hide-scrollbar space-x-3 w-full overflow-x-auto snap-x snap-mandatory scroll-smooth rounded-lg no-scrollbar border divider">
+
+              <div class="snap-start min-w-full flex-shrink-0 flex items-center text-left bg-black/25 overflow-hidden shadow-md">
+                <img src="{% static './image/chatbot_home/techImg/python.png' %}" alt="Python" class="w-16 h-16 m-3 object-contain" />
+                <div>
+                  <h3 class="text-white font-mono font-semibold text-sm">Python</h3>
+                  <p class="text-muted text-xs mt-1">Core backend logic using Python scripting.</p>
+                </div>
+              </div>
+
+              <div class="snap-start min-w-full flex-shrink-0 flex items-center text-left bg-black/25 overflow-hidden shadow-md">
+                <img src="{% static './image/chatbot_home/techImg/django2.png' %}" alt="Python" class="w-16 h-16 m-3 object-contain" />
+                <div>
+                  <h3 class="text-white font-mono font-semibold text-sm">DJANGO</h3>
+                  <p class="text-muted text-xs mt-1">Powerful backend web framework for APIs.</p>
+                </div>
+              </div>
+
+              <div class="snap-start min-w-full flex-shrink-0 flex items-center text-left bg-black/25 overflow-hidden shadow-md">
+                <img src="{% static './image/chatbot_home/techImg/restAPI.jpg' %}" alt="Python" class="w-16 h-16 m-3 object-contain" />
+                <div>
+                  <h3 class="text-white font-mono font-semibold text-sm">RESTAPI</h3>
+                  <p class="text-muted text-xs mt-1">RESTful APIs for communication and integration.</p>
+                </div>
+              </div>
+
+              <div class="snap-start min-w-full flex-shrink-0 flex items-center text-left bg-black/25 overflow-hidden shadow-md">
+                <img src="{% static './image/chatbot_home/techImg/geminiAPI.jpg' %}" alt="Python" class="w-16 h-16 m-3 object-contain" />
+                <div>
+                  <h3 class="text-white font-mono font-semibold text-sm">Gemini AI</h3>
+                  <p class="text-muted text-xs mt-1">AI model for smart and relevant chatbot responses.</p>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <!-- Feature Section -->
-<section class="border-t-2 max-w-screen mx-auto  border-white py-16 px-6" id="features">
-  <div class=" mx-auto text-center">
-    <h2 class="text-3xl font-bold text-[#00fffb] sm:text-7xl mb-4">Chatbot Features</h2>
-    <p class="text-xl text-white mb-12">
-      Discover what makes our AI chatbot intelligent, fast, and user-friendly.
-    </p>
+    <section class="border-t divider max-w-6xl mx-auto py-16 px-6" id="features">
+      <div class="mx-auto text-center">
+        <p class="tag inline-block px-3 py-1 rounded-full mb-4">// spec sheet</p>
+        <h2 class="text-3xl font-bold text-white sm:text-5xl mb-3">Chatbot Features</h2>
+        <p class="text-base text-muted mb-12">
+          Discover what makes our AI chatbot intelligent, fast, and user-friendly.
+        </p>
 
-    <div class="grid gap-10 sm:grid-cols-2 lg:grid-cols-3">
-      <!-- Feature Item -->
-      <div class="bg-gray-50 p-6 rounded-2xl shadow transition duration-300 transform border border-transparent hover:scale-105 hover:shadow-lg hover:bg-indigo-50 hover:border-indigo-600">
-        <div class="flex items-center justify-center w-12 h-12 bg-indigo-100 rounded-full mx-auto mb-4">
-          <svg class="w-6 h-6 text-indigo-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-            <path d="M12 12c2.21 0 4-1.79 4-4S14.21 4 12 4 8 5.79 8 8s1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" />
-          </svg>
+        <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3 text-left">
+
+          <div class="panel p-6 rounded-xl transition duration-300 transform hover:-translate-y-1">
+            <div class="flex items-center justify-center w-11 h-11 bg-black/30 rounded-lg border divider mb-4">
+              <svg class="w-5 h-5 text-mint" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path d="M12 12c2.21 0 4-1.79 4-4S14.21 4 12 4 8 5.79 8 8s1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" />
+              </svg>
+            </div>
+            <h3 class="text-base font-semibold text-white mb-2">AI-Powered Chat</h3>
+            <p class="text-sm text-muted">Gemini API delivers intelligent, real-time responses based on user queries.</p>
+          </div>
+
+          <div class="panel p-6 rounded-xl transition duration-300 transform hover:-translate-y-1">
+            <div class="flex items-center justify-center w-11 h-11 bg-black/30 rounded-lg border divider mb-4">
+              <svg class="w-5 h-5 text-mint" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path d="M9 17v-2a4 4 0 014-4h7" />
+                <path d="M13 7h7v7" />
+              </svg>
+            </div>
+            <h3 class="text-base font-semibold text-white mb-2">Website Understanding</h3>
+            <p class="text-sm text-muted">Understands and processes data directly from a provided website URL.</p>
+          </div>
+
+          <div class="panel p-6 rounded-xl transition duration-300 transform hover:-translate-y-1">
+            <div class="flex items-center justify-center w-11 h-11 bg-black/30 rounded-lg border divider mb-4">
+              <svg class="w-5 h-5 text-mint" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path d="M3 10h11M9 21V3m6 18h6" />
+              </svg>
+            </div>
+            <h3 class="text-base font-semibold text-white mb-2">Real-time Answers</h3>
+            <p class="text-sm text-muted">Fast, responsive interactions with minimal delay and natural flow.</p>
+          </div>
+
+          <div class="panel p-6 rounded-xl transition duration-300 transform hover:-translate-y-1">
+            <div class="flex items-center justify-center w-11 h-11 bg-black/30 rounded-lg border divider mb-4">
+              <svg class="w-5 h-5 text-mint" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path d="M11 17h2v2h-2zM11 7h2v6h-2z" />
+              </svg>
+            </div>
+            <h3 class="text-base font-semibold text-white mb-2">Smart Notifications</h3>
+            <p class="text-sm text-muted">Delivers contextual prompts and follow-up questions when needed.</p>
+          </div>
+
+          <div class="panel p-6 rounded-xl transition duration-300 transform hover:-translate-y-1">
+            <div class="flex items-center justify-center w-11 h-11 bg-black/30 rounded-lg border divider mb-4">
+              <svg class="w-5 h-5 text-mint" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path d="M5 13l4 4L19 7" />
+              </svg>
+            </div>
+            <h3 class="text-base font-semibold text-white mb-2">Reliable Performance</h3>
+            <p class="text-sm text-muted">Stable architecture ensures consistent response quality and uptime.</p>
+          </div>
+
+          <div class="panel p-6 rounded-xl transition duration-300 transform hover:-translate-y-1">
+            <div class="flex items-center justify-center w-11 h-11 bg-black/30 rounded-lg border divider mb-4">
+              <svg class="w-5 h-5 text-mint" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path d="M12 4v16m8-8H4" />
+              </svg>
+            </div>
+            <h3 class="text-base font-semibold text-white mb-2">Simple UI</h3>
+            <p class="text-sm text-muted">A clean and minimalist chat interface optimized for user ease.</p>
+          </div>
+
         </div>
-        <h3 class="text-lg font-semibold text-indigo-600 mb-2">AI-Powered Chat</h3>
-        <p class="text-sm text-gray-600">Gemini API delivers intelligent, real-time responses based on user queries.</p>
       </div>
-      
+    </section>
 
-      <!-- Repeat for more features -->
-      <div class="bg-gray-50 p-6 rounded-2xl shadow transition duration-300 transform border border-transparent hover:scale-105 hover:shadow-lg hover:bg-indigo-50 hover:border-indigo-600">
-        <div class="flex items-center justify-center w-12 h-12 bg-indigo-100 rounded-full mx-auto mb-4">
-          <svg class="w-6 h-6 text-indigo-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-            <path d="M9 17v-2a4 4 0 014-4h7" />
-            <path d="M13 7h7v7" />
-          </svg>
+    <footer class="relative max-w-6xl mx-auto border-t divider py-10 px-4 overflow-x-hidden">
+      <div class="grid grid-cols-1 sm:grid-cols-4 gap-8 sm:gap-4 pb-10">
+        <div class="sm:col-span-1 flex flex-col justify-center sm:border-r divider sm:pr-4">
+          <p class="text-white text-sm"> Ghaziabad, Uttar Pradesh</p>
+          <p class="mt-3 text-white text-sm"> street Road 1 , Main Road 1 , INDIA</p>
+          <p class="mt-3 text-white text-sm"> +91 1234567890</p>
+          <p class="mt-3 text-muted text-xs"> info@chatbot.com</p>
         </div>
-        <h3 class="text-xl font-semibold text-indigo-600 mb-2">Website Understanding</h3>
-        <p class="text-base text-gray-600">Understands and processes data directly from a provided website URL.</p>
-      </div>
 
-      <div class="bg-gray-50 p-6 rounded-2xl shadow transition duration-300 transform border border-transparent hover:scale-105 hover:shadow-lg hover:bg-indigo-50 hover:border-indigo-600">
-        <div class="flex items-center justify-center w-12 h-12 bg-indigo-100 rounded-full mx-auto mb-4">
-          <svg class="w-6 h-6 text-indigo-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-            <path d="M3 10h11M9 21V3m6 18h6" />
-          </svg>
+        <div class="sm:col-span-2 panel rounded-xl flex flex-col justify-center items-center text-center px-6 py-6">
+          <h1 class="text-lg sm:text-2xl mb-2 text-mint font-mono font-bold"> Website Chatbot</h1>
+          <p class="text-sm text-muted">
+            The chatbot project is an intelligent web-based assistant developed using Django and Gemini API. It allows users to input a website link and ask questions related to the content of
+            that site.
+          </p>
         </div>
-        <h3 class="text-xl font-semibold text-indigo-600 mb-2">Real-time Answers</h3>
-        <p class="text-base text-gray-600">Fast, responsive interactions with minimal delay and natural flow.</p>
-      </div>
 
-      <div class="bg-gray-50 p-6 rounded-2xl shadow transition duration-300 transform border border-transparent hover:scale-105 hover:shadow-lg hover:bg-indigo-50 hover:border-indigo-600">
-        <div class="flex items-center justify-center w-12 h-12 bg-indigo-100 rounded-full mx-auto mb-4">
-          <svg class="w-6 h-6 text-indigo-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-            <path d="M11 17h2v2h-2zM11 7h2v6h-2z" />
-          </svg>
+        <div class="sm:col-span-1 flex justify-between gap-4 sm:border-l divider sm:pl-4">
+          <div>
+            <p class="text-mint font-mono font-bold text-sm mb-1">
+              Pages</p>
+            <a href="{% url 'home' %}" class="text-white/80 hover:text-mint transition-colors no-underline block text-sm"> HOME</a>
+            <a href="{% url 'registration' %}" class="text-white/80 hover:text-mint transition-colors no-underline block text-sm"> SIGN UP</a>
+            <a href="{% url 'login' %}" class="text-white/80 hover:text-mint transition-colors no-underline block text-sm"> LOGIN</a>
+          </div>
+          <div>
+            <h4 class="text-mint font-mono font-bold text-sm mb-1"> utility Pages</h4>
+            <p class="text-white/80 text-sm">style Guide</p>
+            <p class="text-white/80 text-sm">Protect</p>
+            <p class="text-white/80 text-sm">License</p>
+          </div>
         </div>
-        <h3 class="text-xl font-semibold text-indigo-600 mb-2">Smart Notifications</h3>
-        <p class="text-base text-gray-600">Delivers contextual prompts and follow-up questions when needed.</p>
       </div>
 
-      <div class="bg-gray-50 p-6 rounded-2xl shadow transition duration-300 transform border border-transparent hover:scale-105 hover:shadow-lg hover:bg-indigo-50 hover:border-indigo-600">
-        <div class="flex items-center justify-center w-12 h-12 bg-indigo-100 rounded-full mx-auto mb-4">
-          <svg class="w-6 h-6 text-indigo-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-            <path d="M5 13l4 4L19 7" />
-          </svg>
-        </div>
-        <h3 class="text-xl font-semibold text-indigo-600 mb-2">Reliable Performance</h3>
-        <p class="text-base text-gray-600">Stable architecture ensures consistent response quality and uptime.</p>
+      <div class="text-xs w-full text-muted text-center sm:text-sm border-t divider pt-6 font-mono">
+        &copy; 2023 Website Chatbot. All rights reserved.
       </div>
-
-      <div class="bg-gray-50 p-6 rounded-2xl shadow transition duration-300 transform border border-transparent hover:scale-105 hover:shadow-lg hover:bg-indigo-50 hover:border-indigo-600">
-        <div class="flex items-center justify-center w-12 h-12 bg-indigo-100 rounded-full mx-auto mb-4">
-          <svg class="w-6 h-6 text-indigo-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-            <path d="M12 4v16m8-8H4" />
-          </svg>
-        </div>
-        <h3 class="text-xl font-semibold text-indigo-600 mb-2">Simple UI</h3>
-        <p class="text-base text-gray-600">A clean and minimalist chat interface optimized for user ease.</p>
-      </div>
-    </div>
-  </div>
-</section>
-<footer class=" relative max-w-screen bottom-0  mx-auto bg-[#0404058c] border-t-2 border-white py-4 min-h-48 overflow-x-hidden">
-  <div class="sm:max-w-screen-2xl grid grid-cols-7  sm:grid-cols-4 grid-rows-1 sm:p-14  sm:mx-auto sm:my-0 ">
-    <div class="col-span-2 sm:col-span-1 flex flex-col sm:justify-start items-center justify-center border-y-2 border-gray-400 pl-2">
-      <div class="my-auto h-fit">
-      <p class="text-white sm:text-lg text-sm "> Ghaziabad, Uttar Pradesh</p>
-      <p class="mt-4 text-white sm:text-lg text-sm"> street Road 1 , Main Road 1 , INDIA</p>
-      <p class="mt-4 text-white sm:text-lg text-sm"> +91 1234567890</p>
-      <p class="mt-1 text-white sm:text-lg text-xs "> info@chatbot.com</p>
-      </div>
-
-    </div>
-    <div class="col-span-3 sm:col-span-2 flex flex-col justify-center items-center border-2 border-gray-400">
-      <h1 class=" sm:text-2xl text-xl my-3 text-emerald-300"> Website Chatbot</h1>
-      <p class="sm:text-lg text-xs text-white text-center" > 
-        The chatbot project is an intelligent web-based assistant developed using Django and Gemini API. It allows users to input a website link and ask questions related to the content of 
-        that site. 
-      </p>
-
-
-    </div>
-    <div class="col-span-2 sm:col-span-1 border-y-2 border-gray-400 flex justify-evenly items-center lg:pt-5 lg:items-start  flex-col lg:flex-row ">
-      <div class="sm:w-2/6  h-fit">
-        <p class="text-white font-bold text-sm">
-          Pages</p>
-       <a href="{% url 'home' %}" class="text-white no-underline block text-sm"> HOME</a>
-       <a href="{% url 'registration' %}"class="text-white no-underline block text-sm"> SIGN UP</a>
-       <a href="{% url 'login' %}"class="text-white no-underline block text-sm"> LOGIN</a>
-    
-        
-      </div>
-      <div class="sm:w-2/6 h-fit pl-4">
-        <h4 class="text-white font-bold text-sm"> utility Pages</h4>
-        <p class="text-white text-sm ">style Guide</p>
-        <p class="text-white text-sm ">Protect</p>
-        <p class="text-white text-sm ">License</p>
-       
-
-
-      </div>
-
-    </div>
-
-  </div>
-  <div class="absolute sm:bottom-2 bottom-0 text-xs w-full text-white text-center sm:text-sm">
-    &copy; 2023 Website Chatbot. All rights reserved.
-  </div>
-</footer>
+    </footer>
 
 
   <script>
@@ -404,10 +452,10 @@ document.addEventListener("DOMContentLoaded", () => {
          
 
           // Remove active class from all links
-          links.forEach(l => l.classList.remove("text-[#852FFF]", "font-bold"));
+          links.forEach(l => l.classList.remove("text-[#6EE7B7]", "font-bold"));
           console.log(e.target)
           // Add active class to clicked link
-          this.classList.add("text-[#852FFF]", "font-bold");
+          this.classList.add("text-[#6EE7B7]", "font-bold");
 
           // Scroll to the section
           const targetId =this.getAttribute("href").slice(1);
