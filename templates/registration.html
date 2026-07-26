@@ -7,29 +7,197 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <!--<title>Registration Form in HTML CSS</title>-->
+    <title>Registration</title>
     <!---Custom CSS File--->
     <link rel="stylesheet" href="{% static 'output.css'%}">
-  </head>
-';
-'
-  <body class="px-2  bg-cover bg-no-repeat min-h-screen bg-center"
-   style="background-image: url('{% static "image/chatbotSignIn/signIN.webp" %}');">
     
 
-   
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+      :root{
+        --ink: #0A0D0C;
+        --panel: #101513;
+        --panel-2: #141B18;
+        --line: rgba(110,231,183,0.14);
+        --line-strong: rgba(110,231,183,0.35);
+        --text: #E7ECEA;
+        --muted: #8FA39D;
+        --amber: #F5A623;
+        --mint: #6EE7B7;
+      }
+
+      .font-mono{ font-family: 'JetBrains Mono', monospace; }
+
+      html, body{ margin: 0; }
+
+      body{
+        font-family: 'Inter', sans-serif;
+        color: var(--text);
+      }
+
+      .bg-background{
+        background-color: var(--ink);
+        background-image:
+          radial-gradient(ellipse 70% 50% at 15% 0%, rgba(110,231,183,0.10), transparent 60%),
+          radial-gradient(ellipse 55% 40% at 100% 10%, rgba(245,166,35,0.10), transparent 60%);
+      }
+
+      #net-bg{
+        position: fixed;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+        display: block;
+      }
+
+      .circuit-bg{
+        position: fixed;
+        inset: 0;
+        z-index: -1;
+        overflow: hidden;
+        background: var(--ink);
+      }
+      .circuit-svg{
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+      }
+      .pulse{
+        position: absolute;
+        width: 6px;
+        height: 6px;
+        border-radius: 9999px;
+        background: var(--mint);
+        box-shadow: 0 0 10px 2px rgba(110,231,183,0.85);
+        offset-rotate: 0deg;
+      }
+      .pulse-1{
+        offset-path: path("M0,140 H180 V50 H460 V230 H760 V90 H1080");
+        animation: travel1 10s linear infinite;
+      }
+      .pulse-2{
+        background: var(--amber);
+        box-shadow: 0 0 10px 2px rgba(245,166,35,0.85);
+        offset-path: path("M1440,320 H1220 V520 H900 V280 H560 V440 H260");
+        animation: travel2 13s linear infinite;
+      }
+      .pulse-3{
+        offset-path: path("M200,900 V620 H520 V760 H860 V540 H1180");
+        animation: travel3 16s linear infinite;
+      }
+      @keyframes travel1{
+        0%{ offset-distance: 0%; opacity: 0; }
+        6%{ opacity: 1; }
+        94%{ opacity: 1; }
+        100%{ offset-distance: 100%; opacity: 0; }
+      }
+      @keyframes travel2{
+        0%{ offset-distance: 0%; opacity: 0; }
+        6%{ opacity: 1; }
+        94%{ opacity: 1; }
+        100%{ offset-distance: 100%; opacity: 0; }
+      }
+      @keyframes travel3{
+        0%{ offset-distance: 0%; opacity: 0; }
+        6%{ opacity: 1; }
+        94%{ opacity: 1; }
+        100%{ offset-distance: 100%; opacity: 0; }
+      }
+
+      .panel{
+        background: linear-gradient(180deg, var(--panel), var(--panel-2));
+        border: 1px solid var(--line);
+        box-shadow: 0 25px 70px -25px rgba(0,0,0,0.7);
+      }
+
+      .field-row{
+        background: transparent;
+        border-bottom: 2px solid var(--line-strong);
+        transition: border-color .2s ease;
+      }
+      .field-row:focus-within{ border-color: var(--mint); }
+      .field-row input::placeholder{ color: var(--muted); }
+
+      .btn-mint{
+        background: var(--mint);
+        color: #06110C;
+        transition: all .2s ease;
+      }
+      .btn-mint:hover{ background: #8FF0C4; transform: translateY(-1px); }
+
+      .tag{
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 0.7rem;
+        letter-spacing: 0.06em;
+        border: 1px solid var(--line-strong);
+        color: var(--mint);
+        background: rgba(110,231,183,0.06);
+      }
+
+      /* --- navbar support classes (used by navbar.html) --- */
+      .text-mint{ color: var(--mint); }
+      .text-amber{ color: var(--amber); }
+      .text-muted{ color: var(--muted); }
+      .divider{ border-color: var(--line); }
+      .btn-ghost{
+        background: transparent;
+        border: 1px solid var(--line-strong);
+        color: var(--text);
+      }
+      .btn-ghost:hover{ border-color: var(--mint); color: var(--mint); }
+      .cursor-blink{
+        display:inline-block; width:8px; height:1.1em; background: var(--mint);
+        animation: blink 1s steps(1) infinite; vertical-align: text-bottom; margin-left:2px;
+      }
+      @keyframes blink{ 50%{ opacity:0; } }
+    </style>
+  </head>
+
+  <body class="px-2 bg-background min-h-screen bg-center">
+
+    <div class="circuit-bg">
+      <svg class="circuit-svg" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" viewBox="0 0 1440 900">
+        <defs>
+          <pattern id="circuit" width="140" height="140" patternUnits="userSpaceOnUse">
+            <path d="M0 70 H50 V25 H110" fill="none" stroke="rgba(110,231,183,0.14)" stroke-width="1.5"/>
+            <path d="M140 105 H90 V130" fill="none" stroke="rgba(245,166,35,0.12)" stroke-width="1.5"/>
+            <path d="M70 0 V45 H140" fill="none" stroke="rgba(110,231,183,0.1)" stroke-width="1.5"/>
+            <circle cx="50" cy="25" r="2.5" fill="rgba(110,231,183,0.4)"/>
+            <circle cx="110" cy="25" r="2.5" fill="rgba(110,231,183,0.25)"/>
+            <circle cx="90" cy="130" r="2.5" fill="rgba(245,166,35,0.35)"/>
+            <circle cx="70" cy="45" r="2.5" fill="rgba(110,231,183,0.3)"/>
+          </pattern>
+          <radialGradient id="circuitFade" cx="50%" cy="28%" r="72%">
+            <stop offset="0%" stop-color="#0A0D0C" stop-opacity="0"/>
+            <stop offset="100%" stop-color="#0A0D0C" stop-opacity="0.92"/>
+          </radialGradient>
+        </defs>
+        <rect width="1440" height="900" fill="url(#circuit)"/>
+        <rect width="1440" height="900" fill="url(#circuitFade)"/>
+      </svg>
+
+      <span class="pulse pulse-1"></span>
+      <span class="pulse pulse-2"></span>
+      <span class="pulse pulse-3"></span>
+    </div>
+
+    {% include 'navbar.html' %}
 
     {% if s1 == 1 %}
-    <div class="h-fit w-full bg-red-400 text-center text-white absolute top-0 left-0" id="error">
-      <p class="text-wrap text-center" id="error">
+    <div class="h-fit w-full bg-red-400 text-center text-white fixed top-16 left-0 z-20 font-mono text-sm py-1.5" id="error">
+      <p class="text-wrap text-center">
 
         This email {{email}} is already exist.
       </p>
     </div>
     {% endif %}
     {% if msg != None %}
-    <div class="h-fit w-full bg-red-400 text-center text-white absolute top-0 left-0" id="error">
-        <p class="text-wrap text-center" id="error">
+    <div class="h-fit w-full bg-red-400 text-center text-white fixed top-16 left-0 z-20 font-mono text-sm py-1.5" id="error">
+        <p class="text-wrap text-center">
 
           {{msg}}
         </p>
@@ -37,53 +205,50 @@
     </div>
     {% endif %}
 
-    <div class=" mx-auto p-1 text-center max-w-screen-2xl w-full text-3xl text-blue-600 font-bold ">
-      <div class="w-fit h-full mx-auto ">
-      <h1 class="text-4xl font-bold bg-gradient-to-b from-slate-600 via-white  to-white bg-clip-text text-transparent">WEBSITE CHATBOT</h1>
-      <div class="mt-1 h-[0.2rem]  bg-gradient-to-b from-slate-600 via-white  to-white rounded-lg"></div>
+    <div class="pt-28 pb-2 px-4 flex flex-col items-center">
+      <span class="tag inline-block px-3 py-1 rounded-full mb-4">// create your account</span>
+      <h1 class="text-3xl sm:text-4xl font-bold font-mono text-center text-white">WEBSITE CHATBOT</h1>
     </div>
-    </div>
-    
-    <section class="bg-[#000000a8] max-w-screen-sm mx-3 sm:max-w-screen-md h-1/2 mt-10 text-white md:mx-auto rounded-2xl shadow-2xl border-y-4 border-x-2 border-x-slate-400">
 
-      <header class=" relative mx-auto text-center w-full text-2xl my-5 text-sky-400">
+    <section class="panel max-w-screen-sm mx-3 sm:max-w-screen-md sm:mx-auto mt-6 mb-10 rounded-2xl">
+
+      <header class="relative mx-auto text-center w-full text-2xl py-6 px-4">
         <a href="{% url 'home' %}">
-         <div class="rounded-full bg-[#94949487] hover:bg-[#3d3d3d] absolute left-5 w-fit h-fit p-3 top-0">
-          <img src="{% static "./image/chatbotSignIn/arrow.png" %}" class="w-4 h-4  " alt="">
+         <div class="rounded-full bg-black/30 hover:bg-black/50 border divider absolute left-5 w-fit h-fit p-2.5 top-1/2 -translate-y-1/2 transition-colors">
+          <svg class="w-4 h-4 text-mint" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
+          </svg>
          </div>
         </a>
         <a href="{% url 'login' %}">
-          <div class="text-purple-500 hover:underline absolute right-5 w-fit h-fit p-2 top-0 text-lg">
+          <div class="text-amber hover:underline absolute right-5 w-fit h-fit top-1/2 -translate-y-1/2 text-base font-mono">
            LOGIN 
           </div>
          </a>
-         <div class="w-fit text-3xl mx-auto">
+         <div class="w-fit text-3xl mx-auto font-mono font-bold text-mint">
           Sign-Up
-           <div class=" h-[0.2rem]  bg-sky-400 rounded-lg mt-1"></div>
+           <div class="h-[0.15rem] bg-mint rounded-lg mt-2" style="background: var(--mint);"></div>
 
          </div>
       </header>
 
 
-      <form action="{% url 'registration' %}" class="form " method="post" submit="return registration()">
+      <form action="{% url 'registration' %}" class="form px-6 pb-8" method="post" submit="return registration()">
         {% csrf_token %}
-        <div class="input-box mx-auto w-4/5 my-2 flex flex-col-reverse ">
-          <input placeholder="Enter full name" type="text" name="name" required class=" focus:outline-none focus:ring-2 focus:ring-[#46fff6] peer/name transition duration-200 rounded w-full p-2 text-cyan-400 text-base "/>
-          <label for="name" class="  text-slate-300 block text-lg peer-focus/name:text-[#46fff6]">Full Name</label>
+        <div class="input-box mx-auto w-full max-w-sm my-4 flex flex-col-reverse field-row px-1">
+          <input placeholder="Enter full name" type="text" name="name" required class="focus:outline-none peer/name transition duration-200 w-full p-2 bg-transparent text-white text-base"/>
+          <label for="name" class="text-muted block text-sm peer-focus/name:text-mint">Full Name</label>
         </div>
-        <div class="input-box mx-auto w-4/5  my-5 flex flex-col-reverse">
-          <input type="text" placeholder="Enter email address" name="email" required class="peer/email focus:outline-none focus:ring-2 focus:ring-[#46fff6] transition duration-200 rounded w-full p-2 text-cyan-400 text-base" />
-          <label for="email" class="text-slate-300 block text-lg peer-focus/email:text-[#46fff6]">Email Address</label>
+        <div class="input-box mx-auto w-full max-w-sm my-6 flex flex-col-reverse field-row px-1">
+          <input type="text" placeholder="Enter email address" name="email" required class="peer/email focus:outline-none transition duration-200 w-full p-2 bg-transparent text-white text-base" />
+          <label for="email" class="text-muted block text-sm peer-focus/email:text-mint">Email Address</label>
         </div>
-        <div class="input-box mx-auto w-4/5 my-2 flex flex-col-reverse">
-          <input type="password" placeholder="Enter new Password" name="password" required class="peer/password focus:outline-none focus:ring-2 focus:ring-[#46fff6] transition duration-200 rounded w-full p-2 text-cyan-400 text-base" />
-          <label for="password" class="text-slate-300 block text-lg peer-focus/password:text-[#46fff6]"> CreatePassword</label>
+        <div class="input-box mx-auto w-full max-w-sm my-4 flex flex-col-reverse field-row px-1">
+          <input type="password" placeholder="Enter new Password" name="password" required class="peer/password focus:outline-none transition duration-200 w-full p-2 bg-transparent text-white text-base" />
+          <label for="password" class="text-muted block text-sm peer-focus/password:text-mint">Create Password</label>
         </div>
 
-
-
-
-        <button class="text-2xl font-bold my-9 w-4/5 mx-auto block text-center text-white bg-[#8c4df1] p-2 rounded-lg hover:bg-purple-800">SUBMIT</button>
+        <button class="text-xl font-bold font-mono my-8 w-full max-w-sm mx-auto block text-center btn-mint p-2.5 rounded-lg">SUBMIT</button>
       </form>
     </section>
     <script>
@@ -105,6 +270,7 @@
 
 
     </script>
+
   </body>
   <script src="/static/script.js"></script>
 

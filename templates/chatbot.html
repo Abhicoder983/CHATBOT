@@ -25,6 +25,21 @@
         --amber: #F5A623;
         --mint: #6EE7B7;
       }
+      :root{
+  --mint: #6EE7B7;
+  --amber: #F5A623;
+  --muted: #8FA39D;
+  --line: rgba(110,231,183,0.14);
+  --line-strong: rgba(110,231,183,0.35);
+}
+.text-mint{ color: var(--mint); }
+.text-amber{ color: var(--amber); }
+.text-muted{ color: var(--muted); }
+.divider{ border-color: var(--line); }
+.btn-ghost{ background: transparent; border: 1px solid var(--line-strong); color: var(--text); }
+.btn-ghost:hover{ border-color: var(--mint); color: var(--mint); }
+.cursor-blink{ display:inline-block; width:8px; height:1.1em; background: var(--mint); animation: blink 1s steps(1) infinite; vertical-align: text-bottom; margin-left:2px; }
+@keyframes blink{ 50%{ opacity:0; } }
 
       body{
         font-family: 'Inter', sans-serif;
@@ -97,51 +112,8 @@
   <body class="p-0 m-0 h-fit bg-background bg-no-repeat bg-cover bg-center">
 
     <!-- subtle grid backdrop instead of curved SVG lines -->
-    <div class="w-full overflow-hidden fixed top-0 left-0 h-[70vh] z-[-1]">
-      <svg class="absolute top-0 left-0 w-full h-full opacity-40" xmlns="http://www.w3.org/2000/svg" width="1440" height="560" preserveAspectRatio="none" viewBox="0 0 1440 560">
-        <defs>
-          <pattern id="grid" width="48" height="48" patternUnits="userSpaceOnUse">
-            <path d="M 48 0 L 0 0 0 48" fill="none" stroke="rgba(110,231,183,0.10)" stroke-width="1"/>
-          </pattern>
-          <linearGradient id="fade" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stop-color="#0A0D0C" stop-opacity="0"/>
-            <stop offset="100%" stop-color="#0A0D0C" stop-opacity="1"/>
-          </linearGradient>
-        </defs>
-        <rect width="1440" height="560" fill="url(#grid)"/>
-        <rect width="1440" height="560" fill="url(#fade)"/>
-      </svg>
-    </div>
-
-    <div class="bg-[#0A0D0C]/85 backdrop-blur-md fixed top-0 inset-x-0 z-30 border-b divider">
-      <div class="max-w-6xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between gap-3">
-        <div class="flex items-center gap-2 text-mint font-mono font-bold text-xs sm:text-sm md:text-base whitespace-nowrap shrink-0 min-w-0 overflow-hidden">
-          <span class="text-muted shrink-0">&gt;</span>
-          <span class="truncate">WEBSITE CHATBOT</span>
-          <span class="cursor-blink hidden sm:inline-block shrink-0"></span>
-        </div>
-
-        <div class="flex items-center gap-3 sm:gap-6 shrink-0">
-          <ul class="hidden sm:flex items-center gap-4 md:gap-6 font-mono text-xs md:text-sm tracking-wide">
-            <li class="hover:text-mint active:text-amber transition-colors duration-200 nav-link">
-              <a href="{% url "home" %}">Home</a>
-            </li>
-            <li class="hover:text-mint active:text-amber transition-colors duration-200 nav-link">
-              <a href="#About">About</a>
-            </li>
-            <li class="hover:text-mint active:text-amber transition-colors duration-200 nav-link">
-              <a href="#features">Features</a>
-            </li>
-          </ul>
-
-          <a href="{% url "login" %}"
-            class="flex items-center justify-center btn-ghost rounded-md px-3 py-1.5 sm:px-5 transition-all duration-200 cursor-pointer shrink-0">
-            <p class="anchor font-mono text-xs sm:text-sm">Login</p>
-          </a>
-        </div>
-      </div>
-    </div>
-
+    
+    {% include "navbar.html" %}
     <section class="mx-auto pt-28 max-w-5xl px-4">
       <div class="flex flex-col items-center">
         <div class="tag px-3 py-1 rounded-full mb-6">// paste a link, ask anything</div>
@@ -444,30 +416,7 @@
 
   <script>
 
-document.addEventListener("DOMContentLoaded", () => {
-      const links = document.querySelectorAll(".nav-link");
 
-      links.forEach(link => {
-        link.addEventListener("click", function (e) {
-         
-
-          // Remove active class from all links
-          links.forEach(l => l.classList.remove("text-[#6EE7B7]", "font-bold"));
-          console.log(e.target)
-          // Add active class to clicked link
-          this.classList.add("text-[#6EE7B7]", "font-bold");
-
-          // Scroll to the section
-          const targetId =this.getAttribute("href").slice(1);
-          
-          const target = document.getElementById(targetId);
-          if (target) {
-            target.scrollIntoView({ behavior: "smooth" });
-          }
-          
-        });
-      });
-    });
 
     const cards = document.querySelectorAll('#features .transition');
   

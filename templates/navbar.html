@@ -1,0 +1,54 @@
+<div class="bg-[#0A0D0C]/85 backdrop-blur-md fixed top-0 inset-x-0 z-30 border-b divider">
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between gap-3">
+    <div class="flex items-center gap-2 text-mint font-mono font-bold text-xs sm:text-sm md:text-base whitespace-nowrap shrink-0 min-w-0 overflow-hidden">
+      <span class="text-muted shrink-0">&gt;</span>
+      <span class="truncate">WEBSITE CHATBOT</span>
+      <span class="cursor-blink hidden sm:inline-block shrink-0"></span>
+    </div>
+
+    <div class="flex items-center gap-3 sm:gap-6 shrink-0">
+      <ul class="hidden sm:flex items-center gap-4 md:gap-6 font-mono text-xs md:text-sm tracking-wide">
+        <li class="hover:text-mint active:text-amber transition-colors duration-200 nav-link">
+          <a href="{% url "home" %}">Home</a>
+        </li>
+        <li class="hover:text-mint active:text-amber transition-colors duration-200 nav-link">
+          <a href="{% url "home" %}#About">About</a>
+        </li>
+        <li class="hover:text-mint active:text-amber transition-colors duration-200 nav-link">
+          <a href="{% url "home" %}#features">Features</a>
+        </li>
+      </ul>
+
+      <a href="{% url "login" %}"
+        class="flex items-center justify-center btn-ghost rounded-md px-3 py-1.5 sm:px-5 transition-all duration-200 cursor-pointer shrink-0">
+        <p class="anchor font-mono text-xs sm:text-sm">Login</p>
+      </a>
+    </div>
+  </div>
+</div>
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const links = document.querySelectorAll(".nav-link");
+
+      links.forEach(link => {
+        link.addEventListener("click", function (e) {
+         
+
+          // Remove active class from all links
+          links.forEach(l => l.classList.remove("text-[#6EE7B7]", "font-bold"));
+          console.log(e.target)
+          // Add active class to clicked link
+          this.classList.add("text-[#6EE7B7]", "font-bold");
+
+          // Scroll to the section
+          const targetId =this.getAttribute("href").slice(1);
+          
+          const target = document.getElementById(targetId);
+          if (target) {
+            target.scrollIntoView({ behavior: "smooth" });
+          }
+          
+        });
+      });
+    });
+    </script>

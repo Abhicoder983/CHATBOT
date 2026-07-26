@@ -16,11 +16,166 @@
     <!--Fontawesome CDN-->
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
 
+	<!--Google fonts (matches the rest of the site)-->
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
 	<!--Custom styles-->
 	<link rel="stylesheet" type="text/css" href="{% static "styles.css" %}">
 	<link rel="stylesheet" href="{% static 'output.css' %}">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+	:root{
+  --ink: #0A0D0C;
+  --panel: #101513;
+  --panel-2: #141B18;
+  --line: rgba(110,231,183,0.14);
+  --line-strong: rgba(110,231,183,0.35);
+  --text: #E7ECEA;
+  --muted: #8FA39D;
+  --amber: #F5A623;
+  --mint: #6EE7B7;
+}
+
+.font-mono{ font-family: 'JetBrains Mono', monospace; }
+
+html, body{
+  height: 100%;
+  margin: 0;
+}
+
+body{
+  font-family: 'Inter', sans-serif;
+  color: var(--text);
+  background-color: var(--ink);
+  background-image:
+    radial-gradient(ellipse 70% 50% at 15% 0%, rgba(110,231,183,0.10), transparent 60%),
+    radial-gradient(ellipse 55% 40% at 100% 10%, rgba(245,166,35,0.10), transparent 60%);
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  overflow-x: hidden;
+}
+
+#net-bg{
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  display: block;
+}
+
+.container{ width: 100%; padding-top: 6rem; padding-bottom: 2rem; }
+
+.card{
+  background: linear-gradient(180deg, var(--panel), var(--panel-2));
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  color: var(--text);
+  box-shadow: 0 25px 70px -25px rgba(0,0,0,0.7);
+  width: 100%;
+  max-width: 420px;
+}
+
+.card-header{
+  background: transparent;
+  border-bottom: 1px solid var(--line);
+  padding: 1.5rem 1.5rem 1rem;
+}
+.card-header h3{
+  font-family: 'JetBrains Mono', monospace;
+  letter-spacing: 0.02em;
+  color: var(--text);
+  font-weight: 700;
+}
+
+.card-body{ padding: 1.5rem; }
+
+.card-footer{
+  background: transparent;
+  border-top: 1px solid var(--line);
+  padding: 1.25rem 1.5rem;
+}
+
+.form-group{ margin-bottom: 1.1rem; }
+
+.input-group-text{
+  background: rgba(255,255,255,0.04);
+  border: 1px solid var(--line);
+  color: var(--mint);
+}
+
+.form-control{
+  background: rgba(255,255,255,0.03);
+  border: 1px solid var(--line);
+  color: var(--text);
+}
+.form-control::placeholder{ color: var(--muted); }
+.form-control:focus{
+  background: rgba(255,255,255,0.06);
+  border-color: var(--mint);
+  box-shadow: 0 0 0 3px rgba(110,231,183,0.15);
+  color: var(--text);
+}
+
+.login_btn{
+  background: var(--mint);
+  border: none;
+  color: #06110C;
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  padding: 0.55rem 2.2rem;
+  border-radius: 8px;
+  transition: all .2s ease;
+}
+.login_btn:hover{
+  background: #8FF0C4;
+  transform: translateY(-1px);
+}
+
+.links{
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+.links a{
+  color: var(--mint);
+  margin-left: 0.35rem;
+  text-decoration: none;
+}
+.links a:hover{ color: var(--amber); }
+
+/* --- navbar support classes --- */
+.text-mint{ color: var(--mint); }
+.text-amber{ color: var(--amber); }
+.text-muted{ color: var(--muted); }
+.divider{ border-color: var(--line); }
+.btn-ghost{
+  background: transparent;
+  border: 1px solid var(--line-strong);
+  color: var(--text);
+}
+.btn-ghost:hover{ border-color: var(--mint); color: var(--mint); }
+.cursor-blink{
+  display: inline-block;
+  width: 8px;
+  height: 1.1em;
+  background: var(--mint);
+  animation: blink 1s steps(1) infinite;
+  vertical-align: text-bottom;
+  margin-left: 2px;
+}
+@keyframes blink{ 50%{ opacity: 0; } }
+</style>
 </head>
-<body style="background-image: url('{% static 'image/registrationBackground.png' %}');">
+<body>
+	{% include "navbar.html" %}
+<canvas id="net-bg"></canvas>
+
+
+
 <div class="container">
 	<div class="d-flex justify-content-center h-100">
 		<div class="card">
@@ -35,7 +190,7 @@
 						<div class="input-group-prepend">
 							<span class="input-group-text"><i class="fas fa-user"></i></span>
 						</div>
-						<input type="text" class="form-control" placeholder="Enter the registered Email" name="email", required>
+						<input type="text" class="form-control" placeholder="Enter the registered Email" name="email" required>
 						
 					</div>
 					<div class="input-group form-group">
@@ -51,7 +206,7 @@
 					</div>
 					
 					{% endif %}
-					<div class="absolute bottom-[7.5rem] left-0 right-0 flex justify-center ">
+					<div class="flex justify-center mt-3">
 						<input type="submit" value="Login" class="btn  login_btn">
 					</div>
 				</form>
@@ -81,6 +236,105 @@
         }, 4000);
     }
 });
+
+	document.addEventListener("DOMContentLoaded", () => {
+      const links = document.querySelectorAll(".nav-link");
+
+      links.forEach(link => {
+        link.addEventListener("click", function (e) {
+         
+
+          // Remove active class from all links
+          links.forEach(l => l.classList.remove("text-[#6EE7B7]", "font-bold"));
+          console.log(e.target)
+          // Add active class to clicked link
+          this.classList.add("text-[#6EE7B7]", "font-bold");
+
+          // Scroll to the section
+          const targetId =this.getAttribute("href").slice(1);
+          
+          const target = document.getElementById(targetId);
+          if (target) {
+            target.scrollIntoView({ behavior: "smooth" });
+          }
+          
+        });
+      });
+    });
+</script>
+<script>
+	
+(function () {
+	var canvas = document.getElementById('net-bg');
+	if (!canvas || !canvas.getContext) return;
+	var ctx = canvas.getContext('2d');
+	var w, h, particles;
+	var MINT = '110,231,183';
+	var AMBER = '245,166,35';
+	var LINK_DIST = 150;
+
+	function resize() {
+		w = canvas.width = window.innerWidth;
+		h = canvas.height = window.innerHeight;
+	}
+	window.addEventListener('resize', resize);
+	resize();
+
+	function makeParticles() {
+		var count = Math.min(90, Math.max(35, Math.floor((w * h) / 16000)));
+		particles = [];
+		for (var i = 0; i < count; i++) {
+			particles.push({
+				x: Math.random() * w,
+				y: Math.random() * h,
+				vx: (Math.random() - 0.5) * 0.35,
+				vy: (Math.random() - 0.5) * 0.35,
+				c: Math.random() < 0.88 ? MINT : AMBER
+			});
+		}
+	}
+	makeParticles();
+	window.addEventListener('resize', makeParticles);
+
+	function step() {
+		ctx.clearRect(0, 0, w, h);
+
+		for (var i = 0; i < particles.length; i++) {
+			var p = particles[i];
+			p.x += p.vx;
+			p.y += p.vy;
+			if (p.x < 0 || p.x > w) p.vx *= -1;
+			if (p.y < 0 || p.y > h) p.vy *= -1;
+		}
+
+		for (var i = 0; i < particles.length; i++) {
+			for (var j = i + 1; j < particles.length; j++) {
+				var a = particles[i], b = particles[j];
+				var dx = a.x - b.x, dy = a.y - b.y;
+				var dist = Math.sqrt(dx * dx + dy * dy);
+				if (dist < LINK_DIST) {
+					ctx.strokeStyle = 'rgba(' + MINT + ',' + (0.16 * (1 - dist / LINK_DIST)) + ')';
+					ctx.lineWidth = 1;
+					ctx.beginPath();
+					ctx.moveTo(a.x, a.y);
+					ctx.lineTo(b.x, b.y);
+					ctx.stroke();
+				}
+			}
+		}
+
+		for (var i = 0; i < particles.length; i++) {
+			var p = particles[i];
+			ctx.fillStyle = 'rgba(' + p.c + ',0.75)';
+			ctx.beginPath();
+			ctx.arc(p.x, p.y, 1.7, 0, Math.PI * 2);
+			ctx.fill();
+		}
+
+		requestAnimationFrame(step);
+	}
+	step();
+})();
 </script>
 </body>
-</html>
+</html>    

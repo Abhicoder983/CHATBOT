@@ -4,49 +4,139 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-   
+    <title>Otp verification</title>
+
     <link rel="stylesheet" href="{% static 'output.css'%}">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+      :root{
+        --ink: #0A0D0C;
+        --panel: #101513;
+        --panel-2: #141B18;
+        --line: rgba(110,231,183,0.14);
+        --line-strong: rgba(110,231,183,0.35);
+        --text: #E7ECEA;
+        --muted: #8FA39D;
+        --amber: #F5A623;
+        --mint: #6EE7B7;
+      }
+
+      .font-mono{ font-family: 'JetBrains Mono', monospace; }
+
+      html, body{ margin: 0; }
+
+      body{
+        font-family: 'Inter', sans-serif;
+        color: var(--text);
+      }
+
+      #net-bg{
+        position: fixed;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+        display: block;
+      }
+
+      .bg-background{
+        background-color: var(--ink);
+        background-image:
+          radial-gradient(ellipse 70% 50% at 15% 0%, rgba(110,231,183,0.10), transparent 60%),
+          radial-gradient(ellipse 55% 40% at 100% 10%, rgba(245,166,35,0.10), transparent 60%);
+      }
+
+      .panel{
+        background: linear-gradient(180deg, var(--panel), var(--panel-2));
+        border: 1px solid var(--line);
+        box-shadow: 0 25px 70px -25px rgba(0,0,0,0.7);
+      }
+
+      .field-row{
+        background: rgba(255,255,255,0.03);
+        border: 1px solid var(--line);
+        transition: border-color .2s ease;
+      }
+      .field-row:focus-within{ border-color: var(--mint); box-shadow: 0 0 0 3px rgba(110,231,183,0.15); }
+      .field-row input::placeholder{ color: var(--muted); }
+
+      .btn-mint{
+        background: var(--mint);
+        color: #06110C;
+        transition: all .2s ease;
+      }
+      .btn-mint:hover{ background: #8FF0C4; transform: translateY(-1px); }
+
+      .tag{
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 0.7rem;
+        letter-spacing: 0.06em;
+        border: 1px solid var(--line-strong);
+        color: var(--mint);
+        background: rgba(110,231,183,0.06);
+      }
+
+      /* --- navbar support classes (used by navbar.html) --- */
+      .text-mint{ color: var(--mint); }
+      .text-amber{ color: var(--amber); }
+      .text-muted{ color: var(--muted); }
+      .divider{ border-color: var(--line); }
+      .btn-ghost{
+        background: transparent;
+        border: 1px solid var(--line-strong);
+        color: var(--text);
+      }
+      .btn-ghost:hover{ border-color: var(--mint); color: var(--mint); }
+      .cursor-blink{
+        display:inline-block; width:8px; height:1.1em; background: var(--mint);
+        animation: blink 1s steps(1) infinite; vertical-align: text-bottom; margin-left:2px;
+      }
+      @keyframes blink{ 50%{ opacity:0; } }
+    </style>
 </head>
-<body class="p-2  bg-cover bg-center bg-no-repeat min-h-screen" style="background-image:url({% static "./image/chatbotSignIn/signIN.webp" %})">
-  
-  <div class="p-1 text-center max-w-screen-2xl mx-auto mt-3  text-3xl ">
-    <div class="w-fit h-full mx-auto ">
-    <h1 class="text-purple-500">WEBSITE CHATBOT</h1>
-    <div class="mt-1 h-[0.2rem]  bg-white rounded-lg"></div>
+<body class="p-2 min-h-screen bg-background">
+
+  <canvas id="net-bg"></canvas>
+
+  {% include 'navbar.html' %}
+
+  <div class="pt-28 pb-2 px-4 flex flex-col items-center">
+    <span class="tag inline-block px-3 py-1 rounded-full mb-4">// verify identity</span>
+    <h1 class="text-3xl sm:text-4xl font-bold font-mono text-center text-mint">WEBSITE CHATBOT</h1>
   </div>
 
-    <section class=" p-3   mt-40 border-2 border-white rounded-xl mx-auto max-w-screen-md w-full  " >
-        <header class="h-fit w-fit mx-auto text-xl mt-2 text-white font-bold ">Enter sent OTP on email 
-          <div class="h-[0.2rem] mt-1 w-full bg-white"></div>
+    <section class="panel p-6 mt-6 mb-10 rounded-2xl mx-auto max-w-screen-md w-full">
+        <header class="h-fit w-fit mx-auto text-xl mt-2 text-white font-bold font-mono text-center">Enter sent OTP on email
+          <div class="h-[0.15rem] mt-2 w-full rounded" style="background: var(--mint);"></div>
 
         </header>
 
-        <form action="{% url 'confirm' %}" class="form " method="post" >
+        <form action="{% url 'confirm' %}" class="form" method="post">
           {% csrf_token %}
-          <div class=" flex flex-col-reverse mx-4  ">
-            <input type="text" placeholder="Enter OTP" name="otp" id="otp" 
-            class=" peer/otp p-2 rounded-md text-lg text-blue-500 mx- focus:outline-none focus:ring-2 focus:ring-blue-500" required />
-        
-            <label for="otp" class="text-2xl peer-focus/otp:text-blue-500 text-white text-left my-2">
 
-               Enter OTP
-            </label>
-            
-          
-          </div>
-          <button type="submit" class="mx-auto my-4 p-2 bg-purple-500 hover:bg-purple-800 text-white text-xl text-center rounded-lg w-[96.333333%]">SUBMIT</button>
-          
           {% if msg %}
-          <div class="bg-red-400 h-fit absolute top-0 left-0" id="error">
-            
-          <p class="text-white text-wrap text-center my-1"> 
-            {{msg}}</p>
-            
+          <div class="bg-red-400 h-fit w-full mt-4 rounded-lg" id="error">
+            <p class="text-white text-wrap text-center my-1.5 font-mono text-sm">
+              {{msg}}</p>
+          </div>
           {% endif %}
+
+          <div class="mx-4 my-5">
+            <label for="otp" class="block text-sm font-mono text-muted mb-2">Enter OTP</label>
+            <div class="field-row rounded-md px-3 flex items-center">
+              <input type="text" placeholder="• • • • • •" name="otp" id="otp"
+              class="w-full p-2 text-lg text-white bg-transparent focus:outline-none tracking-[0.4em] font-mono" required maxlength="6" inputmode="numeric" />
+            </div>
+          </div>
+          <button type="submit" class="mx-auto my-4 p-2.5 btn-mint text-xl font-mono font-semibold text-center rounded-lg w-[96.333333%] block">SUBMIT</button>
+
         </form>
-       
+
     </section>
+
       <script>
         document.addEventListener("DOMContentLoaded", function () {
     var errorDiv = document.getElementById("error");
@@ -62,6 +152,80 @@
     }
 });
       </script>
-    
+
+      <script>
+      (function () {
+          var canvas = document.getElementById('net-bg');
+          if (!canvas || !canvas.getContext) return;
+          var ctx = canvas.getContext('2d');
+          var w, h, particles;
+          var MINT = '110,231,183';
+          var AMBER = '245,166,35';
+          var LINK_DIST = 150;
+
+          function resize() {
+              w = canvas.width = window.innerWidth;
+              h = canvas.height = window.innerHeight;
+          }
+          window.addEventListener('resize', resize);
+          resize();
+
+          function makeParticles() {
+              var count = Math.min(90, Math.max(35, Math.floor((w * h) / 16000)));
+              particles = [];
+              for (var i = 0; i < count; i++) {
+                  particles.push({
+                      x: Math.random() * w,
+                      y: Math.random() * h,
+                      vx: (Math.random() - 0.5) * 0.35,
+                      vy: (Math.random() - 0.5) * 0.35,
+                      c: Math.random() < 0.88 ? MINT : AMBER
+                  });
+              }
+          }
+          makeParticles();
+          window.addEventListener('resize', makeParticles);
+
+          function step() {
+              ctx.clearRect(0, 0, w, h);
+
+              for (var i = 0; i < particles.length; i++) {
+                  var p = particles[i];
+                  p.x += p.vx;
+                  p.y += p.vy;
+                  if (p.x < 0 || p.x > w) p.vx *= -1;
+                  if (p.y < 0 || p.y > h) p.vy *= -1;
+              }
+
+              for (var i = 0; i < particles.length; i++) {
+                  for (var j = i + 1; j < particles.length; j++) {
+                      var a = particles[i], b = particles[j];
+                      var dx = a.x - b.x, dy = a.y - b.y;
+                      var dist = Math.sqrt(dx * dx + dy * dy);
+                      if (dist < LINK_DIST) {
+                          ctx.strokeStyle = 'rgba(' + MINT + ',' + (0.16 * (1 - dist / LINK_DIST)) + ')';
+                          ctx.lineWidth = 1;
+                          ctx.beginPath();
+                          ctx.moveTo(a.x, a.y);
+                          ctx.lineTo(b.x, b.y);
+                          ctx.stroke();
+                      }
+                  }
+              }
+
+              for (var i = 0; i < particles.length; i++) {
+                  var p = particles[i];
+                  ctx.fillStyle = 'rgba(' + p.c + ',0.75)';
+                  ctx.beginPath();
+                  ctx.arc(p.x, p.y, 1.7, 0, Math.PI * 2);
+                  ctx.fill();
+              }
+
+              requestAnimationFrame(step);
+          }
+          step();
+      })();
+      </script>
+
 </body>
-</html>
+</html>  
