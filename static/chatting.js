@@ -126,7 +126,7 @@ document.addEventListener("keydown" , function(event){
            
         }
     
-        const urlRegx=/^(https?:\/\/)?([\da-z.-]+)\.([a-z.]{2,6})([/\w.-]*)*\/?$/;
+        const urlRegx=/^(https?:\/\/)?([\da-z.-]+)\.([a-z]{2,63})(:\d{1,5})?(\/[-a-zA-Z0-9@:%_+.~#?&/=()]*)?$/i;
         if(!urlRegx.test(user_link.value)){
             alert("!Please Enter the valid link")
             return false;
@@ -307,7 +307,7 @@ function getAiInfo(e){
        
     }
 
-    const urlRegx=/^(https?:\/\/)?([\da-z.-]+)\.([a-z.]{2,6})([/\w.-]*)*\/?$/;
+    const urlRegx=/^(https?:\/\/)?([\da-z.-]+)\.([a-z]{2,63})(:\d{1,5})?(\/[-a-zA-Z0-9@:%_+.~#?&/=()]*)?$/i;
     if(!urlRegx.test(user_link.value)){
         alert("!Please Enter the valid link")
         return false;
